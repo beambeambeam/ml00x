@@ -6,3 +6,11 @@ __pycache__/
 # uv virtual environment
 .venv/
 
+
+# Secrets
+.env
+!.env.example
+
+# Kaggle data – download with: uv run get_data.py
+data/train.csv
+data/test.csv
