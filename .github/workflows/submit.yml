@@ -1,21 +1,28 @@
 name: Submit to Kaggle
 
-# Manual only: Actions → Submit to Kaggle → Run workflow. Anyone with write access can run it.
+# Runs on each push to main that changes a submission file.
+# Manual run: Actions → Submit to Kaggle → Run workflow.
 on:
+  push:
+    branches: [main]
+    paths:
+      - submission/**
+      - task*/submit/**
   workflow_dispatch:
     inputs:
       message:
         description: Submission note (the commit SHA is added automatically)
-        required: true
+        required: false
         type: string
 
 permissions:
   contents: read
 
-# One submission at a time. Never cancel a submission that is already running.
+# One submission at a time. A newer run cancels the older one.
+# A file Kaggle already accepted still counts against the daily limit.
 concurrency:
   group: kaggle-submit
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   submit:
@@ -59,9 +66,10 @@ jobs:
 
       - name: Submit and wait for score
         env:
-          MESSAGE: ${{ inputs.message }}
+          MESSAGE: ${{ inputs.message || github.event.head_commit.message }}
         run: |
           set -o pipefail
+          MESSAGE="${MESSAGE%%$'\n'*}"
           note="${GITHUB_SHA::7} ${MESSAGE} (by ${GITHUB_ACTOR})"
           {
             echo "## Kaggle"
