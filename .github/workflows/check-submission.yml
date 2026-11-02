@@ -1,0 +1,58 @@
+name: Check submission
+
+# No `paths:` filter: this is a required check, and a skipped required check blocks the PR.
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-submission-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      # Sparse checkouts skip data/ and models/, which can be large.
+      - name: Check out PR
+        uses: actions/checkout@v5
+        with:
+          sparse-checkout: |
+            submission
+            task1/submit
+            task2/submit
+            task3/submit
+            task4/submit
+            task5/submit
+          sparse-checkout-cone-mode: true
+
+      - name: Check out base branch
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.base_ref }}
+          path: base
+          sparse-checkout: |
+            submission
+            task1/submit
+            task2/submit
+            task3/submit
+            task4/submit
+            task5/submit
+          sparse-checkout-cone-mode: true
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Check and merge
+        run: |
+          set -o pipefail
+          uv run submission/merge.py --baseline base | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload merged submission
+        uses: actions/upload-artifact@v4
+        with:
+          name: submission-${{ github.event.pull_request.head.sha }}
+          path: submission/submission.csv
+          if-no-files-found: error

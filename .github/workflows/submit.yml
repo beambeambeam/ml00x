@@ -1,0 +1,85 @@
+name: Submit to Kaggle
+
+# Manual only: Actions → Submit to Kaggle → Run workflow. Anyone with write access can run it.
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: Submission note (the commit SHA is added automatically)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+# One submission at a time. Never cancel a submission that is already running.
+concurrency:
+  group: kaggle-submit
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      KAGGLE_COMPETITION: ${{ vars.KAGGLE_COMPETITION }}
+    steps:
+      - name: Check configuration
+        run: |
+          missing=0
+          if [ -z "$KAGGLE_API_TOKEN" ]; then echo "::error::Set repository secret KAGGLE_API_TOKEN"; missing=1; fi
+          if [ -z "$KAGGLE_COMPETITION" ]; then echo "::error::Set repository variable KAGGLE_COMPETITION"; missing=1; fi
+          exit "$missing"
+
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: |
+            submission
+            task1/submit
+            task2/submit
+            task3/submit
+            task4/submit
+            task5/submit
+          sparse-checkout-cone-mode: true
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Check and merge
+        run: |
+          set -o pipefail
+          uv run submission/merge.py | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload merged submission
+        uses: actions/upload-artifact@v4
+        with:
+          name: submission-${{ github.sha }}
+          path: submission/submission.csv
+          if-no-files-found: error
+
+      - name: Submit and wait for score
+        env:
+          MESSAGE: ${{ inputs.message }}
+        run: |
+          set -o pipefail
+          note="${GITHUB_SHA::7} ${MESSAGE} (by ${GITHUB_ACTOR})"
+          {
+            echo "## Kaggle"
+            echo
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          uvx --from kaggle==2.2.5 --with six kaggle competitions submit "$KAGGLE_COMPETITION" \
+            -f submission/submission.csv -m "$note" --wait 900 \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Show recent submissions
+        if: always() && env.KAGGLE_API_TOKEN != '' && env.KAGGLE_COMPETITION != ''
+        run: |
+          {
+            echo "### Recent submissions"
+            echo
+            echo '```'
+            uvx --from kaggle==2.2.5 --with six kaggle competitions submissions "$KAGGLE_COMPETITION" | head -n 12
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
