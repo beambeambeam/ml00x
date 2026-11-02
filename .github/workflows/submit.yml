@@ -39,7 +39,7 @@ jobs:
           if [ -z "$KAGGLE_COMPETITION" ]; then echo "::error::Set repository variable KAGGLE_COMPETITION"; missing=1; fi
           exit "$missing"
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           sparse-checkout: |
             submission
@@ -50,7 +50,7 @@ jobs:
             task5/submit
           sparse-checkout-cone-mode: true
 
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
 
       - name: Check and merge
         run: |
@@ -64,7 +64,7 @@ jobs:
 
       - name: Look for an earlier submission of this file
         id: seen
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: .kaggle-submitted
           key: kaggle-submitted-${{ steps.hash.outputs.sha256 }}
@@ -78,7 +78,7 @@ jobs:
 
       - name: Upload merged submission
         if: steps.seen.outputs.cache-hit != 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: submission-${{ github.sha }}
           path: submission/submission.csv
@@ -105,7 +105,7 @@ jobs:
 
       - name: Mark file as submitted
         if: steps.seen.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: .kaggle-submitted
           key: kaggle-submitted-${{ steps.hash.outputs.sha256 }}

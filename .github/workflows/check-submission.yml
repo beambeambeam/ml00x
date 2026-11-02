@@ -18,7 +18,7 @@ jobs:
     steps:
       # Sparse checkouts skip data/ and models/, which can be large.
       - name: Check out PR
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           sparse-checkout: |
             submission
@@ -30,7 +30,7 @@ jobs:
           sparse-checkout-cone-mode: true
 
       - name: Check out base branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           ref: ${{ github.base_ref }}
           path: base
@@ -43,7 +43,7 @@ jobs:
             task5/submit
           sparse-checkout-cone-mode: true
 
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
 
       - name: Check and merge
         run: |
@@ -51,7 +51,7 @@ jobs:
           uv run submission/merge.py --baseline base | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Upload merged submission
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: submission-${{ github.event.pull_request.head.sha }}
           path: submission/submission.csv
