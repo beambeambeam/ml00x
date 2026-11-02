@@ -57,7 +57,27 @@ jobs:
           set -o pipefail
           uv run submission/merge.py | tee -a "$GITHUB_STEP_SUMMARY"
 
+      # A cache entry keyed by the file hash marks each file that Kaggle already scored.
+      - name: Hash merged submission
+        id: hash
+        run: echo "sha256=$(sha256sum submission/submission.csv | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+
+      - name: Look for an earlier submission of this file
+        id: seen
+        uses: actions/cache/restore@v4
+        with:
+          path: .kaggle-submitted
+          key: kaggle-submitted-${{ steps.hash.outputs.sha256 }}
+          lookup-only: true
+
+      - name: Skip unchanged submission
+        if: steps.seen.outputs.cache-hit == 'true'
+        run: |
+          echo "::notice::Kaggle already has this submission file. Skipped the submit."
+          echo "Kaggle already has this submission file (sha256 \`${{ steps.hash.outputs.sha256 }}\`). Skipped the submit." >> "$GITHUB_STEP_SUMMARY"
+
       - name: Upload merged submission
+        if: steps.seen.outputs.cache-hit != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: submission-${{ github.sha }}
@@ -65,6 +85,7 @@ jobs:
           if-no-files-found: error
 
       - name: Submit and wait for score
+        if: steps.seen.outputs.cache-hit != 'true'
         env:
           MESSAGE: ${{ inputs.message || github.event.head_commit.message }}
         run: |
@@ -80,6 +101,14 @@ jobs:
             -f submission/submission.csv -m "$note" --wait 900 \
             | tee -a "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
+          touch .kaggle-submitted
+
+      - name: Mark file as submitted
+        if: steps.seen.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .kaggle-submitted
+          key: kaggle-submitted-${{ steps.hash.outputs.sha256 }}
 
       - name: Show recent submissions
         if: always() && env.KAGGLE_API_TOKEN != '' && env.KAGGLE_COMPETITION != ''
