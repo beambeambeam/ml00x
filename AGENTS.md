@@ -17,12 +17,13 @@ Read `docs/project-instruction.md` for background on each task: situation, examp
 Each task is an independent uv project in its own folder.
 
 ```
-docs/      project instruction
-task1/     Task 1 uv project
-task2/     Task 2 uv project
-task3/     Task 3 uv project
-task4/     Task 4 uv project
-task5/     Task 5 uv project
+docs/        project instruction
+submission/  sample submission and merge script
+task1/       Task 1 uv project
+task2/       Task 2 uv project
+task3/       Task 3 uv project
+task4/       Task 4 uv project
+task5/       Task 5 uv project
 ```
 
 Each task folder holds:
@@ -32,7 +33,8 @@ Each task folder holds:
 - `.gitignore`: the task's ignore rules. Ignore `.venv/`. Do not ignore `data/`, `models/`, or `predictions/`.
 - `data/`: the task's Kaggle files. Download them here and commit them.
 - `models/`: saved model checkpoints. Commit them.
-- `predictions/`: generated prediction files. Commit them.
+- `predictions/`: prediction files from experiments. Commit them.
+- `submit/index.csv`: the one prediction file this task sends to Kaggle. Columns `id,task{N}`, all 25,889 ids. Commit it.
 - `assets/`: report figures and tables that notebooks and scripts generate. Commit this folder.
 
 Rules for report assets:
@@ -68,10 +70,18 @@ These rules are hard guardrails. A violation can disqualify the team.
 
 ## Submission
 
-Fill `sample_submission.csv` and keep its row order.
+One Kaggle competition takes one CSV with all five tasks. CI builds it from the five `task{N}/submit/index.csv` files.
 
-- Columns: `id`, `task1`, `task2`, `task3`, `task4`, `task5`.
-- Rows: 25,889. Every cell has a value.
-- `task1`, `task5`: `0` or `1`. `task2`: `0`–`3`. `task3`: THB amount. `task4`: one of `7-11K`, `fiveN`, `freefried`, `pube`, `roblock`.
+To update a task's submission:
 
-Check the file against this list before each upload.
+1. Write `task{N}/submit/index.csv` with columns `id,task{N}`. Use every id in `submission/sample_submission.csv`.
+2. From the repository root, run `uv run submission/merge.py`. It checks all five files and writes `submission/submission.csv` (gitignored).
+3. Open a PR to `main`. The `Check submission` workflow runs the same check and reports what changed vs. `main`.
+4. After merge, run the `Submit to Kaggle` workflow from the Actions tab on `main`. Each submission uses one of the team's daily Kaggle submissions.
+
+Allowed values:
+
+- `task1`, `task5`: `0` or `1`.
+- `task2`: `0`–`3`.
+- `task3`: THB amount, a number ≥ 0.
+- `task4`: one of `7-11K`, `fiveN`, `freefried`, `pube`, `roblock`.
