@@ -77,7 +77,7 @@ To update a task's submission:
 1. Write `task{N}/submit/index.csv` with columns `id,task{N}`. Use every id in `submission/sample_submission.csv`.
 2. From the repository root, run `uv run submission/merge.py`. It checks all five files and writes `submission/submission.csv` (gitignored).
 3. Open a PR to `main`. The `Check submission` workflow runs the same check and reports what changed vs. `main`.
-4. After merge, the `Submit to Kaggle` workflow runs on `main` if the push changes `submission/` or a `task{N}/submit/` file. If the merged file is the same as a file that Kaggle already scored, the workflow skips the submit. A newer run cancels an older run that is still in progress. You can also start it from the Actions tab. Each submission uses one of the team's daily Kaggle submissions.
+4. After merge, the `Submit to Kaggle` workflow runs on `main` if the push changes `submission/` or a `task{N}/submit/` file. Each Kaggle note holds a `[sha:<hash>]` tag of its file. If Kaggle already has the same file, the workflow skips the submit. A newer push cancels an older run before it reaches Kaggle, but a submit that has started always finishes. You can also start the workflow from the Actions tab. Set `force` there to submit a file again. Each submission uses one of the team's daily Kaggle submissions.
 
 Allowed values:
 
