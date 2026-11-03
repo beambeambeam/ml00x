@@ -1,0 +1,36 @@
+{
+  "selected_model": "equal_blend",
+  "seed": 42,
+  "selection_metric": "macro_f1",
+  "best_params": {
+    "learning_rate": 0.063863707925569,
+    "num_leaves": 59,
+    "max_depth": 4,
+    "min_child_samples": 81,
+    "reg_lambda": 0.12942956115511214,
+    "colsample_bytree": 0.7975990992289793
+  },
+  "iterations": 440,
+  "baseline_holdout": {
+    "macro_f1": 0.7462417590828843,
+    "weighted_f1": 0.7605764044701118
+  },
+  "oof_scores": [
+    {
+      "model": "equal_blend",
+      "macro_f1": 0.7508948805948893,
+      "weighted_f1": 0.7646831594261824
+    },
+    {
+      "model": "lightgbm",
+      "macro_f1": 0.7488841714828611,
+      "weighted_f1": 0.7629119468811654
+    },
+    {
+      "model": "catboost",
+      "macro_f1": 0.7461167727160662,
+      "weighted_f1": 0.7604822205956522
+    }
+  ],
+  "test_rows": 25889
+}

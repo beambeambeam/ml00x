@@ -3,4 +3,54 @@ name = "task2"
 version = "0.1.0"
 description = "Task 2: player segment multi-class classification"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "catboost>=1.2.10",
+    "imbalanced-learn>=0.14.2",
+    "lightgbm>=4.7.0",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "optuna>=5.0.0",
+    "pandas>=3.1.0",
+    "pyarrow>=26.0.0",
+    "scikit-learn>=1.9.1",
+    "seaborn>=0.13.2",
+    "shap>=0.54.1",
+    "xgboost>=3.4.1",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
+    "jupyterlab>=4.6.5",
+    "nbqa>=1.9.1",
+    "nbstripout>=0.9.1",
+    "notebook>=7.6.4",
+    "pre-commit>=4.7.0",
+    "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.3",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["."]
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "UP"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+docstring-code-format = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = ["-ra", "--strict-config", "--strict-markers"]
+
+[tool.coverage.run]
+branch = true
+omit = ["notebook/*", "tests/*"]

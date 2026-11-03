@@ -1,0 +1,4 @@
+candidate,macro_f1,weighted_f1
+Existing CatBoost/LightGBM blend,0.7508948805948893,0.7646831594261824
+Balanced CatBoost,0.741759170856021,0.7531811686550387
+80% existing + 20% balanced CatBoost,0.750871597826227,0.7643939023960835

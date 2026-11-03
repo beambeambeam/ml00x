@@ -1,0 +1,4 @@
+model,base_errors_fixed,base_errors_harmed,base_error_fix_rate
+XGBoost,2082,2474,0.08572487338905588
+Balanced CatBoost,3730,5235,0.15358010458269855
+80/10/10 mixture,420,429,0.017293202124593406

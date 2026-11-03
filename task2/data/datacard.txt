@@ -1,0 +1,168 @@
+TASK 2: PLAYER SEGMENTATION
+================================================================================
+
+TARGET VARIABLE: segment (Multi-class)
+4-class classification: 0=Casual[1], 1=Grinder[2], 2=Social[3], 3=Whale[4]
+
+FEATURES (44 features):
+
+1. play_frequency (float)
+   Average number of days per week the player logs in
+
+2. avg_session_duration (float)
+   Average duration of a single play session in minutes
+
+3. total_playtime_hours (float)
+   Cumulative lifetime playtime
+
+4. login_streak (float)
+   Maximum number of consecutive daily logins
+
+5. days_since_last_login (float)
+   Recency metric - days since last login
+
+6. total_spending_thb (float)
+   Lifetime spending on in-game purchases[5]
+
+7. avg_monthly_spending (float)
+   Average monthly spending
+
+8. spending_frequency (float)
+   Number of purchase transactions per month
+
+9. friend_count (float)
+   Number of in-game friends
+
+10. team_play_percentage (float)
+    Percentage of matches played in groups
+
+11. chat_activity_score (float)
+    Chat frequency and volume score
+
+12. friend_invites_sent (float)
+    Number of friend invitations sent
+
+13. gifts_sent_received (float)
+    Total gift interactions (sent + received)
+
+14. ranked_participation_rate (float)
+    Percentage of matches in ranked[6] mode
+
+15. tournament_entries (float)
+    Number of tournaments[7] entered
+
+16. competitive_rank (float)
+    Highest competitive ranking achieved
+
+17. win_rate_ranked (float)
+    Win rate in competitive ranked[6] matches
+
+18. watches_esports (float)
+    Whether player watches professional esports[8]
+
+19. achievement_completion_rate (float)
+    Percentage of all achievements[9] completed
+
+20. collection_progress (float)
+    Percentage of collectible items owned
+
+21. rare_items_count (float)
+    Count of rare/mythic items in inventory
+
+22. speed_of_progression (float)
+    Rate of progression through game content
+
+23. item_type_preference_cosmetic (float)
+    Preference score for cosmetic[10] items
+
+24. item_type_preference_performance (float)
+    Preference score for performance-enhancing items
+
+25. item_type_preference_social (float)
+    Preference score for social items
+
+26. account_age_days (float)
+    Days since account creation
+
+27. vip_tier (float)
+    Current VIP[11] tier level
+
+28. responds_to_discounts (float)
+    Likelihood to purchase during sales
+
+29. preferred_game_mode (float)
+    Most-played game mode[12]
+
+30. avg_match_length (float)
+    Average duration of matches played in minutes
+
+31. peak_concurrent_hours (float)
+    Most hours played in single day
+
+32. random_metric_1 (float)
+    Random uniform noise - no correlation with segments
+
+33. random_metric_2 (float)
+    Random uniform noise - no correlation with segments
+
+34. random_metric_3 (float)
+    Random normal noise - no correlation with segments
+
+35. region (object)
+    Geographic region
+
+36. platform (object)
+    Primary gaming platform
+
+37. device_type (object)
+    Specific device used
+
+38. payment_method (object)
+    Preferred payment method
+
+39. language (object)
+    Primary language setting
+
+40. account_status (object)
+    Current account status
+
+41. player_type_tag (object)
+    Self-declared or inferred player motivation
+
+42. engagement_level (object)
+    Engagement tier classification
+
+43. loyalty_tier (object)
+    Loyalty tier based on spending
+
+44. skill_tier (object)
+    Skill tier classification
+
+
+================================================================================
+GAME TERMINOLOGY DEFINITIONS
+================================================================================
+
+[1] Casual - Players who play occasionally for relaxation, with low engagement and spending
+
+[2] Grinder - Players who play frequently and competitively, focused on ranking and achievements
+
+[3] Social - Players who focus on social interactions, playing with friends and community engagement
+
+[4] Whale - High-spending players who invest significant money in the game
+
+[5] In-game Purchases - Virtual items or currency bought with real money
+
+[6] Ranked - Competitive game mode where players compete for higher rankings/ratings
+
+[7] Tournament - Organized competitive event where players compete for prizes or recognition
+
+[8] Esports - Professional competitive gaming watched as entertainment
+
+[9] Achievement - In-game goal or milestone that rewards players for completing specific tasks
+
+[10] Cosmetic - Visual customization items that don't affect gameplay (skins, outfits, etc.)
+
+[11] VIP - Premium membership tier offering special benefits to paying members
+
+[12] Game Mode - Different types of gameplay rules or objectives within the same game

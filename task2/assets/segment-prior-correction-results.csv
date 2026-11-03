@@ -1,0 +1,3 @@
+candidate,macro_f1,weighted_f1
+argmax baseline,0.7508948805948893,0.7646831594261824
+sqrt-prior correction,0.750245386662624,0.7633011401463502
