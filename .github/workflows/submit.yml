@@ -1,13 +1,7 @@
 name: Submit to Kaggle
 
-# Runs on each push to main that changes a submission file.
-# Manual run: Actions → Submit to Kaggle → Run workflow.
+# Manual only: Actions → Submit to Kaggle → Run workflow (on main).
 on:
-  push:
-    branches: [main]
-    paths:
-      - submission/**
-      - task*/submit/**
   workflow_dispatch:
     inputs:
       message:
@@ -108,10 +102,9 @@ jobs:
       - name: Submit and wait for score
         if: steps.seen.outputs.found != 'true'
         env:
-          MESSAGE: ${{ inputs.message || github.event.head_commit.message }}
+          MESSAGE: ${{ inputs.message }}
         run: |
           set -o pipefail
-          MESSAGE="${MESSAGE%%$'\n'*}"
           note="${GITHUB_SHA::7} [sha:$HASH] ${MESSAGE} (by ${GITHUB_ACTOR})"
           {
             echo "## Kaggle"
