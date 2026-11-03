@@ -80,15 +80,21 @@ jobs:
       HASH: ${{ needs.prepare.outputs.hash }}
     steps:
       - name: Check configuration
+        id: config
         run: |
-          missing=0
-          if [ -z "$KAGGLE_API_TOKEN" ]; then echo "::error::Set repository secret KAGGLE_API_TOKEN"; missing=1; fi
-          if [ -z "$KAGGLE_COMPETITION" ]; then echo "::error::Set repository variable KAGGLE_COMPETITION"; missing=1; fi
-          exit "$missing"
+          if [ -z "$KAGGLE_API_TOKEN" ] || [ -z "$KAGGLE_COMPETITION" ]; then
+            echo "::notice::KAGGLE_API_TOKEN or KAGGLE_COMPETITION not configured in this repository. Skipping Kaggle submission."
+            echo "Kaggle credentials not set in this repository. Skipped the submit." >> "$GITHUB_STEP_SUMMARY"
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
+        if: steps.config.outputs.configured == 'true'
 
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        if: steps.config.outputs.configured == 'true'
         with:
           name: submission-${{ github.sha }}
 
@@ -96,7 +102,7 @@ jobs:
       # The check runs here, inside the serial group, so two runs of one file cannot both pass it.
       - name: Look for an earlier submission of this file
         id: seen
-        if: ${{ !inputs.force }}
+        if: steps.config.outputs.configured == 'true' && !inputs.force
         run: |
           list=$($KAGGLE competitions submissions "$KAGGLE_COMPETITION" --csv --page-size 200 -q)
           if grep -qF "[sha:$HASH]" <<< "$list"; then
@@ -106,7 +112,7 @@ jobs:
           fi
 
       - name: Submit and wait for score
-        if: steps.seen.outputs.found != 'true'
+        if: steps.config.outputs.configured == 'true' && steps.seen.outputs.found != 'true'
         env:
           MESSAGE: ${{ inputs.message || github.event.head_commit.message }}
         run: |
@@ -124,7 +130,7 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Show recent submissions
-        if: always() && env.KAGGLE_API_TOKEN != '' && env.KAGGLE_COMPETITION != ''
+        if: steps.config.outputs.configured == 'true'
         run: |
           {
             echo "### Recent submissions"
