@@ -6,7 +6,3 @@ __pycache__/
 # uv virtual environment
 .venv/
 
-
-# Data and predictions
-data/
-predictions/
