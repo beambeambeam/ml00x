@@ -1,0 +1,11 @@
+rank,candidate,macro_f1,weighted_f1,method,evidence
+1,Reference + RealMLP-TD (80/20),0.752264,0.765910,80/20 probability blend; RealMLP-TD OOF seed 42,65-realmlp-td-oof.ipynb
+2,Reference + four-seed VIP × region average (80/20),0.752172,0.765704,"80/20 probability blend; VIP × region LightGBM OOF seeds 42, 2025, 1337, 31415",34-vip-region-four-seed-average.ipynb
+3,Fresh seed-2025 reference + loyalty × platform + engagement × device (80/10/10),0.751955,0.765529,80/10/10 probability blend,56-platform-device-fresh-fold-synthesis.ipynb
+4,Reference + VIP × region + purchase × collection cross-family mixture (80/10/10),0.751911,0.765459,80/10/10 probability blend,61-vipregion-purchase-crossfamily-blend.ipynb
+5,Reference + three-seed VIP × region average (80/20),0.751862,0.765462,"80/20 probability blend; VIP × region LightGBM OOF seeds 42, 2025, 1337",32-vip-region-three-seed-average.ipynb
+6,Reference + two-seed VIP × region average (80/20),0.751706,0.765361,"80/20 probability blend; VIP × region LightGBM OOF seeds 42, 2025",30-vip-region-crossseed-blend.ipynb
+7,Reference + purchase × collection equal cross-seed mean (80/20),0.751661,0.765188,80/20 probability blend; purchase × collection OOF seeds 42 and 2025 averaged equally,59-purchase-collection-crossseed-average.ipynb
+8,Reference + ChimeraBoost (80/20),0.751660,0.765359,80/20 probability blend; ChimeraBoost default OOF seed 42,64-chimeraboost-default-oof.ipynb
+9,"Reference + ExtraTrees VIP × region (80/20, seed 42)",0.751649,0.765154,80/20 probability blend; LightGBM ExtraTrees VIP × region,39-lightgbm-variant-blend-screen.ipynb
+10,"Reference + VIP × region (80/20, seed 42)",0.751552,0.765087,80/20 probability blend; balanced-weight LightGBM with VIP × region,28-vip-region-interaction.ipynb

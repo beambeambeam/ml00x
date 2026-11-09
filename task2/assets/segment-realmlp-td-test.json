@@ -1,0 +1,19 @@
+{
+  "test_rows": 25889,
+  "fit_rows": 104000,
+  "elapsed_seconds": 698.9,
+  "train_class_share": {
+    "0": 0.3936,
+    "1": 0.2503,
+    "2": 0.2021,
+    "3": 0.154
+  },
+  "test_predicted_class_share": {
+    "0": 0.4345,
+    "1": 0.2409,
+    "2": 0.1825,
+    "3": 0.1422
+  },
+  "test_loaded_for": "prediction only",
+  "submission_status": "not written to submit/index.csv"
+}
