@@ -3,4 +3,10 @@ name = "task5"
 version = "0.1.0"
 description = "Task 5: account security anomaly detection"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "basemap>=2.0.0",
+    "matplotlib>=3.10.9",
+    "pandas>=3.1.1",
+    "plotly>=7.1.0",
+    "scikit-learn>=1.9.1",
+]
