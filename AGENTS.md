@@ -84,4 +84,4 @@ Allowed values:
 - `task1`, `task5`: `0` or `1`.
 - `task2`: `0`–`3`.
 - `task3`: THB amount, a number ≥ 0.
-- `task4`: one of `7-11K`, `fiveN`, `freefried`, `pube`, `roblock`.
+- `task4`: `0`–`4` (`0`: 7-11 Knights, `1`: FiveN, `2`: Free Fried, `3`: PUBE, `4`: Roblock per `task4/data/datacard.txt`).

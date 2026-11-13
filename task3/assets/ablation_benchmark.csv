@@ -1,5 +1,7 @@
-Model Paradigm,Architecture,OOF MAE (THB),OOF NMAE Score,Delta vs Challenge (0.75)
-1. Constant Median Baseline,Single Scalar Point Estimator,10495.48,0.5000,-0.2500
-2. Standalone LightGBM Hurdle,P(Spend) * Log-L1 Regressor + Direct L1,2879.38,0.7847,+0.0347
-3. Standalone CatBoost Hurdle,P(Spend) * Log-L1 Regressor + Direct L1,2862.14,0.7858,+0.0358
-4. Tri-Model Ensembled Bayes-Hurdle (Optimal),LightGBM + CatBoost + XGBoost Tri-Stage Convex Blend,2809.54,0.7889,+0.0389
+Architecture,Nested_OOF_NMAE,OOF_MAE_THB
+1. Frozen Two-Stage Hurdle Baseline,0.789609,2796.93
+2. Direct Raw-Scale L1 Ensemble (LGBM+CB+XGB),0.786369,2851.71
+3. Level-2 LGBM (MAE) Meta-Stacker,0.790111,2788.49
+4. 3-Family Two-Stage Log-Multiplier Hurdle,0.791231,2769.68
+5. Hybrid Hurdle + Raw-Scale L1 Ensemble,0.791633,2762.95
+6. Gated Super-Hybrid + Level-2 Meta-Stacker (Champion),0.791781,2760.47

@@ -19,7 +19,19 @@ import sys
 from pathlib import Path
 
 TASKS = ("task1", "task2", "task3", "task4", "task5")
-TASK4_LABELS = {"7-11K", "fiveN", "freefried", "pube", "roblock"}
+TASK4_MAP = {
+    "7-11K": "0",
+    "7-11k": "0",
+    "fiveN": "1",
+    "freefried": "2",
+    "pube": "3",
+    "roblock": "4",
+    "0": "0",
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+}
 SAMPLE = Path("submission/sample_submission.csv")
 
 
@@ -41,7 +53,7 @@ def check_value(task: str, raw: str) -> str | None:
             return None
         return value if math.isfinite(number) and number >= 0 else None
     if task == "task4":
-        return value if value in TASK4_LABELS else None
+        return TASK4_MAP.get(value)
     raise ValueError(task)
 
 
