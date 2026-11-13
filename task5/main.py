@@ -14,16 +14,20 @@ Design idea ("each player has their own rectangle"):
     3. Geography: displacement of each login from the player's home point, plus
        coordinates outside the valid lat/lon box.
 
-    Two unsupervised detectors score the engineered matrix:
-      - Robust tail score: soft-max of |robust z| over features (hard outliers).
+    Detectors on the engineered matrix:
+      - HDBSCAN-CBLOF (primary): density clustering (HDBSCAN) per feature, then
+        cluster-based outlier scoring: players in a small cluster (<5%) that an
+        empty band separates from the large clusters are outliers. This is the
+        "rectangle" test learned by a model. Full-space models (Isolation
+        Forest, MCD, GMM, autoencoder, LOF) miss the bot, silent, low-activity
+        and unstable clusters because each differs in only one or a few of ~75
+        features; see assets/model-comparison.csv.
+      - Robust tail score: soft-max of |robust z| over features.
       - Isolation Forest on the clipped robust-z matrix (multi-feature combos).
-      - Gap box: per feature, find the dense core and any small group sitting
-        beyond an empty gap (the "rectangle" test, done automatically for every
-        feature). Catches separated clusters (bots, quiet accounts) that are not
-        extreme in z, so the two detectors above miss them.
-    Hard vote: a player is anomalous if the tail score passes its natural break
-    OR the player sits outside at least one feature box. F3 weights recall 9x,
-    so a union of detectors suits it.
+      - Gap box: a simpler sorted-gap version of the HDBSCAN test, kept only as
+        an independent cross-check (not in the vote).
+    Hard vote: anomalous if HDBSCAN-CBLOF flags the player OR the tail score
+    passes its natural break. F3 weights recall 9x, so a union suits it.
 
 Test rows are only used without labels (allowed for Task 5).
 """
@@ -37,6 +41,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from sklearn.cluster import HDBSCAN
 from sklearn.ensemble import IsolationForest
 
 SEED = 42
@@ -109,14 +114,63 @@ def score(F: pd.DataFrame):
     iforest = -iso.score_samples(Zc)
 
     boxes = gap_boxes(F)
-    outside = pd.DataFrame({c: (F[c] < lo) | (F[c] > hi) for c, (lo, hi) in boxes.items()})
-    pd.DataFrame([{"feature": c, "low": lo, "high": hi, "players_outside": int(outside[c].sum())}
+    box_out = pd.DataFrame({c: (F[c] < lo) | (F[c] > hi) for c, (lo, hi) in boxes.items()})
+    pd.DataFrame([{"feature": c, "low": lo, "high": hi, "players_outside": int(box_out[c].sum())}
                   for c, (lo, hi) in boxes.items()]).to_csv(ASSETS / "gap-boxes.csv", index=False)
 
-    out = pd.DataFrame({"tail": tail, "iforest": iforest, "box_hits": outside.sum(axis=1).to_numpy()})
+    outside, clusters = hdbscan_cblof(F)
+    clusters.sort_values("separation", ascending=False).to_csv(ASSETS / "hdbscan-clusters.csv", index=False)
+
+    out = pd.DataFrame({"tail": tail, "iforest": iforest,
+                        "hdbscan_hits": outside.sum(axis=1).to_numpy(),
+                        "box_hits": box_out.sum(axis=1).to_numpy()})
     ranks = out[["tail", "iforest"]].rank(pct=True)
     out["ensemble"] = ranks.mean(axis=1)  # soft vote on ranks
     return out, outside, boxes
+
+
+def hdbscan_cblof(F: pd.DataFrame, small_frac=0.05, min_sep=100.0, eps=0.1, min_unique=200):
+    """Per-feature HDBSCAN + cluster-based outlier factor.
+
+    For each feature (scaled by IQR), HDBSCAN finds density clusters;
+    `cluster_selection_epsilon` merges fragments of the same dense core. A
+    cluster smaller than `small_frac` of players is an outlier cluster when the
+    empty band between it and the nearest large cluster is at least `min_sep`
+    times the core's typical spacing near that edge. Measured on this data, real
+    clusters sit at >=125x and tail fragments at <=63x, so 100 falls in that gap.
+    Returns per-feature membership flags and a per-cluster table.
+    """
+    hits, table = {}, []
+    for c in F:
+        v = F[c].to_numpy()
+        if len(np.unique(v)) < min_unique:
+            continue
+        x = (v - np.median(v)) / (np.subtract(*np.percentile(v, [75, 25])) + 1e-9)
+        lab = HDBSCAN(min_cluster_size=50, min_samples=20, cluster_selection_epsilon=eps,
+                      copy=True).fit_predict(x.reshape(-1, 1))
+        sizes = pd.Series(lab[lab >= 0]).value_counts()
+        big = sizes[sizes >= small_frac * len(x)].index
+        core = np.sort(x[np.isin(lab, big)])
+        if len(core) == 0:
+            continue
+        flag = np.zeros(len(x), bool)
+        for sc in sizes[sizes < small_frac * len(x)].index:
+            m = lab == sc
+            members = x[m]
+            if len(np.unique(members)) < 0.5 * m.sum():
+                continue  # point mass (e.g. never adds friends): legit sub-population
+            low_side = members.mean() < np.median(core)
+            gap = core[0] - members.max() if low_side else members.min() - core[-1]
+            edge = core[:200] if low_side else core[-200:]
+            spacing = np.median(np.diff(edge)) + 1e-12
+            sep = gap / spacing
+            table.append({"feature": c, "cluster_size": int(m.sum()), "gap_iqr": round(float(gap), 4),
+                          "separation": round(float(sep), 1), "outlier_cluster": bool(sep >= min_sep)})
+            if sep >= min_sep:
+                flag |= m
+        if flag.any():
+            hits[c] = flag
+    return pd.DataFrame(hits, index=F.index), pd.DataFrame(table)
 
 
 def gap_boxes(F: pd.DataFrame, tail_frac=0.06, min_ratio=300.0, min_group=20, min_unique=200):
@@ -169,13 +223,14 @@ def main() -> None:
     S, outside, boxes = score(F)
 
     thr = natural_break(S["tail"].to_numpy())
-    by_tail, by_box = S["tail"] > thr, S["box_hits"] > 0
-    pred = (by_tail | by_box).astype(int)
-    print(f"tail>{thr:.2f}: {by_tail.sum()}  box: {by_box.sum()}  both: {(by_tail & by_box).sum()}")
+    by_tail, by_hdb, by_box = S["tail"] > thr, S["hdbscan_hits"] > 0, S["box_hits"] > 0
+    pred = (by_tail | by_hdb).astype(int)
+    print(f"hdbscan: {by_hdb.sum()}  tail>{thr:.2f}: {by_tail.sum()}  both: {(by_tail & by_hdb).sum()}")
+    print(f"cross-check gap box: {by_box.sum()} flagged, {(by_box & by_hdb).sum()} shared with hdbscan")
     print(f"flagged={pred.sum()} ({pred.mean():.2%})")
 
     pd.DataFrame({"player_id": df.player_id, **S, "is_anomaly": pred}).to_csv(
-        ROOT / "predictions" / "tail-iforest-scores.csv", index=False)
+        ROOT / "predictions" / "detector-scores.csv", index=False)
 
     ids = pd.read_csv(ROOT.parent / "submission" / "sample_submission.csv", usecols=["id"])["id"]
     assert len(ids) == len(df), "row count mismatch with sample submission"

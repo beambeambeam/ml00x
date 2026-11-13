@@ -647,7 +647,7 @@ P011156,normal
 P010266,normal
 P014888,normal
 P024455,normal
-P001930,normal
+P001930,other_tail_outlier
 P020955,bot_24_7
 P001830,normal
 P006198,normal
@@ -1389,7 +1389,7 @@ P003578,normal
 P014137,normal
 P011900,normal
 P014691,normal
-P007582,normal
+P007582,other_tail_outlier
 P024379,normal
 P002843,normal
 P009612,normal
@@ -8420,7 +8420,7 @@ P017092,normal
 P004006,normal
 P018938,normal
 P016473,account_sale_boosting
-P006646,vpn_pricing_abuse
+P006646,account_takeover
 P014546,normal
 P002046,normal
 P007661,normal

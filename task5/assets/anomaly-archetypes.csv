@@ -1,9 +1,9 @@
 archetype,players,share_of_all_players
-account_takeover,328,0.0127
+account_takeover,329,0.0127
 account_sale_boosting,310,0.012
 low_activity,265,0.0102
 silent_account,263,0.0102
 unstable_behavior,246,0.0095
 bot_24_7,207,0.008
-vpn_pricing_abuse,189,0.0073
-other_tail_outlier,8,0.0003
+vpn_pricing_abuse,188,0.0073
+other_tail_outlier,10,0.0004

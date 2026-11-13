@@ -1,0 +1,9 @@
+model,overlap_with_final_set,unstable_behavior,bot_24_7,silent_account,account_takeover,vpn_pricing_abuse,account_sale_boosting,low_activity
+Isolation Forest (full space),0.633,0.18,0.96,0.19,1.0,1.0,1.0,0.11
+Robust Mahalanobis (MCD),0.602,0.09,0.97,0.2,0.94,0.87,1.0,0.12
+Gaussian Mixture (8 comp.),0.567,0.54,0.03,0.11,1.0,0.98,0.97,0.15
+Local Outlier Factor,0.245,0.17,0.11,0.28,0.37,0.54,0.12,0.15
+Autoencoder (64-16-64),0.426,0.97,0.0,0.05,0.58,0.62,0.64,0.06
+Subspace Isolation Forest (per feature),0.737,1.0,1.0,0.09,1.0,1.0,1.0,0.14
+Robust tail score,0.584,0.29,0.5,0.07,1.0,1.0,1.0,0.12
+HDBSCAN-CBLOF (per feature),1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
