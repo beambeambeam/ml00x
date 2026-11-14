@@ -1,0 +1,30 @@
+{
+  "candidate": "top pick, fold-averaged Test predictions",
+  "recipe": "0.8 * (CatBoost + LightGBM)/2 + 0.2 * mean over VIP x region seeds 42, 2025, 1337, 31415",
+  "cv": "StratifiedKFold(3, shuffle=True); reference split seed 42; VIP splits as listed",
+  "test_rows": 25889,
+  "oof_scores": {
+    "reference_macro_f1": 0.7508948805948893,
+    "top_pick_macro_f1": 0.7521718862269783,
+    "top_pick_weighted_f1": 0.7657044936567912
+  },
+  "reproduction": {
+    "reference_max_abs_diff": 0.0,
+    "vip_seed_max_abs_diff": {
+      "42": 0.0,
+      "2025": 0.0,
+      "1337": 0.0,
+      "31415": 0.0
+    }
+  },
+  "agreement_with_full_refit_top_pick": 0.982540847464174,
+  "differing_labels_vs_full_refit": 452,
+  "predicted_class_counts": {
+    "0": 10989,
+    "1": 6342,
+    "2": 4933,
+    "3": 3625
+  },
+  "prediction_file": "predictions\\segment-top-pick-foldavg-test.csv",
+  "submission_status": "not written to submit/index.csv"
+}

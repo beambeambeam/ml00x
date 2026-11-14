@@ -1,7 +1,7 @@
 """Fit the selected Task 2 candidate on all labeled rows and predict test segments.
 
-This creates a separate, player_id-keyed prediction artifact. It intentionally does
-not edit submit/index.csv because player_id-to-ANS mapping has not been verified.
+This creates a separate, player_id-keyed prediction artifact. It does not edit
+submit/index.csv. The ANS id of each player_id is its row number in data/test.csv.
 Run from task2 with: uv run python predict_top_pick.py
 """
 
@@ -246,7 +246,7 @@ def main() -> None:
         f"Reference argmax matches existing test predictions: {reference_matches:,}/{len(output):,}"
     )
     print(f"Predicted class counts: {output.segment.value_counts().sort_index().to_dict()}")
-    print("Official submit/index.csv left unchanged; player_id-to-ANS mapping is not present.")
+    print("Official submit/index.csv left unchanged. Build it by test row position (ANS number).")
 
 
 if __name__ == "__main__":
