@@ -1,7 +1,9 @@
 Paradigm,Validation Strategy,OOF MAE (THB),OOF NMAE Score,Delta vs Fold-Median (pp)
 Fold-training median baseline,5-fold outer OOF,10495.48,0.500037,0.0
-Stage-2 Log-Linear Ridge Hurdle (Standalone),5-fold outer OOF,2842.19,0.78693,28.6893
-LightGBM Quantile (BayesQ Q_{1-0.5/p}),5-fold outer OOF,2716.87,0.794393,29.4356
-XGBoost MultiQuantile (BayesQ Q_{1-0.5/p}),5-fold outer OOF,2714.42,0.794541,29.4504
-CatBoost MultiQuantile (BayesQ Q_{1-0.5/p}),5-fold outer OOF,2702.42,0.795263,29.5226
-Champion Nested Bayes-Optimal MultiQuantile,5-fold nested outer OOF (Promoted),2702.65,0.795249,29.5212
+Stage-2 Log-Linear Ridge Hurdle (Standalone),5-fold outer OOF,2842.18,0.786931,28.6894
+LightGBM Quantile (BayesQ Q_{1-0.5/p}),5-fold outer OOF,2716.82,0.794396,29.4359
+XGBoost MultiQuantile (BayesQ Q_{1-0.5/p}),5-fold outer OOF,2714.43,0.79454,29.4503
+CatBoost 9-Quantile (Q_V5 Depth-5),5-fold outer OOF,2702.37,0.795266,29.5229
+CatBoost 15-Quantile (Q_FINE Depth-5),5-fold outer OOF,2702.88,0.795235,29.5198
+CatBoost 15-Quantile (Q_FINE Depth-7),5-fold outer OOF,2704.42,0.795143,29.5105
+Champion Tri-Stage-1 + Tri-Grid MultiQuantile (Nested),5-fold nested outer OOF (Promoted),2702.22,0.795275,29.5238
