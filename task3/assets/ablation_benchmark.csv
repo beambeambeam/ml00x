@@ -1,9 +1,10 @@
 Paradigm,Validation Strategy,OOF MAE (THB),OOF NMAE Score,Delta vs Fold-Median (pp)
 Fold-training median baseline,5-fold outer OOF,10495.48,0.500037,0.0
-Stage-2 Log-Linear Ridge Hurdle (Standalone),5-fold outer OOF,2842.18,0.786931,28.6894
-LightGBM Quantile (BayesQ Q_{1-0.5/p}),5-fold outer OOF,2716.82,0.794396,29.4359
-XGBoost MultiQuantile (BayesQ Q_{1-0.5/p}),5-fold outer OOF,2714.43,0.79454,29.4503
-CatBoost 9-Quantile (Q_V5 Depth-5),5-fold outer OOF,2702.37,0.795266,29.5229
-CatBoost 15-Quantile (Q_FINE Depth-5),5-fold outer OOF,2702.88,0.795235,29.5198
-CatBoost 15-Quantile (Q_FINE Depth-7),5-fold outer OOF,2704.42,0.795143,29.5105
-Champion Tri-Stage-1 + Tri-Grid MultiQuantile (Nested),5-fold nested outer OOF (Promoted),2702.22,0.795275,29.5238
+Stage-2 Log-Linear Ridge Hurdle (Reference),5-fold outer OOF,2743.92,0.79277,29.2733
+Stage-2 Robust Huber(eps=1.35) Hurdle,5-fold outer OOF,2723.18,0.794014,29.3977
+CatBoost Depth-5 V3 Q_FINE (Huber Resid),5-fold outer OOF,2697.13,0.795582,29.5544
+LightGBM Depth-6 V3 Q_FINE (Huber Resid),5-fold outer OOF,2692.13,0.795883,29.5846
+XGBoost Depth-5 V3 Early-Stopped Q_FINE,5-fold outer OOF,2691.56,0.795918,29.5881
+PyTorch TabMQ_V2 BatchEnsemble Q_FINE,5-fold outer OOF,2690.16,0.796002,29.5965
+PyTorch TabMQ_Cmp3L Skip BatchEnsemble Q_FINE,5-fold outer OOF,2690.54,0.795979,29.5942
+Run 16 V3 6-Stage-1 + 5-Family Q_FINE Hurdle (Nested),5-fold nested outer OOF,2690.26,0.795996,29.5959
