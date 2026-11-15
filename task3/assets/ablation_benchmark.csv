@@ -1,5 +1,9 @@
-Model Paradigm,Architecture,OOF MAE (THB),OOF NMAE Score,Delta vs Challenge (0.75)
-1. Constant Median Baseline,Single Scalar Point Estimator,10495.48,0.5000,-0.2500
-2. Standalone LightGBM Hurdle,P(Spend) * Log-L1 Regressor + Direct L1,2879.38,0.7847,+0.0347
-3. Standalone CatBoost Hurdle,P(Spend) * Log-L1 Regressor + Direct L1,2862.14,0.7858,+0.0358
-4. Tri-Model Ensembled Bayes-Hurdle (Optimal),LightGBM + CatBoost + XGBoost Tri-Stage Convex Blend,2809.54,0.7889,+0.0389
+Paradigm,Validation Strategy,OOF MAE (THB),OOF NMAE Score,Delta vs Fold-Median (pp)
+Fold-training median baseline,5-fold outer OOF,10495.48,0.500037,0.0
+Stage-2 Log-Linear Ridge Hurdle (Standalone),5-fold outer OOF,2842.18,0.786931,28.6894
+LightGBM Quantile (BayesQ Q_{1-0.5/p}),5-fold outer OOF,2716.82,0.794396,29.4359
+XGBoost MultiQuantile (BayesQ Q_{1-0.5/p}),5-fold outer OOF,2714.43,0.79454,29.4503
+CatBoost 9-Quantile (Q_V5 Depth-5),5-fold outer OOF,2702.37,0.795266,29.5229
+CatBoost 15-Quantile (Q_FINE Depth-5),5-fold outer OOF,2702.88,0.795235,29.5198
+CatBoost 15-Quantile (Q_FINE Depth-7),5-fold outer OOF,2704.42,0.795143,29.5105
+Champion Tri-Stage-1 + Tri-Grid MultiQuantile (Nested),5-fold nested outer OOF (Promoted),2702.22,0.795275,29.5238

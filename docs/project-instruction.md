@@ -188,7 +188,7 @@ Build an image classifier that identifies which Karena game is being played from
 - **Images:** Gameplay screenshots (144p, centered crop to 230 × 120)
 - **Sources:** Live streams, submissions, forums, tickets
 - **Variety:** Different maps, phases, weather, and UI states
-- **Classes:** `7-11K`, `fiveN`, `freefried`, `pube`, `roblock`
+- **Classes / submission IDs (per current TA addendum):** `0` = `7-11K`, `1` = `fiveN`, `2` = `freefried`, `3` = `pube`, `4` = `roblock`
 - Pre-trained models are allowed for this task.
 
 ### Hints & Best Practices
@@ -238,8 +238,8 @@ Fill your answers in `sample_submission.csv`. Include one prediction column for 
 
 | `id`       | `task1` | `task2` | `task3` | `task4`     | `task5` |
 | ---------- | ------: | ------: | ------: | ----------- | ------: |
-| `ANS00001` |       0 |       2 |       0 | `freefried` |       1 |
-| `ANS00002` |       1 |       3 |   10000 | `fiveN`     |       0 |
+| `ANS00001` |       0 |       2 |       0 | 2           |       1 |
+| `ANS00002` |       1 |       3 |   10000 | 1           |       0 |
 | `ANS00003` |       … |       … |       … | …           |       … |
 | `ANS25889` |       … |       … |       … | …           |       … |
 

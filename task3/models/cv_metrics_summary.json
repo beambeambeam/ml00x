@@ -1,0 +1,124 @@
+{
+  "deployment_only_all_oof_parameters": {
+    "p_mode": "lr3_raw",
+    "q_combo": "tri_50_30_20",
+    "scale": 1.0,
+    "tau": 0.47250000000000003,
+    "w_tuple": [
+      0.5,
+      0.3,
+      0.2
+    ]
+  },
+  "deployment_only_all_oof_tuned_score": 0.7953070215184316,
+  "evaluation_protocol": "5 outer stratified folds; strict internal 90/10 early-stopping splits; nested inner BayesQ grid search",
+  "external_verified_baseline_nmae": 0.7896088679,
+  "fixed_reference_config": {
+    "model": "Log-Linear Ridge Bayes Hurdle",
+    "scale": 1.0,
+    "tau": 0.5
+  },
+  "fixed_reference_pooled_oof_nmae": 0.7869308713651277,
+  "inner_selected_parameters_by_outer_fold": [
+    {
+      "outer_fold": 1,
+      "outer_prev_hist_ratio": 0.34981501588206015,
+      "p_mode": "lr3_raw",
+      "q_combo": "tri_50_30_20",
+      "scale": 1.0,
+      "tau": 0.4675,
+      "w_tuple": [
+        0.5,
+        0.3,
+        0.2
+      ]
+    },
+    {
+      "outer_fold": 2,
+      "outer_prev_hist_ratio": 0.34977659222226704,
+      "p_mode": "lr3_raw",
+      "q_combo": "tri_50_30_20",
+      "scale": 1.0,
+      "tau": 0.47250000000000003,
+      "w_tuple": [
+        0.5,
+        0.3,
+        0.2
+      ]
+    },
+    {
+      "outer_fold": 3,
+      "outer_prev_hist_ratio": 0.3499152165243874,
+      "p_mode": "lr3_raw",
+      "q_combo": "dual_60_40",
+      "scale": 1.0,
+      "tau": 0.47250000000000003,
+      "w_tuple": [
+        0.6,
+        0.4,
+        0.0
+      ]
+    },
+    {
+      "outer_fold": 4,
+      "outer_prev_hist_ratio": 0.3498691610375395,
+      "p_mode": "lr3_raw",
+      "q_combo": "tri_50_30_20",
+      "scale": 1.0,
+      "tau": 0.46,
+      "w_tuple": [
+        0.5,
+        0.3,
+        0.2
+      ]
+    },
+    {
+      "outer_fold": 5,
+      "outer_prev_hist_ratio": 0.3499443458667337,
+      "p_mode": "lr3_raw",
+      "q_combo": "tri_50_30_20",
+      "scale": 1.0025,
+      "tau": 0.48250000000000004,
+      "w_tuple": [
+        0.5,
+        0.3,
+        0.2
+      ]
+    }
+  ],
+  "library_versions": {
+    "catboost": "1.2.10",
+    "lightgbm": "4.7.0",
+    "numpy": "2.4.6",
+    "pandas": "3.1.0",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.2.0"
+  },
+  "metric": "NMAE = 1 / (1 + sum(abs(y_true-y_pred)) / sum(y_true))",
+  "n_samples_test": 25889,
+  "n_samples_train": 104000,
+  "outer_fold_mean_nmae": 0.7952054484945067,
+  "outer_fold_sample_sd_nmae": 0.005487658403353786,
+  "paired_bootstrap": {
+    "delta": "nested BayesQ NMAE minus Log-Linear Ridge Hurdle NMAE",
+    "delta_nmae": 0.008344158437292193,
+    "delta_nmae_95pct_ci": [
+      0.007560219841027491,
+      0.009126875162900288
+    ],
+    "method": "1,000 paired row resamples on outer OOF predictions"
+  },
+  "per_outer_fold_nmae": [
+    0.7854195937508216,
+    0.797241460829755,
+    0.7979649262701927,
+    0.7972093607551071,
+    0.7981919008666568
+  ],
+  "pooled_oof_mae_thb": 2702.2177742713593,
+  "pooled_oof_nmae": 0.7952750298024199,
+  "prior_champion_nmae": 0.791781,
+  "promotion_decision": "Promote",
+  "target_sum_thb": 1091692220.86,
+  "task": "Task 3: Monthly Spending Prediction"
+}
