@@ -12,4 +12,6 @@ data/test/*.jpg
 
 # Downloaded pretrained-weight cache; keep the trained checkpoint instead.
 models/torch-cache/
+models/huggingface-cache/
+models/convnextv2-tiny-candidate.pt
 
