@@ -1,0 +1,21 @@
+{
+  "model": "5-Fold Stacking Blend (LightGBM + CatBoost + XGBoost)",
+  "features_total": 56,
+  "cohort_features": [
+    "player_num",
+    "player_num_norm",
+    "player_num_z",
+    "player_bucket"
+  ],
+  "oof_macro_f1_lgb": 0.7464572323080866,
+  "oof_macro_f1_cat": 0.7533475621332981,
+  "oof_macro_f1_xgb": 0.7488725107807576,
+  "oof_macro_f1_blend": 0.7508408309567614,
+  "predicted_distribution": {
+    "0": 0.4264745644868477,
+    "1": 0.2437328595156244,
+    "2": 0.19027386148557301,
+    "3": 0.13951871451195488
+  },
+  "elapsed_seconds": 183.0
+}

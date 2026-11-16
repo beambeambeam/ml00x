@@ -1,5 +1,10 @@
-Model Paradigm,Architecture,OOF MAE (THB),OOF NMAE Score,Delta vs Challenge (0.75)
-1. Constant Median Baseline,Single Scalar Point Estimator,10495.48,0.5000,-0.2500
-2. Standalone LightGBM Hurdle,P(Spend) * Log-L1 Regressor + Direct L1,2879.38,0.7847,+0.0347
-3. Standalone CatBoost Hurdle,P(Spend) * Log-L1 Regressor + Direct L1,2862.14,0.7858,+0.0358
-4. Tri-Model Ensembled Bayes-Hurdle (Optimal),LightGBM + CatBoost + XGBoost Tri-Stage Convex Blend,2809.54,0.7889,+0.0389
+Paradigm,Validation Strategy,OOF MAE (THB),OOF NMAE Score,Delta vs Fold-Median (pp)
+Fold-training median baseline,5-fold outer OOF,10495.48,0.500037,0.0
+Stage-2 Log-Linear Ridge Hurdle (Reference),5-fold outer OOF,2743.92,0.79277,29.2733
+Stage-2 Robust Huber(eps=1.35) Hurdle,5-fold outer OOF,2723.18,0.794014,29.3977
+CatBoost Depth-5 V3 Q_FINE (Huber Resid),5-fold outer OOF,2697.13,0.795582,29.5544
+LightGBM Depth-6 V3 Q_FINE (Huber Resid),5-fold outer OOF,2692.13,0.795883,29.5846
+XGBoost Depth-5 V3 Early-Stopped Q_FINE,5-fold outer OOF,2691.56,0.795918,29.5881
+PyTorch TabMQ_V2 BatchEnsemble Q_FINE,5-fold outer OOF,2690.16,0.796002,29.5965
+PyTorch TabMQ_Cmp3L Skip BatchEnsemble Q_FINE,5-fold outer OOF,2690.54,0.795979,29.5942
+Run 16 V3 6-Stage-1 + 5-Family Q_FINE Hurdle (Nested),5-fold nested outer OOF,2690.26,0.795996,29.5959

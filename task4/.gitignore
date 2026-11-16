@@ -6,3 +6,12 @@ __pycache__/
 # uv virtual environment
 .venv/
 
+# Dataset images are kept locally and are not committed.
+data/train/*.jpg
+data/test/*.jpg
+
+# Downloaded pretrained-weight cache; keep the trained checkpoint instead.
+models/torch-cache/
+models/huggingface-cache/
+models/convnextv2-tiny-candidate.pt
+

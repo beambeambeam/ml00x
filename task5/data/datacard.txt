@@ -1,0 +1,133 @@
+TASK 5: ACCOUNT SECURITY MONITORING
+================================================================================
+
+TARGET VARIABLE: is_anomaly (Binary)
+Anomaly detection: 0=Normal/Legitimate, 1=Anomalous/Suspicious
+
+NOTE: Features with suffixes _1, _2, _3, _4 represent measurements across 4 consecutive time periods for trend analysis.
+
+FEATURES (122 features):
+
+1. login_count_1, login_count_2, login_count_3, login_count_4 (float)
+   Number of login events in each time period
+
+2. login_lat_1, login_lat_2, login_lat_3, login_lat_4 (float)
+   Latitude coordinate of login locations
+
+3. login_lon_1, login_lon_2, login_lon_3, login_lon_4 (float)
+   Longitude coordinate of login locations
+
+4. location_changes_1, location_changes_2, location_changes_3, location_changes_4 (float)
+   Number of significant location changes in period
+
+5. device_count_1, device_count_2, device_count_3, device_count_4 (float)
+   Number of unique devices used in period
+
+6. ip_hash_entropy_1, ip_hash_entropy_2, ip_hash_entropy_3, ip_hash_entropy_4 (float)
+   Entropy of IP[1] address distribution (0=same IP, 1=many IPs)
+
+7. login_time_variance_1, login_time_variance_2, login_time_variance_3, login_time_variance_4 (float)
+   Variance in login times (hours standard deviation)
+
+8. session_duration_mean_1, session_duration_mean_2, session_duration_mean_3, session_duration_mean_4 (float)
+   Average session length in period (minutes)
+
+9. session_duration_std_1, session_duration_std_2, session_duration_std_3, session_duration_std_4 (float)
+   Standard deviation of session lengths
+
+10. play_pattern_consistency_1, play_pattern_consistency_2, play_pattern_consistency_3, play_pattern_consistency_4 (float)
+    Consistency score of play patterns/game modes[2]
+
+11. activity_level_1, activity_level_2, activity_level_3, activity_level_4 (float)
+    Relative activity level (playtime/day normalized)
+
+12. skill_rating_1, skill_rating_2, skill_rating_3, skill_rating_4 (float)
+    Competitive skill rating/ELO[3]
+
+13. skill_trajectory_1, skill_trajectory_2, skill_trajectory_3, skill_trajectory_4 (float)
+    Rate of skill change (rating change per day)
+
+14. kda_mean_1, kda_mean_2, kda_mean_3, kda_mean_4 (float)
+    Kill/Death/Assist ratio average
+
+15. kda_std_1, kda_std_2, kda_std_3, kda_std_4 (float)
+    Standard deviation of KDA[4]
+
+16. accuracy_mean_1, accuracy_mean_2, accuracy_mean_3, accuracy_mean_4 (float)
+    Shot accuracy percentage average
+
+17. accuracy_std_1, accuracy_std_2, accuracy_std_3, accuracy_std_4 (float)
+    Standard deviation of accuracy
+
+18. reaction_time_mean_1, reaction_time_mean_2, reaction_time_mean_3, reaction_time_mean_4 (float)
+    Average reaction time to stimuli (milliseconds)
+
+19. reaction_time_std_1, reaction_time_std_2, reaction_time_std_3, reaction_time_std_4 (float)
+    Standard deviation of reaction times
+
+20. performance_stability_1, performance_stability_2, performance_stability_3, performance_stability_4 (float)
+    Overall performance consistency score
+
+21. purchase_frequency_1, purchase_frequency_2, purchase_frequency_3, purchase_frequency_4 (float)
+    Number of purchases in period
+
+22. purchase_amount_mean_1, purchase_amount_mean_2, purchase_amount_mean_3, purchase_amount_mean_4 (float)
+    Average purchase amount
+
+23. purchase_amount_std_1, purchase_amount_std_2, purchase_amount_std_3, purchase_amount_std_4 (float)
+    Standard deviation of purchase amounts
+
+24. refund_count_1, refund_count_2, refund_count_3, refund_count_4 (float)
+    Number of refund requests
+
+25. currency_transfers_1, currency_transfers_2, currency_transfers_3, currency_transfers_4 (float)
+    In-game currency[5] transfers to other players
+
+26. friend_adds_1, friend_adds_2, friend_adds_3, friend_adds_4 (float)
+    Number of friend additions in period
+
+27. friend_removes_1, friend_removes_2, friend_removes_3, friend_removes_4 (float)
+    Number of friend removals in period
+
+28. communication_frequency_1, communication_frequency_2, communication_frequency_3, communication_frequency_4 (float)
+    Chat/voice communication frequency score
+
+29. guild_changes_1, guild_changes_2, guild_changes_3, guild_changes_4 (float)
+    Number of guild[6]/clan changes
+
+30. account_age_days (float)
+    Days since account creation
+
+31. behavior_stability (float)
+    Overall behavior consistency score across lifetime
+
+32. password_changed (float)
+    Whether password was recently changed
+
+33. vpn_usage (float)
+    Whether VPN[7] usage was detected
+
+34. suspicious_login_time (float)
+    Whether login times are unusual
+
+35. mass_item_sale (float)
+    Whether large item sale was detected
+
+
+================================================================================
+GAME TERMINOLOGY DEFINITIONS
+================================================================================
+
+[1] IP - Internet Protocol address; unique identifier for devices connected to the internet
+
+[2] Game Mode - Different types of gameplay rules or objectives within the same game
+
+[3] ELO - Rating system used to calculate relative skill levels in competitive games
+
+[4] KDA - Kill/Death/Assist ratio; a metric measuring combat performance
+
+[5] In-game Currency - Virtual money used within the game to buy items
+
+[6] Guild/Clan - A group or team of players who play together regularly
+
+[7] VPN - Virtual Private Network; technology that masks a user's real location/IP address

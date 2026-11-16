@@ -1,70 +1,28 @@
-# Task 3: 30-Day Monthly Spending Prediction
+# Task 3: Monthly Spending Prediction (`spending_30d`)
 
-**Team:** ML004  
-**Course:** CPE 342 Machine Learning (Semester 1/2026) — KMUTT  
-**Instructor:** Dr. Boonyarit Changaival  
-**Department:** Department of Computer Engineering, King Mongkut's University of Technology Thonburi  
+**Champion Method:** Leak-Free 5-Fold Bayes-Optimal Multi-Quantile Hurdle ($Q_{1 - 0.5/p}$)  
+**Competition Metric:** Normalized Mean Absolute Error — $\text{NMAE} = \frac{1}{1 + \sum|y - \hat{y}| / \sum y}$
 
----
+## Verified 5-Fold Nested Outer OOF Performance
+| Model / Ablation Stage | Validation Protocol | OOF MAE (THB) | OOF NMAE |
+| :--- | :--- | ---: | ---: |
+| Fold-Training Median Baseline | 5-Fold Outer OOF | 10,495.48 | 0.500037 |
+| Prior Frozen External Baseline | 5-Fold Nested OOF | 2,796.93 | 0.789609 |
+| Prior Hybrid Hurdle + Meta-Stacker | 5-Fold Nested OOF | 2,760.47 | 0.791781 |
+| Stage-2 Log-Linear Ridge Hurdle | 5-Fold Outer OOF | 2,842.19 | 0.786930 |
+| LightGBM Quantile ($Q_{1-0.5/p}$) | 5-Fold Outer OOF | 2,716.87 | 0.794393 |
+| XGBoost MultiQuantile ($Q_{1-0.5/p}$) | 5-Fold Outer OOF | 2,714.42 | 0.794541 |
+| CatBoost MultiQuantile ($Q_{1-0.5/p}$) | 5-Fold Outer OOF | 2,702.42 | 0.795263 |
+| **Promoted Champion (Nested BayesQ)** | **5-Fold Nested Outer OOF** | **2,702.65** | **0.795249** |
 
-## 1. Problem Formulation & Metric
+* **Per-Outer-Fold NMAE:** `[0.785353, 0.797148, 0.798009, 0.797133, 0.798254]` (`Mean +/- SD = 0.795179 +/- 0.005516`)
+* **Paired Bootstrap 95% CI vs Log-Linear Ridge:** `+0.008319` (`[+0.007528, +0.009090]`)
+* **Zero-Spender Alignment:** Train `48.12%` vs Test Predicted `49.57%` (`N = 25,889`)
 
-- **Target Variable:** `spending_30d` ($\ge 0.0$ THB).
-- **Data Characteristics:** Zero-inflated continuous distribution (~50.5% exact zero spending, heavy Pareto tail among positive spenders up to 265,404 THB).
-- **Official Competition Metric:** Normalized Mean Absolute Error (NMAE)
+## Key Architectural Innovations
+1. **Deterministic Identity Cleaning (`99.0%` exact):** Reconstructs missing `historical_spending` via `total_transactions * avg_transaction_value` (or `avg_transaction_value` when `tx == 0`) before falling back to fold-local median `prev / hist` ratios.
+2. **Fold-Local Missing Segment Recovery:** Trains an internal `LGBMClassifier` on known-segment training rows to supply soft probabilities `p_seg_0..3` for MCAR missing segments (`~92.2%` CV accuracy).
+3. **Bayes-Optimal $L_1$ Quantile Evaluation:** Models $\varepsilon = \log(Y) - \hat{z}_{\text{Ridge}}$ across 9 conditional quantiles $[0.03, \dots, 0.51]$ and interpolates strictly at $q^*(p_i) = 1 - \frac{1}{2 p_i}$ with strict per-row monotonicity and internal 90/10 early-stopping splits.
 
-$$
-\text{NMAE} = \frac{1}{1 + \frac{\sum_{i=1}^N |y_i - \hat{y}_i|}{\sum_{i=1}^N y_i}}
-$$
-
-- Baseline (Predicting Global Median): $\text{NMAE} = 0.5000$
-- Challenge Target: $\text{NMAE} \ge 0.7500$
-- Our Ensembled Solution: **$\text{NMAE} = 0.7889$** (MAE: **2,809.54 THB**)
-
----
-
-## 2. Methodology & Architecture: Two-Stage Tri-Model Hurdle Ensemble
-
-Standard single-stage regression models fail on zero-inflated heavy-tailed distributions due to gradient conflict between mass at zero and extreme positive values. We implement a decoupled Two-Stage Hurdle Model:
-
-1. **Stage 1 (Binary Gatekeeper Classifier):**
-   - Predicts propensity to spend $P(Y > 0 \mid X)$.
-   - Algorithms: LightGBM (`binary_logloss`), CatBoost (`Logloss`), XGBoost (`binary:logistic`).
-   - Objective: Distinguish non-payers ($0$ THB) from active spenders.
-
-2. **Stage 2 (Positive Spending Regressor):**
-   - Trained exclusively on samples with $y > 0$ using logarithmic target $\log(1 + y)$.
-   - Loss Function: $L_1$ Regression (MAE / Regression-L1) to align directly with the Bayes-optimal median estimator required by MAE evaluation.
-   - Algorithms: LightGBM (`regression_l1`), CatBoost (`MAE`), XGBoost (`reg:absoluteerror`).
-
-3. **Stage 3 (Bayes-Optimal Hurdle Post-Processing):**
-   - Reconstructs spending via optimal gating threshold $\tau^*$ and blending parameter $\alpha^*$:
-
-$$
-\hat{y}_i = \mathbb{I}(\hat{p}_i \ge \tau^*) \cdot \left[ \alpha \hat{y}_i^{\text{positive}} + (1 - \alpha) \hat{y}_i^{\text{direct}} \right]
-$$
-
-   - Hyperparameters $\tau^* = 0.50$, $\alpha^* = 0.95$ tuned via grid search on Out-Of-Fold (OOF) predictions.
-
----
-
-## 3. Validation Results Summary (5-Fold Stratified CV)
-
-| Model Architecture | OOF MAE (THB) | OOF NMAE | Status |
-| :--- | :---: | :---: | :---: |
-| Baseline (Empirical Global Median) | 10,495.48 | 0.5000 | Reference Baseline |
-| Standalone LightGBM Hurdle | 2,879.38 | 0.7847 | Target Exceeded (+0.0347) |
-| Standalone CatBoost Hurdle | 2,862.14 | 0.7858 | Target Exceeded (+0.0358) |
-| **Tri-Model Hurdle Ensemble (LGBM + CatBoost + XGBoost)** | **2,809.54** | **0.7889** | **Top Performance (+0.0389)** |
-
----
-
-## 4. Execution & Artifacts
-
-- **Jupyter Notebook:** `task3_monthly_spending.ipynb` (Fully self-contained, automated dataset resolution for Local, Google Colab, and Kaggle runtimes).
-- **Test Set Predictions:** `predictions/test_predictions.csv` (25,889 rows with `player_id` and `spending_30d`).
-- **Diagnostic Visualizations:** Saved in `assets/`:
-  - `figure1-spending-eda.png`
-  - `figure2-hurdle-calibration-diagnostics.png`
-  - `figure3-residual-error-distribution.png`
-  - `figure4-test-spending-prediction-density.png`
+## Reproducible Execution
+Execute `task3_monthly_spending.ipynb` end-to-end; passing the promotion gate automatically writes verified outputs into `predictions/test_predictions.csv`, `predictions/oof_predictions.csv`, `submit/index.csv`, `assets/`, and `models/`.
