@@ -79,6 +79,10 @@ To update a task's submission:
 3. Open a PR to `main`. The `Check submission` workflow runs the same check and reports what changed vs. `main`.
 4. After merge, start the `Submit to Kaggle` workflow by hand: Actions tab → Submit to Kaggle → Run workflow on `main`. It never runs on push. Each Kaggle note holds a `[sha:<hash>]` tag of its file. If Kaggle already has the same file, the workflow skips the submit. A newer run cancels an older run before it reaches Kaggle, but a submit that has started always finishes. Set `force` to submit a file again. Each submission uses one of the team's daily Kaggle submissions.
 
+Submission ids: in `submission/sample_submission.csv`, every id is `ANS` followed by the row number of the test set. `ANS00001` is the first test row and `ANS25889` is the last. The ids are in the same order as the test file, so the `ANS` number is the test row index.
+
+For Task 2, predictions keyed by `player_id` (for example `task2/predictions/*-test.csv`) go into `index.csv` by finding each `player_id`'s row in `task2/data/test.csv` and writing the `ANS` id for that row. This is not an unverified mapping.
+
 Allowed values:
 
 - `task1`, `task5`: `0` or `1`.
