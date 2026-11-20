@@ -4,19 +4,25 @@
 
 ## Current
 
-- **sha12:** `92253faba1f6` (since 2026-11-20, `33160ae`, #70)
-- **Active Version:** **Run 22 / Run 18** (`Palapluem`, restored in PR `#70`)
-- **Generating Notebook:** `task5/task5_account_security.ipynb` (self-contained)
+- **sha12:** `5e57282c6459` (since 2026-11-20, `05a762a`, #71)
+- **Active Version:** **Archetype rules + calibrated NaN-unstable recovery** (`bbb`, PR `#71`)
+- **Generating Script:** `task5/archetype_rules.py` (`uv run python archetype_rules.py`)
 - **Required Input:** `task5/data/test.csv` (`25,889` accounts × `123` columns)
-- **Outputs:** `task5/predictions/test_predictions.csv`, `task5/assets/task5_anomaly_detection_diagnostics.png`
-- **Detector Components & Unsupervised Checks:**
-  - `1D Density-Gap CBLOF` (`1,808`) + `Soft-Max Robust Tail Score > 18.35` (`826`) + `Wide-Gap Box`
-  - `Uniform-Box Latent Unstable-Behavior Recovery` (`3-Fam Platt`: `StrictUnflagged_AUC = 0.99030`, `F3-Bayes Thr = 0.10`, `+37` NaN accounts)
-  - `Archetype 8 Joint 12D Hyper-Rectangle` (`erratic_combat_variance`: `+244` new accounts)
-  - Dropped `session_duration_std__drift4` Gaussian noise artifact (`-51` FPs)
-- **Test Distribution (`25,889` rows):** `0` (normal): `23,800` (`91.9%`), `1` (anomalous): `2,089` (`8.07%` / `8.1%`)
+- **Outputs:** `task5/predictions/archetype-rules.csv`, `task5/assets/archetype-rule-counts.csv`, `task5/assets/erratic-combat-box.png`, `task5/assets/unstable-nan-calibration.csv`, `task5/assets/unstable-nan-cut-expected-f3.csv`
+- **Detector Components:**
+  - Exact uniform-box rules for 8 injected archetypes (account_takeover, vpn_pricing_abuse, account_sale_boosting, bot_24_7, low_activity, silent_account, unstable_behavior, erratic_combat): `2,052` flags
+  - NaN `behavior_stability` recovery: hard filter (all `purchase_frequency` in [3, 6], age ≥ 795) + 5-seed × 5-fold LightGBM + isotonic calibration, cut `0.157` by expected F3: `+24` flags
+  - Masked OOF check on `22,926` players with known `behavior_stability` (value = 10·TP − flags): PR `1323` at its cut vs Run 22 `1303` at its cut; PR higher at every cut 0.08–0.20
+- **Test Distribution (`25,889` rows):** `0` (normal): `23,813` (`92.0%`), `1` (anomalous): `2,076` (`8.0%`)
 
 ## Changelog
+
+### 2026-11-20 – `5e57282c6459` – #71
+
+- Commit: `05a762a` by bbb
+- Prev: `92253faba1f6` | Δrows vs prev: 19 (0.1%)
+- Why: feat: Task 5 archetype rules with calibrated NaN-unstable recovery (#71). `task5/archetype_rules.py`; expected F3 0.99785 vs 0.99744 for Run 22; removes 16 low-probability NaN-unstable flags, adds 3
+- Merged: `1f26381be9b0` | Kaggle public: –
 
 ### 2026-11-20 – `92253faba1f6` – #70
 
