@@ -6,3 +6,7 @@ __pycache__/
 # uv virtual environment
 .venv/
 
+
+# Secrets
+.env
+!.env.example

@@ -15,3 +15,7 @@ models/torch-cache/
 models/huggingface-cache/
 models/convnextv2-tiny-candidate.pt
 
+
+# Secrets
+.env
+!.env.example

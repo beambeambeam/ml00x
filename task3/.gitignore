@@ -10,3 +10,7 @@ __pycache__/
 # CatBoost & macOS
 catboost_info/
 .DS_Store
+
+# Secrets
+.env
+!.env.example
