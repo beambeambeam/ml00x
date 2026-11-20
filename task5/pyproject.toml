@@ -5,10 +5,14 @@ description = "Task 5: account security anomaly detection"
 requires-python = ">=3.12"
 dependencies = [
     "basemap>=2.0.0",
+    "kaggle>=2.2.5",
+    "lightgbm>=4.7.0",
     "matplotlib>=3.10.9",
     "numpy>=2.3.5",
     "pandas>=3.1.1",
     "plotly>=7.1.0",
+    "python-dotenv>=1.2.4",
     "scikit-learn>=1.9.1",
     "scipy>=1.18.1",
+    "six>=1.17.0",
 ]
