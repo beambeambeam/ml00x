@@ -75,9 +75,10 @@ One Kaggle competition takes one CSV with all five tasks. CI builds it from the 
 To update a task's submission:
 
 1. Write `task{N}/submit/index.csv` with columns `id,task{N}`. Use every id in `submission/sample_submission.csv`.
-2. From the repository root, run `uv run submission/merge.py`. It checks all five files and writes `submission/submission.csv` (gitignored).
-3. Open a PR to `main`. The `Check submission` workflow runs the same check and reports what changed vs. `main`.
-4. After merge, start the `Submit to Kaggle` workflow by hand: Actions tab → Submit to Kaggle → Run workflow on `main`. It never runs on push. Each Kaggle note holds a `[sha:<hash>]` tag of its file. If Kaggle already has the same file, the workflow skips the submit. A newer run cancels an older run before it reaches Kaggle, but a submit that has started always finishes. Set `force` to submit a file again. Each submission uses one of the team's daily Kaggle submissions.
+2. From the repository root, run `uv run submission/merge.py --baseline <main checkout>`. It checks all five files, writes `submission/submission.csv` (gitignored), and prints each file's `sha12`, Δrows vs. `main`, and the merged `sha12`.
+3. Record the change in the submission history (next section), in the same PR.
+4. Open a PR to `main`. The `Check submission` workflow runs the same check and reports what changed vs. `main`. `main` accepts only branches that are up to date with it. When `main` moves, update your branch, rerun `merge.py --baseline`, and fix the history `sha12`, prev, and Δrows values.
+5. After merge, start the `Submit to Kaggle` workflow by hand: Actions tab → Submit to Kaggle → Run workflow on `main`. It never runs on push. Each Kaggle note holds a `[sha:<hash>]` tag of its file. If Kaggle already has the same file, the workflow skips the submit. A newer run cancels an older run before it reaches Kaggle, but a submit that has started always finishes. Set `force` to submit a file again. Each submission uses one of the team's daily Kaggle submissions.
 
 Allowed values:
 
@@ -85,3 +86,19 @@ Allowed values:
 - `task2`: `0`–`3`.
 - `task3`: THB amount, a number ≥ 0.
 - `task4`: `0`–`4` (`0`: 7-11 Knights, `1`: FiveN, `2`: Free Fried, `3`: PUBE, `4`: Roblock per `task4/data/datacard.txt`).
+
+## Submission history
+
+`submit.md` (root) and `task{N}/submit/submit.md` are the submission history. Agents keep them. CI does not check them.
+
+Each time a PR changes `task{N}/submit/index.csv`, including a revert or restore:
+
+1. In `task{N}/submit/submit.md`, add a changelog entry at the top of `## Changelog`. Use the format of the entries below it: date, new `sha12`, PR, commit, author, prev `sha12`, Δrows, why, merged `sha12`. For a revert, add `↩ Same file as <date> <commit>`. Write a real reason in **Why**: run name, notebook, OOF score. Update `## Current` to the new version.
+2. In root `submit.md`, add a row at the top of `## Merged history`. Update the `## Current` table and the merged `sha12`.
+3. Copy every `sha12` and Δrows value from the `merge.py --baseline` report.
+
+Done when each changed task has a new changelog entry and root `submit.md` has a new merged row. All of them must carry `sha12` values that match the `merge.py` report.
+
+Append only. To fix a wrong entry, add a new entry. Old entries stay as they are.
+
+After a `Submit to Kaggle` run, open a small PR that writes the public score into the matching merged row and changelog entries. Match by merged `sha12`: the run log prints `HASH` and `Public score` (`gh run view <id> --log`).
