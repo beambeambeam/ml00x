@@ -164,7 +164,7 @@ print(classification_report(y, oof[winner].argmax(axis=1), digits=4, zero_divisi
 pd.DataFrame(oof[winner], columns=[f"prob_{i}" for i in range(4)]).assign(segment=y.to_numpy()).to_csv(ROOT / "predictions/segment-oof.csv", index=False)
 """)
 markdown("""## Refit and test predictions
-Only now load Test, preserve its row order, and predict with models refitted on **all** labeled rows. Save predictions keyed by the original `player_id`. Since no verified mapping between `player_id` and `ANS...` submission IDs is available, do not overwrite `submit/index.csv` based on an unverified row-order assumption. Check competition instructions before promoting these predictions to submission.""")
+Only now load Test, preserve its row order, and predict with models refitted on **all** labeled rows. Save predictions keyed by the original `player_id`. `ANS` ids are the test row numbers, so each `player_id` maps to its `ANS` id by test row position. Do not overwrite `submit/index.csv` from this notebook; submission changes go through a submission PR.""")
 code("""test = pd.read_csv(ROOT / "data/test.csv")
 assert "segment" not in test
 assert test["player_id"].is_unique
