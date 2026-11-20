@@ -4,14 +4,22 @@
 
 ## Current
 
-- **sha12:** `fd65d3e13622` (since 2026-11-20, `3b82623`, #68)
-- **Active Version:** **exp 003** (`bbb`, PR `#68`)
-- **Generating Notebook:** `task1/notebooks/experiments/003.ipynb`
-- **Required Artifacts:** `task1/models/experiments/003/lightgbm.joblib`, `task1/models/experiments/003/meta.joblib`
-- **OOF Metrics:** `nested_f2 = 0.83878` | `roc_auc = 0.89378`
-- **Test Distribution (`25,889` rows):** `0`: `10,367` (`40.0%`), `1`: `15,522` (`60.0%`)
+- **sha12:** `4817f4300bce` (since 2026-11-20, #74)
+- **Active Version:** **exp 004** (`Palapluem`, PR `#74`)
+- **Generating Notebook:** `task1/notebooks/experiments/004.ipynb`
+- **Artifacts & Outputs:** `task1/models/experiments/004/stack_meta.json`, `task1/predictions/experiments/004/oof.csv`, `task1/predictions/experiments/004/test.csv`, `task1/assets/experiments/004/results.csv`, `task1/assets/experiments/004/per-fold-f2.csv`, `task1/assets/experiments/004/f2-threshold-curves.png`
+- **OOF Metrics:** `nested_f2 = 0.839578` (`obs5_f2 = 0.860511`) | `roc_auc = 0.894765` | `pr_auc = 0.837997` | `log_loss = 0.355336` | `paired bootstrap P(>exp003) = 99.1%` (all OOF) / `98.7%` (`obs==5`)
+- **Pure-Train Support Clamp:** `d0 = 7,945` test rows (`25,152` OOF rows, `0` FN across all 5 folds) | `d1 = 3,428` test rows (`10,044` OOF rows, `0` FP across all 5 folds)
+- **Test Distribution (`25,889` rows):** `0`: `10,332` (`39.9%`), `1`: `15,557` (`60.1%`)
 
 ## Changelog
+
+### 2026-11-20 – `4817f4300bce` – #74
+
+- Commit: `pending` by Palapluem (Wisit Suwannao)
+- Prev: `fd65d3e13622` | Δrows vs prev: 295 (1.1%)
+- Why: feat(task1): exp 004 Pure-Train DGP + Interior CatBoost/LGBM ensemble (`task1/notebooks/experiments/004.ipynb`; `nested_f2 0.839578` vs exp 003 `0.838777`, `obs5_f2 0.860511` vs `0.859353`, `roc_auc 0.894765` vs `0.893780`, `log_loss 0.355336` vs `0.362346`; paired bootstrap win `99.1%` all / `98.7%` `obs==5`; Pure-Train 1D+2D support clamp `d0=7,945` / `d1=3,428`)
+- Merged: `b7f0765d8736` | Kaggle public: –
 
 ### 2026-11-20 – `fd65d3e13622` – #68
 

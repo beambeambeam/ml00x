@@ -6,6 +6,9 @@ __pycache__/
 # uv virtual environment
 .venv/
 
+# CatBoost & macOS
+catboost_info/
+.DS_Store
 
 # Secrets
 .env
