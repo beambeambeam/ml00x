@@ -4,8 +4,9 @@ version = "0.1.0"
 description = "Task 4: game title image classification"
 requires-python = ">=3.12"
 dependencies = [
-    "numpy>=2.0",
-    "pandas>=2.0",
-    "pillow>=10.0",
-    "scikit-learn>=1.5",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "pandas>=3.1.1",
+    "pillow>=13.0.0",
+    "scikit-learn>=1.9.1",
 ]
