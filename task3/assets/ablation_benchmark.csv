@@ -1,10 +1,5 @@
 Paradigm,Validation Strategy,OOF MAE (THB),OOF NMAE Score,Delta vs Fold-Median (pp)
 Fold-training median baseline,5-fold outer OOF,10495.48,0.500037,0.0
-Stage-2 Log-Linear Ridge Hurdle (Reference),5-fold outer OOF,2743.92,0.79277,29.2733
-Stage-2 Robust Huber(eps=1.35) Hurdle,5-fold outer OOF,2723.18,0.794014,29.3977
-CatBoost Depth-5 V3 Q_FINE (Huber Resid),5-fold outer OOF,2697.13,0.795582,29.5544
-LightGBM Depth-6 V3 Q_FINE (Huber Resid),5-fold outer OOF,2692.13,0.795883,29.5846
-XGBoost Depth-5 V3 Early-Stopped Q_FINE,5-fold outer OOF,2691.56,0.795918,29.5881
-PyTorch TabMQ_V2 BatchEnsemble Q_FINE,5-fold outer OOF,2690.16,0.796002,29.5965
-PyTorch TabMQ_Cmp3L Skip BatchEnsemble Q_FINE,5-fold outer OOF,2690.54,0.795979,29.5942
-Run 16 V3 6-Stage-1 + 5-Family Q_FINE Hurdle (Nested),5-fold nested outer OOF,2690.26,0.795996,29.5959
+Run 16 V3 6-Stage-1 + 5-Family Q_FINE Hurdle,5-fold nested outer OOF,2690.26,0.795996,29.5959
+90% ExactBayesL1V2 + 10% Run 16 V3 Blend,5-fold outer OOF,2684.15,0.796365,29.6328
+Run 18 ExactBayesL1V2 Generative Marginalization (Promoted),5-fold strict outer OOF,2683.96,0.796377,29.634
