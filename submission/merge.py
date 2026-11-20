@@ -10,10 +10,14 @@ Run from the repository root:
     uv run submission/merge.py --baseline base   # also report changes vs. another checkout
 
 Exits 1 when any check fails. Prints a Markdown report to stdout.
+The report gives each file's `sha12` (first 12 hex digits of its SHA-256).
+The merged `sha12` is the same `[sha:<hash>]` tag the Kaggle workflow writes.
+Copy these values into `submit.md` (see AGENTS.md).
 """
 
 import argparse
 import csv
+import hashlib
 import math
 import sys
 from pathlib import Path
@@ -37,6 +41,10 @@ SAMPLE = Path("submission/sample_submission.csv")
 
 def task_file(root: Path, task: str) -> Path:
     return root / task / "submit" / "index.csv"
+
+
+def sha12(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:12]
 
 
 def check_value(task: str, raw: str) -> str | None:
@@ -161,12 +169,17 @@ def main() -> int:
 
     lines = ["## Submission check", "", f"Rows expected: {len(ids):,}", ""]
     lines += [
-        "| Task | Status | Distribution | Changed vs. base |",
-        "| --- | --- | --- | --- |",
+        "| Task | Status | sha12 | Base sha12 | Distribution | Changed vs. base |",
+        "| --- | --- | --- | --- | --- | --- |",
     ]
     warnings: list[str] = []
     for task, (values, errs) in results.items():
         changed = "–"
+        path = task_file(args.root, task)
+        sha = f"`{sha12(path)}`" if path.is_file() else "–"
+        base_sha = "–"
+        if args.baseline and task_file(args.baseline, task).is_file():
+            base_sha = f"`{sha12(task_file(args.baseline, task))}`"
         if args.baseline and not errs:
             base_values, base_errs = read_task(
                 task_file(args.baseline, task), task, ids
@@ -178,7 +191,9 @@ def main() -> int:
                 changed = "n/a"
         status = "❌" if errs else "✅"
         dist = distribution(task, values) if not errs else "–"
-        lines.append(f"| {task} | {status} | {dist} | {changed} |")
+        lines.append(
+            f"| {task} | {status} | {sha} | {base_sha} | {dist} | {changed} |"
+        )
         if not errs:
             warnings += warnings_for(task, values)
 
@@ -196,7 +211,7 @@ def main() -> int:
         writer.writerow(["id", *TASKS])
         for i in ids:
             writer.writerow([i, *(results[t][0][i] for t in TASKS)])
-    print(f"\nWrote `{args.out}`.")
+    print(f"\nWrote `{args.out}`. Merged sha12: `{sha12(args.out)}`.")
     return 0
 
 
