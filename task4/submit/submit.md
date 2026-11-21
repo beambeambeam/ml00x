@@ -4,20 +4,27 @@
 
 ## Current
 
-- **sha12:** `1cb773dd067e` (since 2026-11-20, `8654961`, #69)
-- **Active Version:** **Run 22** (`Palapluem`, PR `#65`, restored in PR `#69`)
+- **sha12:** `7574dd3c1c40` (since 2026-11-21, #76)
+- **Active Version:** **Run 23** (`Palapluem`, PR `#76`)
 - **Generating Notebook:** `task4/task4_game_title_detection.ipynb`
 - **Required Artifacts:**
-  - `task4/predictions/model-level/task4-sgkf-e2e-bundle.npz` (5-fold SGKF Pure-Train E2E `ConvNeXtV2`, `DINOv2-StageA/C`, `MLP-V3`)
+  - `task4/predictions/model-level/task4-sgkf-e2e-bundle.npz` (5-fold SGKF Pure-Train E2E `ConvNeXtV2-StageC`, `DINOv2-StageA/C`, `ConvNeXtV2-SGKF`, `MLP-V3`)
   - 8 model-level CSVs in `task4/predictions/model-level/`: `task4-{dinov3-vitb,dinov3-vitl,eva02-base,eva02-large}-{oof,test-predictions}.csv`
   - `task4/data/train.csv`, `task4/data/test.csv`
 - **Method & OOF Metrics (`31,546` train images, 100% Pure-Train):**
-  - Temperature-calibrated 9-stream Log-Odds SLSQP pool (`EVA02-Large=0.3158`, `DINOv3-ViT-L=0.2017`, `ConvNeXtV2-SGKF=0.1867`, `DINOv2-StageC-2TTA=0.1402`, `EVA02-Base=0.0772`, `DINOv2-StageC-6TTA=0.0627`, `MLP-V3-SGKF=0.0143`, `DINOv3-ViT-B=0.0013`) + Pure-Train Nested Uniform-Prior Debias (`alpha*=0.860`)
-  - `OOF Macro-F1 = 0.991174` | `OOF LogLoss = 0.026605` | `Iso(<0.75) F1 = 0.991955` | `Corrupt F1 = 0.986183`
-- **Test Distribution (`25,889` rows):** `0` (`7-11K`): `3,667` (`14.2%`), `1` (`fiveN`): `6,832` (`26.4%`), `2` (`freefried`): `3,865` (`14.9%`), `3` (`pube`): `6,407` (`24.7%`), `4` (`roblock`): `5,118` (`19.8%`)
+  - Temperature-calibrated 11-stream Log-Odds SLSQP pool (`EVA02-Large=0.2994`, `CNXv2-StageC-2TTA=0.2309`, `DINOv3-ViT-L=0.2009`, `DINOv2-StageC-2TTA=0.1431`, `EVA02-Base=0.0592`, `CNXv2-StageC-6TTA=0.0335`, `DINOv2-StageC-6TTA=0.0222`, `MLP-V3-SGKF=0.0104`, `ConvNeXtV2-SGKF=0.0003`) + Pure-Train Nested Uniform-Prior Debias (`alpha*=0.790`)
+  - `OOF Macro-F1 = 0.991577` | `OOF LogLoss = 0.025643` (`100%` bootstrap win vs Run 22 `0.026605`) | `Iso(<0.75) F1 = 0.992266` | `Corrupt F1 = 0.986601` | `ExtHard6 (CNX-C+DINO-C) = 0.951443`
+- **Test Distribution (`25,889` rows):** `0` (`7-11K`): `3,697` (`14.3%`), `1` (`fiveN`): `6,793` (`26.2%`), `2` (`freefried`): `3,855` (`14.9%`), `3` (`pube`): `6,441` (`24.9%`), `4` (`roblock`): `5,103` (`19.7%`)
   - *Note:* `index.csv` stores class names (`7-11K..roblock`). `submission/merge.py` maps them 1:1 to `0..4`.
 
 ## Changelog
+
+### 2026-11-21 – `7574dd3c1c40` – #76
+
+- Commit: `pending` by Palapluem (Wisit Suwannao)
+- Prev: `1cb773dd067e` | Δrows vs prev: 240 (0.9%)
+- Why: feat(task4): Run 23 integrate 5-fold SGKF Nightmare-Hardened ConvNeXtV2-Tiny Stage-C (`CNXv2-StageC`: `All 0.982770`, `ExtHard6 0.945645`, `LL 0.065822`; Run 23 11-stream pool `OOF Macro-F1 0.991577` vs Run 22 `0.991174`, `LL 0.025643` vs `0.026605` [`100%` bootstrap], `Iso F1 0.992266`, `Corrupt F1 0.986601`, `UnifW F1 0.992338` [`88.6%` bootstrap])
+- Merged: `6caa214ed301` | Kaggle public: –
 
 ### 2026-11-20 – `1cb773dd067e` – #69
 

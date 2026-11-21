@@ -12,10 +12,10 @@ The merged `sha12` equals the `[sha:<hash>]` tag in each Kaggle note.
 | [Task 1](task1/submit/submit.md) | `4817f4300bce` | 2026-11-20, #74 | exp 004 – `task1/notebooks/experiments/004.ipynb` |
 | [Task 2](task2/submit/submit.md) | `d8273939dc94` | 2026-11-20, #69 | Run 22 – `task2/task2_player_segment.ipynb` |
 | [Task 3](task3/submit/submit.md) | `3646bdd6dda1` | 2026-11-19, #57 | Run 22 – `task3/task3_monthly_spending.ipynb` |
-| [Task 4](task4/submit/submit.md) | `1cb773dd067e` | 2026-11-20, #69 | Run 22 – `task4/task4_game_title_detection.ipynb` |
+| [Task 4](task4/submit/submit.md) | `7574dd3c1c40` | 2026-11-21, #76 | Run 23 – `task4/task4_game_title_detection.ipynb` |
 | [Task 5](task5/submit/submit.md) | `5e57282c6459` | 2026-11-20, #71 | Archetype rules – `task5/archetype_rules.py` |
 
-- **Merged sha12:** `b7f0765d8736` – Kaggle public: 0.86362
+- **Merged sha12:** `6caa214ed301` – Kaggle public: –
 - **Best Kaggle public so far:** 0.86363 (merged `b3ea360f52c3`, commit `33160ae`)
 
 ## Merged history
@@ -24,6 +24,7 @@ One row per `main` commit that changed any `task{N}/submit/index.csv`. "↩" mar
 
 | Date | Commit | PR | Merged sha12 | Tasks changed | Kaggle public | Note |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2026-11-21 | `pending` | #76 | `6caa214ed301` | 4 | – | feat(task4): Run 23 add 5-fold SGKF Nightmare-Hardened ConvNeXtV2-StageC (#76) |
 | 2026-11-21 | `2df195e` | #74 | `b7f0765d8736` | 1 | 0.86362 | feat(task1): exp 004 Pure-Train DGP + Interior CatBoost/LGBM ensemble (#74) |
 | 2026-11-20 | `05a762a` | #71 | `1f26381be9b0` | 5 | – | feat: Task 5 archetype rules with calibrated NaN-unstable recovery (#71) |
 | 2026-11-20 | `33160ae` | #70 | `b3ea360f52c3` | 5 | 0.86363 | fix: restore Run 22 task5 submit/index.csv (#70) |
