@@ -4,15 +4,23 @@
 
 ## Current
 
-- **sha12:** `4817f4300bce` (since 2026-11-21, `2df195e`, #74)
-- **Active Version:** **exp 004** (`Palapluem`, PR `#74`)
-- **Generating Notebook:** `task1/notebooks/experiments/004.ipynb`
-- **Artifacts & Outputs:** `task1/models/experiments/004/stack_meta.json`, `task1/predictions/experiments/004/oof.csv`, `task1/predictions/experiments/004/test.csv`, `task1/assets/experiments/004/results.csv`, `task1/assets/experiments/004/per-fold-f2.csv`, `task1/assets/experiments/004/f2-threshold-curves.png`
-- **OOF Metrics:** `nested_f2 = 0.839578` (`obs5_f2 = 0.860511`) | `roc_auc = 0.894765` | `pr_auc = 0.837997` | `log_loss = 0.355336` | `paired bootstrap P(>exp003) = 99.1%` (all OOF) / `98.7%` (`obs==5`)
-- **Pure-Train Support Clamp:** `d0 = 7,945` test rows (`25,152` OOF rows, `0` FN across all 5 folds) | `d1 = 3,428` test rows (`10,044` OOF rows, `0` FP across all 5 folds)
-- **Test Distribution (`25,889` rows):** `0`: `10,332` (`39.9%`), `1`: `15,557` (`60.1%`)
+- **sha12:** `af57ef293a3a` (2026-11-21, `6324964`, #78)
+- **Active Version:** **exp 005**, account cohort likelihoods + exp 004
+- **Generating Script:** `task1/run_account_cohorts.py`. Run `uv run python run_account_cohorts.py --promote` from `task1/`.
+- **Required Artifacts:** `task1/predictions/experiments/004/{oof,test}.csv` and `task1/models/experiments/004/stack_meta.json`
+- **Outputs:** `task1/predictions/experiments/005/{oof,test}.csv`, `task1/models/experiments/005/metrics.json`, and `task1/assets/experiments/005/{results,per-fold-f2}.csv`
+- **OOF Metrics:** F2 `0.840965` (+`0.001388`), ROC AUC `0.896463`, PR AUC `0.840479`, log loss `0.351097`. F2 rose in all five folds. Paired row bootstrap 95% interval for the F2 gain is `[+0.000743, +0.002039]`.
+- **Validation:** Cohort ranges and blend weight came from exploratory analysis of the labeled data. Fold training estimated cohort weights, skill transforms, and classifier coefficients. Thresholds were tuned on the other OOF folds.
+- **Test Distribution (`25,889` rows):** `0`: `10,541` (`40.7%`), `1`: `15,348` (`59.3%`)
 
 ## Changelog
+
+### 2026-11-21 – `af57ef293a3a` – #78
+
+- Commit: `6324964` by beambeambeam
+- Prev: `4817f4300bce` | Δrows vs prev: 311 (1.2%)
+- Why: Experiment 005 combines account cohort likelihoods and a regularized skill classifier with experiment 004. Five-fold OOF F2 increased from `0.839578` to `0.840965`. F2 with incomplete account fields increased from `0.825042` to `0.827285`.
+- Merged: `faeb950de6f5` | Kaggle public: –
 
 ### 2026-11-20 – `4817f4300bce` – #74
 
