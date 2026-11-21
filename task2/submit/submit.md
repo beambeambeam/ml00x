@@ -4,20 +4,31 @@
 
 ## Current
 
-- **sha12:** `d8273939dc94` (since 2026-11-20, `8654961`, #69)
-- **Active Version:** **Run 22 / Run 18** (`Palapluem`, restored in PR `#69`)
-- **Generating Notebook:** `task2/task2_player_segment.ipynb`
+- **sha12:** `34d927a40901` (2026-11-21, source `2f988af`, #79)
+- **Active Version:** **Run 22 models with corrected affine macro-F1 export**
+- **Generating Script:** `task2/run_bayes_export.py`; run `uv run python run_bayes_export.py --promote` from `task2/`.
+- **Generating Notebook:** `task2/task2_player_segment.ipynb`; its single executable export calls the same `predict_segments` function as validation.
 - **Required Artifacts:**
   - `task2/predictions/model-level/task2-exact-param-em-bundle.npz`
   - `task2/predictions/model-level/segment-tuned-catboost-lightgbm-revised-2026-11-12-macro-f1-0.751314-oof.csv`
   - `task2/predictions/model-level/segment-tuned-catboost-lightgbm-revised-2026-11-12-macro-f1-0.751314-test-predictions.csv`
   - `task2/data/train.csv`, `task2/data/test.csv`
+- **Outputs:** `task2/predictions/bayes-export/{oof,test,index}.csv`, `task2/models/bayes-export/decision-rule.json`, `task2/assets/bayes-export/`.
 - **OOF Metrics:**
-  - Nested 5-Fold Outer Stack `ExactBayes` Macro-$F_1$ = **`0.75932`** (`per-fold=[0.75766, 0.7566, 0.76115, 0.75866, 0.76248]`)
-  - `OOF LogLoss = 0.59565` (`SLSQP weights: 0.9922 ExactParamEM + 0.0078 LGB_Clean28`)
-- **Test Distribution (`25,889` rows):** `0`: `9,455` (`36.5%`), `1`: `6,747` (`26.1%`), `2`: `5,498` (`21.2%`), `3`: `4,189` (`16.2%`)
+  - Corrected affine export macro F1 **`0.759316`**, versus **`0.753158`** for the previous executable export rule. Weighted F1 `0.771085` versus `0.763171`.
+  - All five folds improve; paired row-bootstrap 95% interval for macro-F1 gain: `[+0.004653, +0.007692]`.
+  - `OOF LogLoss = 0.595646`; existing log-loss stack and fixed-point decision fit are retained.
+- **Validation limits:** Cross-fitted postprocessing of frozen OOF probabilities, not fully nested base-model retraining. Other OOF models can have seen held-out postprocessing-fold labels. Bootstrap is conditional on these models and folds. The NPZ lacks row IDs; original order is assumed, input hashes are recorded, and keyed-model labels are checked. Corrected export has no Kaggle score yet.
+- **Test Distribution (`25,889` rows):** `0`: `10,558` (`40.8%`), `1`: `6,583` (`25.4%`), `2`: `5,046` (`19.5%`), `3`: `3,702` (`14.3%`)
 
 ## Changelog
+
+### 2026-11-21 – `34d927a40901` – #79
+
+- Commit: `2f988af` by bbb
+- Prev: `d8273939dc94` | Δrows vs prev: 1,622 (6.3%)
+- Why: `run_bayes_export.py` reproduces the previous submission with the multiplier-only rule, then restores the validated `alpha * p - beta` rule. The correct export was a Markdown cell; the executable cell omitted beta. On the same frozen OOF models, macro F1 increases from `0.753158` to `0.759316`, with gains on all five postprocessing folds. The score is a replay comparison, not a new fully nested training result.
+- Merged: `904a1fd0976c` | Kaggle public: –
 
 ### 2026-11-20 – `d8273939dc94` – #69
 

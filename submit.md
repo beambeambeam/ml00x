@@ -10,12 +10,12 @@ The merged `sha12` equals the `[sha:<hash>]` tag in each Kaggle note.
 | Task | sha12 | Since | Source |
 | --- | --- | --- | --- |
 | [Task 1](task1/submit/submit.md) | `af57ef293a3a` | 2026-11-21, #78 | exp 005 – `task1/run_account_cohorts.py` |
-| [Task 2](task2/submit/submit.md) | `d8273939dc94` | 2026-11-20, #69 | Run 22 – `task2/task2_player_segment.ipynb` |
+| [Task 2](task2/submit/submit.md) | `34d927a40901` | 2026-11-21, #79 | Run 22 models, affine export fix – `task2/run_bayes_export.py` |
 | [Task 3](task3/submit/submit.md) | `3646bdd6dda1` | 2026-11-19, #57 | Run 22 – `task3/task3_monthly_spending.ipynb` |
 | [Task 4](task4/submit/submit.md) | `1cb773dd067e` | 2026-11-21, #77 | Run 22 – `task4/task4_game_title_detection.ipynb` (reverted from #76) |
 | [Task 5](task5/submit/submit.md) | `5e57282c6459` | 2026-11-20, #71 | Archetype rules – `task5/archetype_rules.py` |
 
-- **Merged sha12:** `faeb950de6f5` – Kaggle public: –
+- **Merged sha12:** `904a1fd0976c` – Kaggle public: –
 - **Best Kaggle public so far:** 0.86363 (merged `b3ea360f52c3`, commit `33160ae`)
 
 ## Merged history
@@ -24,6 +24,7 @@ One row per `main` commit that changed any `task{N}/submit/index.csv`. "↩" mar
 
 | Date | Commit | PR | Merged sha12 | Tasks changed | Kaggle public | Note |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2026-11-21 | `2f988af` | #79 | `904a1fd0976c` | 2 | – | Task 2 affine export fix; frozen-OOF macro F1 `0.753158` → `0.759316`, all five folds improve; 1,622 rows changed |
 | 2026-11-21 | `6324964` | #78 | `faeb950de6f5` | 1 | – | Task 1 exp 005 account cohorts and skill classifier, 311 rows changed and OOF F2 `0.840965` |
 | 2026-11-21 | `pending` | #77 | `b7f0765d8736` | 4 | 0.86362 | ↩ same file as `2df195e`. fix(task4): revert task4 submit/index.csv to Run 22 after Run 23 0.86310 regression (#77) |
 | 2026-11-21 | `bbec716` | #76 | `6caa214ed301` | 4 | 0.86310 | feat(task4): Run 23 add 5-fold SGKF Nightmare-Hardened ConvNeXtV2-StageC (#76) |
