@@ -1,0 +1,182 @@
+{
+  "method": "Existing seven-model stack with shared affine macro-F1 decision rule",
+  "protocol": "Five-fold cross-fitted postprocessing of frozen OOF probabilities; no base-model retraining",
+  "limitations": "Not fully nested retraining: other OOF base models can have seen held-out fold labels. Bootstrap is conditional on frozen models and folds. NPZ has no row IDs; original row order is assumed and input hashes are recorded.",
+  "model_names": [
+    "ExactParamEM",
+    "XGB_Clean28",
+    "LGB_Clean28",
+    "CB_Clean28",
+    "CleanTabM_SWA3",
+    "Fact_Clean28",
+    "Oven_Rev"
+  ],
+  "weights": [
+    0.992160245188338,
+    2.3242430319910467e-17,
+    0.007839754811661964,
+    0.0,
+    3.211087559560816e-17,
+    0.0,
+    0.0
+  ],
+  "alpha": [
+    2.5011364914503167,
+    3.974632004412477,
+    4.991879419209212,
+    6.745094156433321
+  ],
+  "beta": [
+    1.0262635384033887,
+    1.4854121060871552,
+    1.79588108198534,
+    2.5213303131502287
+  ],
+  "fold_parameters": [
+    {
+      "fold": 0,
+      "weights": [
+        1.0,
+        8.248099325376872e-17,
+        0.0,
+        0.0,
+        2.6020852139652106e-18,
+        4.776187157830681e-18,
+        3.4361817730622264e-18
+      ],
+      "alpha": [
+        2.501021108359092,
+        3.971874032780772,
+        4.996959424908451,
+        6.744839282443817
+      ],
+      "beta": [
+        1.0267028014957817,
+        1.4848159257894356,
+        1.8000371614396498,
+        2.5226000961799837
+      ]
+    },
+    {
+      "fold": 1,
+      "weights": [
+        1.0,
+        0.0,
+        3.173974616046539e-17,
+        6.9143378150571485e-18,
+        5.7036471079316875e-18,
+        0.0,
+        0.0
+      ],
+      "alpha": [
+        2.502878703793692,
+        3.9774745318522617,
+        4.997394804350446,
+        6.714555152934574
+      ],
+      "beta": [
+        1.0268882715221572,
+        1.4864051326812522,
+        1.7965389398315939,
+        2.5128410372661754
+      ]
+    },
+    {
+      "fold": 2,
+      "weights": [
+        0.9590800614659312,
+        2.060578814067277e-17,
+        0.04091993853406882,
+        0.0,
+        1.5652242421153669e-18,
+        5.96026823407568e-19,
+        0.0
+      ],
+      "alpha": [
+        2.500190751524247,
+        3.975859345016169,
+        4.991793293495705,
+        6.748835964401424
+      ],
+      "beta": [
+        1.0255875786431015,
+        1.4855961328820195,
+        1.7935503279876244,
+        2.521353577256455
+      ]
+    },
+    {
+      "fold": 3,
+      "weights": [
+        1.0,
+        0.0,
+        8.53267109746092e-17,
+        6.098372110169871e-18,
+        3.3335956338521458e-18,
+        2.5544952038998663e-18,
+        9.313054238726151e-18
+      ],
+      "alpha": [
+        2.4993701874500838,
+        3.977233161169151,
+        4.988755580522496,
+        6.756412245344412
+      ],
+      "beta": [
+        1.0254551127010516,
+        1.48597040802622,
+        1.7944875477420914,
+        2.5237334158298568
+      ]
+    },
+    {
+      "fold": 4,
+      "weights": [
+        0.9820263260157678,
+        0.0,
+        0.017973673984232236,
+        5.313785792521788e-18,
+        0.0,
+        4.218225130418088e-18,
+        6.792038847292902e-18
+      ],
+      "alpha": [
+        2.4997511808302164,
+        3.972987121731854,
+        4.991232782425859,
+        6.761330683070545
+      ],
+      "beta": [
+        1.0258397997820148,
+        1.4849117759678672,
+        1.7965034094890435,
+        2.5261814327452976
+      ]
+    }
+  ],
+  "old_export_macro_f1": 0.7531575910277661,
+  "fixed_macro_f1": 0.7593158436136265,
+  "fixed_weighted_f1": 0.7710848213712889,
+  "old_export_weighted_f1": 0.763170897163242,
+  "oof_log_loss": 0.595645981801214,
+  "bootstrap_delta_macro_f1_95_percent": [
+    0.004652854436172327,
+    0.007692116785611524
+  ],
+  "passed_promotion_gate": true,
+  "test_changed_rows": 1622,
+  "test_class_counts": [
+    10558,
+    6583,
+    5046,
+    3702
+  ],
+  "input_sha256": {
+    "task2/data/train.csv": "0cdaa5fad6c17a7f27d965b988cd72f6113a1a53c1f88bcf5d12c25128249f48",
+    "task2/data/test.csv": "224345827c690d4383fa1c81d4a7baecfb22735ed80189b1d90504dfcfa9b703",
+    "submission/sample_submission.csv": "e8d39f0a2295b6b5ea1ef98cbb7bd224c843cf21c5135a07506f5cde163b893d",
+    "task2/predictions/model-level/task2-exact-param-em-bundle.npz": "28e20b3ed8edb5604f82aae17a3c8867064766d919a0f4d43e989455207254dd",
+    "task2/predictions/model-level/segment-tuned-catboost-lightgbm-revised-2026-11-12-macro-f1-0.751314-oof.csv": "9bd563dee046f1e3694279e50b9782e3b6930d38e67409151dbc62dd74d21dd8",
+    "task2/predictions/model-level/segment-tuned-catboost-lightgbm-revised-2026-11-12-macro-f1-0.751314-test-predictions.csv": "69f66d50262adb7d9bc67b498220170ec182b04ac620d65662fa7d0755b2911b"
+  }
+}
