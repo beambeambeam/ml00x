@@ -15,7 +15,7 @@ The merged `sha12` equals the `[sha:<hash>]` tag in each Kaggle note.
 | [Task 4](task4/submit/submit.md) | `1cb773dd067e` | 2026-11-20, #69 | Run 22 – `task4/task4_game_title_detection.ipynb` |
 | [Task 5](task5/submit/submit.md) | `5e57282c6459` | 2026-11-20, #71 | Archetype rules – `task5/archetype_rules.py` |
 
-- **Merged sha12:** `b7f0765d8736` – Kaggle public: –
+- **Merged sha12:** `b7f0765d8736` – Kaggle public: 0.86362
 - **Best Kaggle public so far:** 0.86363 (merged `b3ea360f52c3`, commit `33160ae`)
 
 ## Merged history
@@ -24,7 +24,7 @@ One row per `main` commit that changed any `task{N}/submit/index.csv`. "↩" mar
 
 | Date | Commit | PR | Merged sha12 | Tasks changed | Kaggle public | Note |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | `pending` | #74 | `b7f0765d8736` | 1 | – | feat(task1): exp 004 Pure-Train DGP + Interior CatBoost/LGBM ensemble (#74) |
+| 2026-11-21 | `2df195e` | #74 | `b7f0765d8736` | 1 | 0.86362 | feat(task1): exp 004 Pure-Train DGP + Interior CatBoost/LGBM ensemble (#74) |
 | 2026-11-20 | `05a762a` | #71 | `1f26381be9b0` | 5 | – | feat: Task 5 archetype rules with calibrated NaN-unstable recovery (#71) |
 | 2026-11-20 | `33160ae` | #70 | `b3ea360f52c3` | 5 | 0.86363 | fix: restore Run 22 task5 submit/index.csv (#70) |
 | 2026-11-20 | `8654961` | #69 | `296e7a3ae27a` | 2, 4 | 0.84113 | fix: restore Run 22 task2 and task4 submit/index.csv (#69) |

@@ -4,7 +4,7 @@
 
 ## Current
 
-- **sha12:** `4817f4300bce` (since 2026-11-20, #74)
+- **sha12:** `4817f4300bce` (since 2026-11-21, `2df195e`, #74)
 - **Active Version:** **exp 004** (`Palapluem`, PR `#74`)
 - **Generating Notebook:** `task1/notebooks/experiments/004.ipynb`
 - **Artifacts & Outputs:** `task1/models/experiments/004/stack_meta.json`, `task1/predictions/experiments/004/oof.csv`, `task1/predictions/experiments/004/test.csv`, `task1/assets/experiments/004/results.csv`, `task1/assets/experiments/004/per-fold-f2.csv`, `task1/assets/experiments/004/f2-threshold-curves.png`
@@ -16,10 +16,10 @@
 
 ### 2026-11-20 – `4817f4300bce` – #74
 
-- Commit: `pending` by Palapluem (Wisit Suwannao)
+- Commit: `2df195e` by Palapluem (Wisit Suwannao)
 - Prev: `fd65d3e13622` | Δrows vs prev: 295 (1.1%)
 - Why: feat(task1): exp 004 Pure-Train DGP + Interior CatBoost/LGBM ensemble (`task1/notebooks/experiments/004.ipynb`; `nested_f2 0.839578` vs exp 003 `0.838777`, `obs5_f2 0.860511` vs `0.859353`, `roc_auc 0.894765` vs `0.893780`, `log_loss 0.355336` vs `0.362346`; paired bootstrap win `99.1%` all / `98.7%` `obs==5`; Pure-Train 1D+2D support clamp `d0=7,945` / `d1=3,428`)
-- Merged: `b7f0765d8736` | Kaggle public: –
+- Merged: `b7f0765d8736` | Kaggle public: 0.86362
 
 ### 2026-11-20 – `fd65d3e13622` – #68
 
