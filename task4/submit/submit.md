@@ -4,20 +4,29 @@
 
 ## Current
 
-- **sha12:** `1cb773dd067e` (since 2026-11-21, #77 — reverted `submit/index.csv` to Run 22; Run 23 code kept on `main`)
-- **Active Version:** **Run 22** (`Palapluem`, PR `#65` / reverted in `#77`)
-- **Generating Notebook:** `task4/task4_game_title_detection.ipynb`
+- **sha12:** `cd9689ef4951` (since 2026-11-22, #80)
+- **Active Version:** **Run 24 — Dual-Regime SOTA Fusion (`CNXv3-Base + DINOv3L-Hard + DINOv2 + Base ViTs`)** (`Palapluem`, PR `#80`)
+- **Generating Script / Notebook:** `task4/scripts/fuse_t4_sota_trio.py`, `task4/task4_game_title_detection.ipynb`
 - **Required Artifacts:**
   - `task4/predictions/model-level/task4-sgkf-e2e-bundle.npz` (5-fold SGKF Pure-Train E2E `ConvNeXtV2`, `DINOv2-StageA/C`, `MLP-V3`)
-  - 8 model-level CSVs in `task4/predictions/model-level/`: `task4-{dinov3-vitb,dinov3-vitl,eva02-base,eva02-large}-{oof,test-predictions}.csv`
-  - `task4/data/train.csv`, `task4/data/test.csv`
+  - `task4/predictions/model-level/task4-cnxv3-sgkf-hard-bundle.npz` & `task4/predictions/model-level/task4-cnxv3-{orig2,hard6}-{oof,test-predictions}.csv`
+  - `task4/predictions/model-level/task4-dinov3l-sgkf-hard-bundle.npz` & `task4/predictions/model-level/task4-dinov3l-{orig2,hard6}-{oof,test-predictions}.csv`
+  - 8 base ViT CSVs in `task4/predictions/model-level/`: `task4-{dinov3-vitb,dinov3-vitl,eva02-base,eva02-large}-{oof,test-predictions}.csv`
+  - `task4/models/t4_sota_fusion_meta.json`, `task4/data/train.csv`, `task4/data/test.csv`
 - **Method & OOF Metrics (`31,546` train images, 100% Pure-Train):**
-  - Temperature-calibrated 9-stream Log-Odds SLSQP pool (`EVA02-Large=0.3158`, `DINOv3-ViT-L=0.2017`, `ConvNeXtV2-SGKF=0.1867`, `DINOv2-StageC-2TTA=0.1402`, `EVA02-Base=0.0772`, `DINOv2-StageC-6TTA=0.0627`, `MLP-V3-SGKF=0.0143`, `DINOv3-ViT-B=0.0013`) + Pure-Train Nested Uniform-Prior Debias (`alpha*=0.860`)
-  - `OOF Macro-F1 = 0.991174` | `OOF LogLoss = 0.026605` | `Iso(<0.75) F1 = 0.991955` | `Corrupt F1 = 0.986183`
-- **Test Distribution (`25,889` rows):** `0` (`7-11K`): `3,667` (`14.2%`), `1` (`fiveN`): `6,832` (`26.4%`), `2` (`freefried`): `3,865` (`14.9%`), `3` (`pube`): `6,407` (`24.7%`), `4` (`roblock`): `5,118` (`19.8%`)
-  - *Note:* `index.csv` stores class names (`7-11K..roblock`). `submission/merge.py` maps them 1:1 to `0..4`.
+  - Dual-Regime Temperature-Calibrated Log-Odds SLSQP Clean Pool (`EVA02-Large=0.2250`, `CNXv3-Base-Hard6=0.2045`, `DINOv3L-Hard-Orig2=0.1780`, `DINOv3L-Hard-Hard6=0.1192`, `DINOv3-ViT-L=0.0864`, `CNXv3-Base-Orig2=0.0621`, `EVA02-Base=0.0468`, `DINOv2-StageC-2TTA=0.0446`, `MLP-V3-SGKF=0.0241`, `ConvNeXtV2-SGKF=0.0091`) + ExtHard6 Sub-Pool (`DINOv3L-Hard-Hard6=0.4145`, `CNXv2-StageC-6TTA=0.3483`, `CNXv3-Base-Hard6=0.1605`, `DINOv2-StageC-6TTA=0.0767`) with JS Shift Gate (`gamma=0.0`, `tau_js=0.016081`) + Pure-Train Nested Prior Debias (`alpha*=0.69`)
+  - `OOF Macro-F1 = 0.993723` | `OOF LogLoss = 0.020969` | `Iso(<0.75) F1 = 0.993871` | `Corrupt F1 = 0.988965` | `ExtHard6 F1 = 0.968777` | `ExtHard6 LogLoss = 0.091773` | `Paired Bootstrap vs Run 22 (0.991174) = 1.0000`
+- **Test Distribution (`25,889` rows):** `0` (`7-11k`): `3,686` (`14.2%`), `1` (`fiveN`): `6,753` (`26.1%`), `2` (`freefried`): `3,911` (`15.1%`), `3` (`pube`): `6,349` (`24.5%`), `4` (`roblock`): `5,190` (`20.0%`)
+  - *Note:* `index.csv` stores canonical numeric labels `0..4` (`AGENTS.md` schema).
 
 ## Changelog
+
+### 2026-11-22 – `cd9689ef4951` – #80
+
+- Commit: `pending` by Palapluem (Wisit Suwannao)
+- Prev: `1cb773dd067e` | Δrows vs prev: 793 (3.1%)
+- Why: feat(task4): Run 24 Dual-Regime SOTA Fusion integrating 5-fold SGKF Nightmare-Hardened ConvNeXtV3-Base (`CNXv3-Base`) and DINOv3-ViT-L-16 (`DINOv3L-Hard`, `OOF_W6 F1 0.991660`, `ExtHard6 F1 0.962927`) with DINOv2-StageC and Base ViTs (`all_oof_f1 0.993723` vs Run 22 `0.991174`, `iso_oof_f1 0.993871`, `corrupt_oof_f1 0.988965`, `exthard6_oof_f1 0.968777`, `oof_logloss 0.020969`, `paired_bootstrap_vs_r22 1.0000`)
+- Merged: `b2f908917ce1` | Kaggle public: –
 
 ### 2026-11-21 – `1cb773dd067e` – #77
 
