@@ -19,10 +19,10 @@
 
 ### 2026-11-23 – `a5005a73a89d` – #86
 
-- Commit: `pending` by Palapluem (Wisit Suwannao)
+- Commit: `ca30f19` by Palapluem (Wisit Suwannao)
 - Prev: `b308313ff651` | Δrows vs prev: 13 (0.1%)
 - Why: feat(task5): replace LightGBM NaN-unstable recovery with zero-parameter Exact Analytical Longitudinal Bayes integral (`ExactBayesUB`) in `task5/archetype_rules.py`; `22,926` masked OOF (`2,393` hard candidates, `246` pos) `AUC 0.91251 → 0.93656`, `PR-AUC 0.69322 → 0.79922`, `LogLoss 0.18256 → 0.13851`, `10·TP−Flags 1,394 → 1,502` (`Boot P=0.9892`), `Expected F3 = 0.99835`, `+25` NaN flags (`2,077` total, `+4/-9` vs #82, `+6/-5` vs #71)
-- Merged: `f5ad4958942c` | Kaggle public: pending
+- Merged: `f5ad4958942c` | Kaggle public: – (combined in `e3b50d7d48a7`: 0.86545)
 
 ### 2026-11-22 – `b308313ff651` – #82
 

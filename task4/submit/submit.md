@@ -24,10 +24,10 @@
 
 ### 2026-11-23 – `f9b481b506b7` – #87
 
-- Commit: `pending` by Palapluem (Wisit Suwannao)
+- Commit: `fa90a83` by Palapluem (Wisit Suwannao)
 - Prev: `e146d960e1a0` | Δrows vs prev: 41 (0.2%)
 - Why: feat(task4): Run 25-V2 Pure-Train 3-Family Consensus Restoration Shift Gate (`tau_js_98pct_iso=0.006393`, `gamma=0.10` across all 5 outer folds, `test_rows_gated=770`, `alpha*=0.60`), lifting `all_oof_f1 0.994122 -> 0.994412` (`+0.000290`, `500/500` bootstrap vs Run 25), `iso_oof_f1 0.995278 -> 0.995665`, `corrupt_oof_f1 0.989391 -> 0.989838`, plus `siglip_l16` auto-discovery
-- Merged: `e3b50d7d48a7` | Kaggle public: pending
+- Merged: `e3b50d7d48a7` | Kaggle public: 0.86545
 
 ### 2026-11-23 – `e146d960e1a0` – #84
 
