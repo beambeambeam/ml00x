@@ -1,5 +1,5 @@
 archetype,players,share_of_all_players
-normal,23807,0.9196
+normal,23812,0.9198
 account_takeover,508,0.0196
 account_sale_boosting,310,0.012
 low_activity,265,0.0102
@@ -7,5 +7,5 @@ silent_account,263,0.0102
 unstable_behavior,246,0.0095
 erratic_combat,244,0.0094
 bot_24_7,207,0.008
-unstable_behavior_nan,30,0.0012
+unstable_behavior_nan,25,0.001
 vpn_pricing_abuse,9,0.0003

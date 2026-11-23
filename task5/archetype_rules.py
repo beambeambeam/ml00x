@@ -8,15 +8,14 @@ range, so exact rules separate them. Each rule fires on any observed signal,
 which makes it robust to the ~5% NaN cells.
 
 One archetype (unstable behaviour) has a single box feature,
-`behavior_stability`. When that cell is NaN, a LightGBM model scores the player
-from its weaker side effects (purchase frequency, login count, account age).
-The model trains on players whose `behavior_stability` is observed, where the
-rule label is exact. Out-of-fold isotonic calibration turns its scores into
-probabilities. F3 gains from a flag when P(anomaly) > F3 / 10, so the cut
-maximises expected F3.
+`behavior_stability`. When that cell is NaN, a zero-parameter closed-form
+analytical Bayesian posterior (`ExactBayesUB`) scores the player by integrating
+the exact Normal vs. unstable longitudinal generative densities over
+`purchase_frequency_1..4`, `login_count_1..4`, and `account_age_days`.
+F3 gains from a flag when P(anomaly) > F3 / 10, so the cut maximises expected F3.
 
-Task 5 has only test.csv. The rules and the model use it without labels, which
-the competition allows for this task.
+Task 5 has only test.csv. The rules and the Bayesian integral use it without
+labels, which the competition allows for this task.
 
 Usage (from task5/):
     uv run archetype_rules.py
@@ -24,21 +23,23 @@ Usage (from task5/):
 
 from pathlib import Path
 
-import lightgbm as lgb
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.isotonic import IsotonicRegression
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import StratifiedKFold
 
 ROOT = Path(__file__).resolve().parent
 ASSETS = ROOT / "assets"
 PERIODS = (1, 2, 3, 4)
-SEEDS = range(5)
+
+# Exact 200-point Gauss-Legendre quadrature over Normal login_count base B_lc ~ Uniform(20, 100)
+_GL_X, _GL_W = np.polynomial.legendre.leggauss(200)
+_LC_BASE_PTS = 0.5 * (100.0 - 20.0) * _GL_X + 0.5 * (100.0 + 20.0)
+_LC_BASE_W = 0.5 * (100.0 - 20.0) * _GL_W / 80.0
+_PF_NORM_C = np.array([0.50, 0.40, 0.30, 0.20], dtype=np.float64)
+_LC_NORM_C = np.array([0.20, 0.30, 0.25, 0.15], dtype=np.float64)
 
 # Erratic-combat box: all three groups are i.i.d. uniform in these ranges in every period.
 ERRATIC_BOX = {"kda_std": (0.7, 1.0), "accuracy_std": (9.0, 12.0), "performance_stability": (0.85, 0.95)}
@@ -117,30 +118,117 @@ def unstable_side_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     return X, hard
 
 
+def marginal_mult_uniform(
+    vals: np.ndarray, b_min: float, b_max: float, c_vec: np.ndarray
+) -> np.ndarray:
+    """Exact marginal density for X_p | B ~ Uniform(B*(1-c_p), B*(1+c_p)), B ~ Uniform(b_min, b_max)."""
+    vals = np.asarray(vals, dtype=np.float64)
+    obs = ~np.isnan(vals)
+    k = obs.sum(axis=1)
+    blo = np.full(len(vals), float(b_min), dtype=np.float64)
+    bhi = np.full(len(vals), float(b_max), dtype=np.float64)
+    log_denom = np.zeros(len(vals), dtype=np.float64)
+    for p in range(4):
+        m = obs[:, p]
+        blo[m] = np.maximum(blo[m], vals[m, p] / (1.0 + c_vec[p]))
+        bhi[m] = np.minimum(bhi[m], vals[m, p] / (1.0 - c_vec[p]))
+        log_denom += np.where(m, np.log(2.0 * c_vec[p]), 0.0)
+    valid = blo < bhi
+    out = np.zeros(len(vals), dtype=np.float64)
+    for i in np.flatnonzero(valid):
+        ki = int(k[i])
+        if ki == 0:
+            integral = b_max - b_min
+        elif ki == 1:
+            integral = np.log(bhi[i] / blo[i])
+        else:
+            integral = (blo[i] ** (1 - ki) - bhi[i] ** (1 - ki)) / (ki - 1.0)
+        out[i] = integral / ((b_max - b_min) * np.exp(log_denom[i]))
+    return out
+
+
+def prod_uniform_density_1d(
+    z: np.ndarray, a1: float, b1: float, a2: float, b2: float
+) -> np.ndarray:
+    """Exact density of product U1 * U2 where U1 ~ Uniform(a1, b1), U2 ~ Uniform(a2, b2)."""
+    lo = np.maximum(a1, z / b2)
+    hi = np.minimum(b1, z / a2)
+    mask = hi > lo
+    safe_lo = np.where(mask, lo, 1.0)
+    safe_hi = np.where(mask, hi, 1.0)
+    return np.where(mask, np.log(safe_hi / safe_lo) / ((b1 - a1) * (b2 - a2)), 0.0)
+
+
+def marginal_ub_lc_exact(
+    vals: np.ndarray,
+    c_norm: np.ndarray = _LC_NORM_C,
+    m_lo: float = 0.40,
+    m_hi: float = 0.70,
+) -> np.ndarray:
+    """1D Gauss-Legendre marginal likelihood of UB login_count under X_p = B*(1+u_p)*m_p."""
+    vals = np.asarray(vals, dtype=np.float64)
+    lik_grid = np.ones((len(vals), len(_LC_BASE_PTS)), dtype=np.float64)
+    for p in range(4):
+        vp = vals[:, p]
+        obs = ~np.isnan(vp)
+        if not np.any(obs):
+            continue
+        z = vp[obs, None] / _LC_BASE_PTS[None, :]
+        fp = (
+            prod_uniform_density_1d(z, 1.0 - c_norm[p], 1.0 + c_norm[p], m_lo, m_hi)
+            / _LC_BASE_PTS[None, :]
+        )
+        lik_grid[obs] *= fp
+    return lik_grid @ _LC_BASE_W
+
+
 def unstable_nan_probability(df: pd.DataFrame, X: pd.DataFrame, hard: pd.Series):
-    """Calibrated P(unstable) for players with NaN behavior_stability."""
+    """Exact analytical Bayes P(unstable) for players with NaN behavior_stability."""
+    del X  # Exact integral uses raw longitudinal periods directly from df
+    other_7 = archetype_rules(df).drop(columns=["unstable_behavior"]).any(axis=1)
     known = df.behavior_stability.notna()
-    train = hard & known
-    Xk, yk = X[train], (df.behavior_stability[train] < 0.55).astype(int).to_numpy()
-    oof, models = np.zeros(len(Xk)), []
-    for seed in SEEDS:
-        for tr, va in StratifiedKFold(5, shuffle=True, random_state=seed).split(Xk, yk):
-            m = lgb.LGBMClassifier(
-                n_estimators=300, learning_rate=0.02, num_leaves=7, min_child_samples=30,
-                subsample=0.8, subsample_freq=1, random_state=seed, n_jobs=4, verbose=-1,
-            ).fit(Xk.iloc[tr], yk[tr])
-            oof[va] += m.predict_proba(Xk.iloc[va])[:, 1] / len(SEEDS)
-            models.append(m)
-    iso = IsotonicRegression(out_of_bounds="clip", y_min=0, y_max=1).fit(oof, yk)
-    z_oof = np.log(np.clip(oof, 1e-5, 1 - 1e-5) / (1.0 - np.clip(oof, 1e-5, 1 - 1e-5)))[:, None]
-    platt = LogisticRegression(C=10.0).fit(z_oof, yk)
+    known_clean = known & (~other_7)
+    prior_ub = float((df.loc[known_clean, "behavior_stability"] < 0.55).sum() / known_clean.sum())
+
+    pf_h = df.loc[hard, cols("purchase_frequency")].to_numpy(dtype=np.float64)
+    lc_h = df.loc[hard, cols("login_count")].to_numpy(dtype=np.float64)
+    age_h = df.loc[hard, "account_age_days"].to_numpy(dtype=np.float64)
+
+    p_pf_norm = marginal_mult_uniform(pf_h, 0.0, 5.0, _PF_NORM_C)
+    p_lc_norm = marginal_mult_uniform(lc_h, 20.0, 100.0, _LC_NORM_C)
+    p_age_norm = np.where(
+        np.isnan(age_h),
+        1.0,
+        np.where((age_h >= 180.0) & (age_h <= 1500.0), 1.0 / 1320.0, 0.0),
+    )
+    l_norm = p_pf_norm * p_lc_norm * p_age_norm
+
+    k_pf = (~np.isnan(pf_h)).sum(axis=1)
+    in_pf_ub = np.all(np.isnan(pf_h) | ((pf_h >= 3.0) & (pf_h <= 6.0)), axis=1)
+    p_pf_ub = np.where(in_pf_ub, (1.0 / 3.0) ** k_pf, 0.0)
+    p_lc_ub = marginal_ub_lc_exact(lc_h, c_norm=_LC_NORM_C, m_lo=0.40, m_hi=0.70)
+    p_age_ub = np.where(
+        np.isnan(age_h),
+        1.0,
+        np.where((age_h >= 800.0) & (age_h <= 1500.0), 1.0 / 700.0, 0.0),
+    )
+    l_ub = p_pf_ub * p_lc_ub * p_age_ub
+
+    num = prior_ub * l_ub
+    den = num + (1.0 - prior_ub) * l_norm
+    post_h = np.divide(num, den, out=np.zeros_like(num), where=den > 0.0)
+
+    post_full = pd.Series(0.0, index=df.index)
+    post_full.loc[hard] = post_h
+
     target = hard & ~known
-    raw = np.mean([m.predict_proba(X[target])[:, 1] for m in models], axis=0)
-    z_raw = np.log(np.clip(raw, 1e-5, 1 - 1e-5) / (1.0 - np.clip(raw, 1e-5, 1 - 1e-5)))[:, None]
     p = pd.Series(0.0, index=df.index)
-    p[target] = 0.5 * iso.predict(raw) + 0.5 * platt.predict_proba(z_raw)[:, 1]
-    oof_cal = 0.5 * iso.predict(oof) + 0.5 * platt.predict_proba(z_oof)[:, 1]
-    calib = pd.DataFrame({"oof_raw": oof, "oof_calibrated": oof_cal, "is_unstable": yk})
+    p.loc[target] = post_full.loc[target]
+
+    hk = hard & known_clean
+    yk = (df.loc[hk, "behavior_stability"] < 0.55).astype(int).to_numpy()
+    post_hk = post_full.loc[hk].to_numpy()
+    calib = pd.DataFrame({"oof_raw": post_hk, "oof_calibrated": post_hk, "is_unstable": yk})
     return p, calib
 
 

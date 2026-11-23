@@ -13,9 +13,9 @@ The merged `sha12` equals the `[sha:<hash>]` tag in each Kaggle note.
 | [Task 2](task2/submit/submit.md) | `34d927a40901` | 2026-11-21, #79 | Run 22 models, affine export fix – `task2/run_bayes_export.py` |
 | [Task 3](task3/submit/submit.md) | `3646bdd6dda1` | 2026-11-19, #57 | Run 22 – `task3/task3_monthly_spending.ipynb` |
 | [Task 4](task4/submit/submit.md) | `e146d960e1a0` | 2026-11-23, #84 | Run 25 Dual-Regime SOTA Trio Fusion (`CNXv3+DINOv3L+EVA02L+DINOv2+ViTs`) – `task4/scripts/fuse_t4_sota_trio.py` |
-| [Task 5](task5/submit/submit.md) | `b308313ff651` | 2026-11-22, #82 | Archetype rules + rich NaN stability & Platt/Iso50 – `task5/archetype_rules.py` |
+| [Task 5](task5/submit/submit.md) | `a5005a73a89d` | 2026-11-23, #86 | Archetype rules + Exact Analytical Longitudinal Bayes (`ExactBayesUB`) – `task5/archetype_rules.py` |
 
-- **Merged sha12:** `ecadd77e92d2` – Kaggle public: 0.86540
+- **Merged sha12:** `f5ad4958942c` – pending Kaggle submission
 - **Best Kaggle public so far:** 0.86540 (merged `ecadd77e92d2`, commit `2024555`)
 
 ## Merged history
@@ -24,6 +24,7 @@ One row per `main` commit that changed any `task{N}/submit/index.csv`. "↩" mar
 
 | Date | Commit | PR | Merged sha12 | Tasks changed | Kaggle public | Note |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2026-11-23 | `pending` | #86 | `f5ad4958942c` | 5 | pending | feat(task5): Exact Analytical Longitudinal Bayes (`ExactBayesUB`) for NaN-unstable recovery (`Masked AUC 0.9125→0.9366, PR-AUC 0.6932→0.7992, LL 0.1826→0.1385, Expected F3 0.99835`), 13 rows changed (`2,077` total flags) |
 | 2026-11-23 | `2024555` | #84 | `ecadd77e92d2` | 4 | 0.86540 | feat(task4): Run 25 Dual-Regime SOTA Trio Fusion CNXv3+DINOv3L+EVA02L (`OOF 0.994122`, `Iso 0.995278`, `ExtHard6 0.970477`, `LL 0.019381`), 371 rows changed (1.4%) |
 | 2026-11-22 | `571aefb` | #82 | `e952e560ec4c` | 5 | 0.86530 | feat(task5): rich stability features & Platt/Iso calibration for NaN-unstable recovery (`Masked AUC 0.8980→0.9105, PR 0.6288→0.6829, Expected F3 0.99790`), 10 rows changed |
 | 2026-11-22 | `fb0da33` | #80 | `b2f908917ce1` | 4 | 0.86536 | feat(task4): Run 24 Dual-Regime SOTA Fusion CNXv3+DINOv3L (`OOF 0.993723`, `ExtHard6 0.968777`), 793 rows changed (3.1%) |

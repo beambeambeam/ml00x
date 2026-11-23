@@ -4,18 +4,25 @@
 
 ## Current
 
-- **sha12:** `b308313ff651` (since 2026-11-22, #82)
-- **Active Version:** **Archetype rules + rich NaN-unstable Platt/Isotonic50 recovery** (`Palapluem`, PR `#82`)
-- **Generating Script:** `task5/archetype_rules.py` (`uv run python archetype_rules.py`)
+- **sha12:** `a5005a73a89d` (since 2026-11-23, #86)
+- **Active Version:** **Archetype rules + zero-parameter Exact Analytical Longitudinal Bayes (`ExactBayesUB`)** (`Palapluem`, PR `#86`)
+- **Generating Script:** `task5/archetype_rules.py` (`uv run archetype_rules.py`)
 - **Required Input:** `task5/data/test.csv` (`25,889` accounts × `123` columns)
 - **Outputs:** `task5/predictions/archetype-rules.csv`, `task5/assets/archetype-rule-counts.csv`, `task5/assets/erratic-combat-box.png`, `task5/assets/unstable-nan-calibration.csv`, `task5/assets/unstable-nan-cut-expected-f3.csv`
 - **Detector Components:**
   - Exact uniform-box rules for 8 injected archetypes (account_takeover, vpn_pricing_abuse, account_sale_boosting, bot_24_7, low_activity, silent_account, unstable_behavior, erratic_combat): `2,052` flags
-  - NaN `behavior_stability` recovery: hard filter (all `purchase_frequency` in [3, 6], age ≥ 795) + stability side features (`lc_std`, `lc_range`, `pf_range`, `age_gt_800`, `lc_norm_age`) + 5-seed × 5-fold LightGBM + 50/50 Platt & Isotonic calibration, cut `0.1068` (`0.107`) by expected F3: `+30` flags (`Expected F3 = 0.99790`)
-  - Masked OOF check on `22,926` players (`known & ~sure_7`, `2,393` hard-filter candidates, `246` positives): nested OOF `AUC 0.89795 → 0.91046`, `PR-AUC 0.62878 → 0.68293`, `LogLoss 0.20529 → 0.18360`, `10·TP − flags` `1,343 → 1,395` (`Boot P = 0.911`), passes two-way stratified split-half replication (`A→B` and `B→A`)
-- **Test Distribution (`25,889` rows):** `0` (normal): `23,807` (`92.0%`), `1` (anomalous): `2,082` (`8.0%`)
+  - NaN `behavior_stability` recovery (`ExactBayesUB`): hard filter (all `purchase_frequency` in [3, 6], age ≥ 795) + closed-form Normal marginal density over `purchase_frequency_1..4` ($B_{\text{pf}} \sim U(0,5)$), `login_count_1..4` ($B_{\text{lc}} \sim U(20,100)$), and `account_age_days` ($U(180,1500)$) vs. UB i.i.d. `purchase_frequency` ($U(3,6)$), product-Uniform `login_count` ($m_p \sim U(0.40, 0.70)$, 200-pt Gauss-Legendre), and `account_age_days` ($U(800,1500)$), cut `0.11513` (`0.115`) by expected F3: `+25` flags (`Expected F3 = 0.99835`)
+  - Masked OOF check on `22,926` players (`known & ~sure_7`, `2,393` hard-filter candidates, `246` positives): `AUC 0.91251 → 0.93656` (`22,926` full `0.99169 → 0.99399`), `PR-AUC 0.69322 → 0.79922`, `LogLoss 0.18256 → 0.13851` (`22,926` full `0.01866 → 0.01446`), `10·TP − Flags 1,394 → 1,502` (`Boot P = 0.9892`), passes two-way stratified split-half replication (`Half A AUC=0.92757, PR=0.77952`; `Half B AUC=0.94609, PR=0.81982`)
+- **Test Distribution (`25,889` rows):** `0` (normal): `23,812` (`92.0%`), `1` (anomalous): `2,077` (`8.0%`)
 
 ## Changelog
+
+### 2026-11-23 – `a5005a73a89d` – #86
+
+- Commit: `pending` by Palapluem (Wisit Suwannao)
+- Prev: `b308313ff651` | Δrows vs prev: 13 (0.1%)
+- Why: feat(task5): replace LightGBM NaN-unstable recovery with zero-parameter Exact Analytical Longitudinal Bayes integral (`ExactBayesUB`) in `task5/archetype_rules.py`; `22,926` masked OOF (`2,393` hard candidates, `246` pos) `AUC 0.91251 → 0.93656`, `PR-AUC 0.69322 → 0.79922`, `LogLoss 0.18256 → 0.13851`, `10·TP−Flags 1,394 → 1,502` (`Boot P=0.9892`), `Expected F3 = 0.99835`, `+25` NaN flags (`2,077` total, `+4/-9` vs #82, `+6/-5` vs #71)
+- Merged: `f5ad4958942c` | Kaggle public: pending
 
 ### 2026-11-22 – `b308313ff651` – #82
 
