@@ -1,13 +1,13 @@
 """Pure-Train Dual-Regime SOTA Fusion & Shift-Gated Calibration for Task 4.
 
 Auto-discovers completed full-resolution Nightmare-Hardened SGKF bundles
-(`cnxv3`, `dinov3l`, `eva02l`, `cnxv2b`) alongside `task4-sgkf-e2e-bundle.npz`
+(`cnxv3`, `dinov3l`, `eva02l`, `siglip_l16`, `cnxv2b`) alongside `task4-sgkf-e2e-bundle.npz`
 and the 4 base ViT streams, then performs strictly zero-test-leakage Nested
 5-Fold SGKF optimization:
 1. Out-of-fold Temperature Scaling weighted by `train_hard_iso_w` (Guo et al., ICML 2017)
 2. Clean/Standard Nested SLSQP Log-Odds Pooling (evicts low-res `CNXv2-StageC-2TTA` once full-res `cnxv3` exists)
 3. Deterministic ExtHard6 Nested SLSQP Log-Odds Pooling across all 6-TTA hardened families
-4. Pure-Train Pointwise Restoration Shift Gate tuned inside training folds (clean 99th-pct JSD + entropy reduction)
+4. Pure-Train Consensus Restoration Shift Gate tuned inside training folds (clean 98th-pct JSD + entropy reduction + Macro-F1 objective)
 5. Nested Uniform-Prior Bayes Macro-F1 Debiasing (alpha*) & 500-resample paired bootstrap vs Run 22
 
 Usage:
@@ -35,11 +35,12 @@ CLASS_MAP: Dict[str, int] = {
     "pube": 3,
     "roblock": 4,
 }
-DEFAULT_FULLRES_KEYS = ("cnxv3", "dinov3l", "eva02l", "cnxv2b")
+DEFAULT_FULLRES_KEYS = ("cnxv3", "dinov3l", "eva02l", "siglip_l16", "cnxv2b")
 HARDENED_LABELS = {
     "cnxv3": "CNXv3-Base",
     "dinov3l": "DINOv3L-Hard",
     "eva02l": "EVA02L-Hard",
+    "siglip_l16": "SigLIPL16-Hard",
     "cnxv2b": "CNXv2B-Hard",
 }
 
@@ -142,15 +143,13 @@ def fit_nested_pool_weights(
 def apply_shift_gate_blend(
     p_clean: np.ndarray,
     p_hard: np.ndarray,
-    p_orig2_ref: np.ndarray,
-    p_hard6_ref: np.ndarray,
+    js: np.ndarray,
     tau_js: float,
     gamma: float,
 ) -> Tuple[np.ndarray, np.ndarray]:
     """Blend log-odds toward ExtHard stack strictly where 6-TTA restoration shifts & reduces entropy."""
     if gamma <= 0.0:
         return p_clean.copy(), np.zeros(len(p_clean), dtype=np.float64)
-    js = js_divergence(p_orig2_ref, p_hard6_ref)
     h_clean = entropy_norm(p_clean)
     h_hard = entropy_norm(p_hard)
     excess = np.clip((js - tau_js) / max(tau_js, 1e-4), 0.0, 1.0)
@@ -164,37 +163,38 @@ def apply_shift_gate_blend(
 def fit_nested_shift_gate(
     p_clean_oof: np.ndarray,
     p_hard_oof: np.ndarray,
-    p_orig2_oof: np.ndarray,
-    p_hard6_oof: np.ndarray,
+    js_all: np.ndarray,
     y: np.ndarray,
     folds: np.ndarray,
     iso_mask: np.ndarray,
-    sample_w: np.ndarray,
+    corr_mask: np.ndarray,
 ) -> Tuple[np.ndarray, float, float]:
-    """Tune Pure-Train restoration shift gate strictly within outer training folds."""
-    js_all = js_divergence(p_orig2_oof, p_hard6_oof)
-    gammas = [0.0, 0.05, 0.10, 0.15, 0.25, 0.35]
+    """Tune Pure-Train consensus restoration shift gate strictly within outer training folds."""
+    gammas = [0.0, 0.10, 0.15, 0.20, 0.25, 0.35]
     fold_taus: List[float] = []
     fold_gammas: List[float] = []
     gated_oof = np.zeros_like(p_clean_oof, dtype=np.float64)
 
     for k in range(5):
         tr, va = folds != k, folds == k
-        tau_k = float(np.quantile(js_all[tr & iso_mask], 0.99))
-        wt = sample_w[tr] / sample_w[tr].mean()
-        tr_idx = np.arange(tr.sum())
-        best_g, best_nll = 0.0, float("inf")
+        tau_k = float(np.quantile(js_all[tr & iso_mask], 0.98))
+        pi_k = np.bincount(y[tr], minlength=5).astype(np.float64) / tr.sum()
+        best_g, best_score = 0.0, -1.0
         for g in gammas:
             pr_tr, _ = apply_shift_gate_blend(
-                p_clean_oof[tr], p_hard_oof[tr], p_orig2_oof[tr], p_hard6_oof[tr], tau_k, g
+                p_clean_oof[tr], p_hard_oof[tr], js_all[tr], tau_k, g
             )
-            nll = float(-np.mean(wt * np.log(np.clip(pr_tr[tr_idx, y[tr]], 1e-12, 1.0))))
-            if nll < best_nll - 1e-9:
-                best_nll, best_g = nll, g
+            pr_deb = pr_tr / (pi_k[None, :] ** 0.65)
+            pred_tr = pr_deb.argmax(1)
+            score = 0.5 * float(f1_score(y[tr], pred_tr, average="macro")) + 0.5 * float(
+                f1_score(y[tr & corr_mask], pred_tr[corr_mask[tr]], average="macro")
+            )
+            if score > best_score + 1e-9:
+                best_score, best_g = score, g
         fold_taus.append(tau_k)
         fold_gammas.append(best_g)
         gated_oof[va], _ = apply_shift_gate_blend(
-            p_clean_oof[va], p_hard_oof[va], p_orig2_oof[va], p_hard6_oof[va], tau_k, best_g
+            p_clean_oof[va], p_hard_oof[va], js_all[va], tau_k, best_g
         )
 
     return gated_oof, float(np.mean(fold_taus)), float(np.mean(fold_gammas))
@@ -370,21 +370,31 @@ def run_fusion(task4_dir: Path, save_outputs: bool = True, seed: int = 42) -> Di
         hard_std_oof_pool[va] = geo_pool([p[va] for p in hard_std_oof], hard_fold_ws[k], T_hard)
     hard_te_pool = geo_pool(hard_te, w_hard, T_hard)
 
-    # Reference pair for restoration divergence: primary un-hardened Orig2 vs Hard6 if present
-    if "cnxv3" in discovered_fullres:
-        ref_o2_oof = norm_p(discovered_fullres["cnxv3"]["oof_orig2"])
-        ref_w6_oof = norm_p(discovered_fullres["cnxv3"]["oof_w6"])
-        ref_o2_te = norm_p(discovered_fullres["cnxv3"]["te_orig2"])
-        ref_w6_te = norm_p(discovered_fullres["cnxv3"]["te_w6"])
+    # Consensus restoration divergence across all discovered full-res hardened families
+    if discovered_fullres:
+        js_oof = np.mean(
+            [
+                js_divergence(norm_p(bun["oof_orig2"]), norm_p(bun["oof_w6"]))
+                for bun in discovered_fullres.values()
+            ],
+            axis=0,
+        )
+        js_te = np.mean(
+            [
+                js_divergence(norm_p(bun["te_orig2"]), norm_p(bun["te_w6"]))
+                for bun in discovered_fullres.values()
+            ],
+            axis=0,
+        )
     else:
-        ref_o2_oof, ref_w6_oof = norm_p(e2e["cnx_c2_oof"]), norm_p(e2e["cnx_c6_oof"])
-        ref_o2_te, ref_w6_te = norm_p(e2e["cnx_c2_te"]), norm_p(e2e["cnx_c6_te"])
+        js_oof = js_divergence(norm_p(e2e["cnx_c2_oof"]), norm_p(e2e["cnx_c6_oof"]))
+        js_te = js_divergence(norm_p(e2e["cnx_c2_te"]), norm_p(e2e["cnx_c6_te"]))
 
     gated_oof_raw, tau_js, opt_gamma = fit_nested_shift_gate(
-        clean_oof_raw, hard_std_oof_pool, ref_o2_oof, ref_w6_oof, y, folds, iso_mask, w_hard_iso
+        clean_oof_raw, hard_std_oof_pool, js_oof, y, folds, iso_mask, corr_mask
     )
     gated_te_raw, test_gate_vals = apply_shift_gate_blend(
-        clean_te_raw, hard_te_pool, ref_o2_te, ref_w6_te, tau_js, opt_gamma
+        clean_te_raw, hard_te_pool, js_te, tau_js, opt_gamma
     )
 
     opt_alpha, fold_alphas, final_oof_deb = fit_nested_prior_debias(gated_oof_raw, y, folds)
@@ -422,7 +432,7 @@ def run_fusion(task4_dir: Path, save_outputs: bool = True, seed: int = 42) -> Di
         "clean_pool_temps": {n: round(float(t), 4) for n, t in zip(pool_names, T_pool)},
         "exthard_weights": {n: round(float(w), 4) for n, w in zip(hard_names, w_hard)},
         "shift_gate": {
-            "tau_js_99pct_iso": round(tau_js, 6),
+            "tau_js_98pct_iso": round(tau_js, 6),
             "gamma": round(opt_gamma, 4),
             "test_rows_gated": int((test_gate_vals > 0).sum()),
         },

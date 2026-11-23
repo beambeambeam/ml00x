@@ -42,33 +42,33 @@
     "EVA02L-Hard-Hard6": 0.2629
   },
   "shift_gate": {
-    "tau_js_99pct_iso": 0.016081,
-    "gamma": 0.0,
-    "test_rows_gated": 0
+    "tau_js_98pct_iso": 0.006393,
+    "gamma": 0.1,
+    "test_rows_gated": 770
   },
-  "prior_debias_alpha": 0.67,
+  "prior_debias_alpha": 0.6,
   "fold_alphas": [
-    0.9,
     0.6,
     0.6,
     0.6,
-    0.65
+    0.6,
+    0.6
   ],
   "metrics": {
-    "all_oof_f1": 0.994122,
-    "iso_oof_f1": 0.995278,
-    "corrupt_oof_f1": 0.989391,
+    "all_oof_f1": 0.994412,
+    "iso_oof_f1": 0.995665,
+    "corrupt_oof_f1": 0.989838,
     "exthard6_oof_f1": 0.970477,
-    "oof_logloss": 0.019381,
+    "oof_logloss": 0.019466,
     "exthard6_logloss": 0.087769,
     "run22_baseline_f1": 0.991174,
     "paired_bootstrap_vs_r22": 1.0
   },
   "test_distribution": {
-    "0": 3688,
-    "1": 6737,
-    "2": 3956,
-    "3": 6323,
-    "4": 5185
+    "0": 3707,
+    "1": 6729,
+    "2": 3955,
+    "3": 6334,
+    "4": 5164
   }
 }
