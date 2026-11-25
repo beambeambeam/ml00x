@@ -199,11 +199,11 @@
 การแข่งขัน \textbf{Karena Player Intelligence System} จำลองบทบาททีม \textbf{Machine Learning Engineer} ของบริษัท \textbf{Karena Thailand} ผู้พัฒนาและให้บริการแพลตฟอร์มเกมออนไลน์ขนาดใหญ่ในภูมิภาค (ลักษณะเดียวกับแพลตฟอร์ม \textit{Garena}) ซึ่งดูแลเกมหลัก 5 เกมที่มีแนวการเล่นแตกต่างกัน ได้แก่ \textit{PUBE Mobile} (เกมยิงเอาชีวิตรอดเชิงกลยุทธ์), \textit{Free Fried} (เกมยิงแข่งขันจังหวะเร็ว), \textit{7-11 Knights} (เกม RPG สะสมตัวละคร), \textit{Roblock} (เกมสร้างโลกจำลองผู้เล่นหลายคน) และ \textit{FiveN} (เกมชุมชนจำลองบทบาทสมมติ) จากการเติบโตของฐานผู้เล่นอย่างรวดเร็ว บริษัทเผชิญปัญหาเชิงปฏิบัติการสำคัญ 5 ด้านที่ส่งผลกระทบโดยตรงต่อประสบการณ์ผู้เล่นและผลประกอบการ ดังนี้
 
 \begin{enumerate}[leftmargin=1.9em,itemsep=2.5pt]
-    \item \textbf{ปัญหาภาระงานคัดกรองการโกง (Task 1 — Anti-Cheat Pre-Filter):} แพลตฟอร์มได้รับรายงานการโกงมากกว่า 10,000 กรณีต่อวัน ขณะที่เจ้าหน้าที่ผู้ตรวจสอบสามารถพิจารณาด้วยตนเองได้เพียง 500 กรณีต่อวัน ก่อให้เกิดงานค้างสะสมกว่า 45,000 กรณี ระบบกฎเกณฑ์อัตโนมัติแบบเดิมมีอัตรา False Positive สูงถึง 70\% ทำให้ผู้เล่นสุจริตถูกตั้งธงและระงับบัญชีโดยผิดพลาดจนสร้างภาระแก่ฝ่ายบริการลูกค้า ขณะเดียวกันผู้เล่นทุจริตที่ใช้โปรแกรม Subtle Aimbot (ช่วยเล็งอัตโนมัติ) และ Wallhack (มองทะลุสิ่งกีดขวาง) ยังคงหลบเลี่ยงการตรวจจับได้ ส่งผลให้อัตราการรักษาผู้เล่นในโหมดแข่งขันลดลง 15\% และกระทบต่อรายได้ราว 15 ล้านบาทต่อวัน
+    \item \textbf{ปัญหาภาระงานคัดกรองการโกง (Task 1 — Anti-Cheat Pre-Filter):} แพลตฟอร์มได้รับรายงานการโกงมากกว่า 10,000 กรณีต่อวัน ขณะที่เจ้าหน้าที่ผู้ตรวจสอบสามารถพิจารณาด้วยตนเองได้เพียง 500 กรณีต่อวัน ก่อให้เกิดงานค้างสะสมกว่า 45,000 กรณี ระบบกฎเกณฑ์อัตโนมัติแบบเดิมมีอัตรา False Positive สูงถึง 70\% ทำให้ผู้เล่นสุจริตถูกระบุสถานะผิดพลาดจนนำไปสู่การระงับบัญชีโดยไม่สมควรและสร้างภาระแก่ฝ่ายบริการลูกค้า ขณะเดียวกันผู้เล่นทุจริตที่ใช้โปรแกรม Subtle Aimbot (ช่วยเล็งอัตโนมัติ) และ Wallhack (มองทะลุสิ่งกีดขวาง) ยังคงหลบเลี่ยงการตรวจจับได้ ส่งผลให้อัตราการรักษาผู้เล่นในโหมดแข่งขันลดลง 15\% และกระทบต่อรายได้ราว 15 ล้านบาทต่อวัน
     \item \textbf{ปัญหาการตลาดแบบไม่ตรงกลุ่มเป้าหมาย (Task 2 — Player Segment Classification):} ฝ่ายการตลาดใช้งบประมาณกว่า 60 ล้านบาทต่อเดือนไปกับแคมเปญการตลาดแบบไม่จำแนกกลุ่ม (Mass Campaign) ซึ่งมีอัตราการตอบรับเพียง 2--5\% เช่น การแสดงประกาศแข่งขัน Esports ต่อผู้เล่นสาย Casual บนมือถือ การส่งโฆษณาจำหน่ายไอเทมเครื่องแต่งกาย (Cosmetic) ต่อผู้ที่ไม่เคยเติมเงิน หรือการส่งคำเชิญกิจกรรมสวมบทบาทของเกม \textit{FiveN} ให้กลุ่มผู้เล่นสายแข่งขันของ \textit{PUBE Mobile} ทั้งที่ผู้เล่นกลุ่มใช้จ่ายสูง (Whales) เพียง 5\% แรกสร้างรายได้ถึง 60\% ของแพลตฟอร์ม และตัวชี้วัดอย่างชั่วโมงการเล่นเพียงอย่างเดียวไม่อาจแยกผู้เล่นสายไต่แรงก์ (Grinder), สายสังคม (Social) และสายเติมหนัก (Whale) ออกจากกันได้ การจำแนกกลุ่มอย่างแม่นยำจึงมีศักยภาพเพิ่มประสิทธิผลแคมเปญได้ถึง 3--4 เท่า
     \item \textbf{ความคลาดเคลื่อนในการพยากรณ์รายได้และดูแลลูกค้า VIP (Task 3 — Monthly Spending Prediction):} ฝ่ายการเงินคาดการณ์รายได้รายไตรมาสคลาดเคลื่อน 35--40\% จนกระทบการวางงบประมาณและการจัดสรรบุคลากร เนื่องจากยอดเติมเงินมีลักษณะ Zero-Inflated และมีหางขวาหนัก (Heavy Right Tail) ขณะเดียวกันทีม VIP Support จำนวน 20 คนขาดข้อมูลคาดการณ์รายบุคคล จึงทุ่มทรัพยากรดูแลผู้เล่นที่เล่นนาน 150 รายซึ่งมียอดใช้จ่ายรวมเพียง 12,000 บาท แต่กลับปล่อยให้ลูกค้า Whale ที่ใช้จ่ายถึง 255,000 บาทต้องรอตอบคำถามนานถึง 3 วันจนย้ายไปแพลตฟอร์มคู่แข่ง นอกจากนี้การแจกโค้ดส่วนลด 50\% แบบสุ่มให้กลุ่มที่พร้อมจ่ายเต็มราคาอยู่แล้วยังสร้างความสูญเสียรายได้กว่า 6 ล้านบาทต่อเดือน และทำให้กำหนดช่วงเวลากิจกรรมจำกัดเวลา (Limited-Time Events) ไม่สอดคล้องกับช่วงเวลาจับจ่ายของผู้เล่นหลัก
     \item \textbf{คอขวดในการคัดแยกภาพหน้าจอแจ้งปัญหา (Task 4 — Game Title Detection):} ฝ่ายบริการลูกค้าได้รับ Ticket แจ้งปัญหาพร้อมภาพหน้าจอที่ไม่มีป้ายกำกับราว 2,000 ใบต่อวัน โดยเจ้าหน้าที่ต้องใช้เวลามากกว่า 10 นาทีต่อใบในการระบุชื่อเกมก่อนส่งต่อผู้เชี่ยวชาญ อีกทั้งกิจกรรมชิงรางวัล ``Play Multiple Games for Rewards'' มีภาพส่งเข้าร่วมกว่า 50,000 ภาพ แต่ตรวจสอบด้วยมือได้เพียง 3\% จึงเกิดช่องโหว่การทุจริตรับรางวัล รวมถึงภาพจากการถ่ายทอดสด ฟอรัม และชุมชนผู้เล่นกว่า 100,000 ภาพต่อสัปดาห์ที่ฝ่ายการตลาดยังไม่สามารถจัดหมวดหมู่เพื่อติดตามความนิยมรายเกมแบบอัตโนมัติได้
-    \item \textbf{การโจรกรรมบัญชีและการเอาเปรียบเศรษฐกิจในเกม (Task 5 — Account Security Monitoring):} แพลตฟอร์มพบเหตุบัญชีถูกขโมยที่ยืนยันแล้วกว่า 5,000 บัญชีต่อเดือน (ซึ่งคาดว่าปริมาณจริงสูงเป็น 2 เท่า) จนกลายเป็นปัญหาอันดับหนึ่งที่ใช้ทรัพยากรฝ่ายบริการลูกค้าถึง 60\% ควบคู่กับขบวนการรับจ้างปั๊มแรงก์ การเปิดบอตฟาร์มตลอด 24 ชั่วโมงที่ก่อให้เกิดภาวะเงินเฟ้อในเกม และการใช้ VPN เพื่อซื้อสินค้าในราคาภูมิภาคอื่น (ส่วนลด 70\%) ระบบกฎเกณฑ์แบบคงที่แบบเดิมสร้างสัญญาณเตือนผิดพลาด (False Alarms) สูงถึง 60\% ต่อผู้เล่นที่เดินทางข้ามพื้นที่จริงหรือผู้เล่นที่พัฒนาฝีมือขึ้นตามธรรมชาติ ขณะที่ผู้โจมตีซึ่งเว้นช่วงเวลาทำรายการเกิน 24 ชั่วโมงสามารถเล็ดลอดการตรวจจับได้โดยง่าย
+    \item \textbf{การโจรกรรมบัญชีและการเอาเปรียบเศรษฐกิจในเกม (Task 5 — Account Security Monitoring):} แพลตฟอร์มพบเหตุบัญชีที่ถูกโจรกรรมและยืนยันแล้วกว่า 5,000 บัญชีต่อเดือน (ซึ่งคาดว่าปริมาณจริงสูงเป็น 2 เท่า) จนกลายเป็นปัญหาอันดับหนึ่งที่ใช้ทรัพยากรฝ่ายบริการลูกค้าถึง 60\% ควบคู่กับขบวนการรับจ้างปรับเพิ่มระดับแรงก์ (Account Boosting) การเปิดบัญชีอัตโนมัติ (Bot Farming) ตลอด 24 ชั่วโมงที่ก่อให้เกิดภาวะเงินเฟ้อในเกม และการใช้ VPN เพื่อซื้อสินค้าในราคาภูมิภาคอื่น (ส่วนลด 70\%) ระบบกฎเกณฑ์แบบคงที่ (Static Rule-Based System) สร้างสัญญาณเตือนผิดพลาด (False Alarms) สูงถึง 60\% ต่อผู้เล่นที่เดินทางข้ามพื้นที่จริงหรือผู้เล่นที่พัฒนาฝีมือขึ้นตามธรรมชาติ ขณะที่ผู้โจมตีซึ่งเว้นช่วงเวลาทำรายการเกิน 24 ชั่วโมงสามารถหลบเลี่ยงการตรวจจับได้โดยง่าย
 \end{enumerate}
 
 \subsection{วัตถุประสงค์ของโครงงาน}
@@ -235,21 +235,21 @@
     \item \textbf{ค่าน้ำหนักคะแนนรวม:} ค่าน้ำหนัก $w_1 \dots w_5$ สำหรับคำนวณคะแนนรวมบน Kaggle ไม่ได้เปิดเผยเป็นตัวเลข จึงมุ่งยกระดับประสิทธิภาพของแต่ละ Task ตามตัวชี้วัดทางการของงานนั้นโดยตรง
 \end{itemize}
 
-ช่องทางอ้างอิงการแข่งขันและคลังซอร์สโค้ดหลักของกลุ่ม \textbf{ML004} ที่เผยแพร่ร่วมกันมี 3 แหล่งหลัก ได้แก่
+ช่องทางอ้างอิงการแข่งขันและคลังจัดเก็บไฟล์กลางของกลุ่ม \textbf{ML004} (Source Code \& Report Archive) ประกอบด้วย
 {\raggedright
-\begin{itemize}[leftmargin=1.9em,itemsep=1pt,topsep=0pt]
+\begin{itemize}[leftmargin=1.8em,itemsep=1pt,topsep=0pt]
     \item \textbf{Kaggle:} \url{https://www.kaggle.com/competitions/player-intelligence-system-cpe-342-ml/}
-    \item \textbf{คลังหลักของกลุ่ม:} \url{https://github.com/beambeambeam/ml00x} (โค้ดรวม, \code{submission/merge.py}, \code{submit.md})
-    \item \textbf{คลังส่งงานรายวิชา:} \url{https://github.com/Palapluem/cpe342-machine-learning-2026/tree/main/project} (Notebooks \& Report)
+    \item \textbf{คลังซอร์สโค้ดกลาง:} \url{https://github.com/beambeambeam/ml00x} (\code{task1}--\code{task5}, \code{merge.py})
+    \item \textbf{คลังรายงานวิชาการ:} \url{https://github.com/beambeambeam/ml00x/tree/main/report} (\code{.tex/.pdf})
 \end{itemize}\par}
 
 \subsection{เครื่องมือและเทคโนโลยีที่ใช้ในการพัฒนา}
 
 ทุกขั้นตอนของการวิเคราะห์ การทดลอง และการสร้างผลลัพธ์พัฒนาด้วยภาษา Python บน Jupyter Notebook ที่สามารถประมวลผลซ้ำ (Reproduce) ได้ครบถ้วน โดยมีเครื่องมือและไลบรารีหลักดังนี้
-\begin{itemize}
+\begin{itemize}[itemsep=1.5pt,topsep=2pt]
     \item \textbf{การจัดการข้อมูลและการคำนวณเชิงตัวเลข:} NumPy, Pandas และ SciPy (สำหรับ Optimization ด้วยวิธี SLSQP, Gauss-Legendre Quadrature และ Statistical Testing)
     \item \textbf{Tabular Machine Learning \& Deep Tabular Models:} Scikit-learn, LightGBM, XGBoost, CatBoost และ PyTorch สำหรับ Neural Network บนข้อมูลตาราง
-    \item \textbf{Computer Vision \& Pre-trained Backbones (Task 4):} PyTorch ร่วมกับคลังโมเดล \code{timm} และ Hugging Face Transformers สำหรับสถาปัตยกรรม ConvNeXt, Vision Transformer (EVA-02, DINOv2, DINOv3) และ Vision-Language Backbones (SigLIP2, CLIP) ประมวลผลบน GPU T4
+    \item \textbf{Computer Vision \& Pre-trained Backbones (Task 4):} PyTorch ร่วมกับคลังโมเดล \code{timm} และ Transformers สำหรับสถาปัตยกรรม ConvNeXt, ViT (EVA-02, DINOv2, DINOv3) และ VLM (SigLIP2, CLIP) บน GPU T4
     \item \textbf{การปรับแต่ง การแสดงผล และการควบคุมเวอร์ชัน:} Optuna สำหรับ Hyperparameter Tuning ภายใต้ Nested Cross-Validation, Matplotlib / Seaborn สำหรับสร้างกราฟวิเคราะห์ความละเอียด 300~dpi และ Git / GitHub สำหรับบริหารจัดการซอร์สโค้ดแบบแยกโมดูลระหว่างสมาชิกกลุ่ม \textbf{ML004}
 \end{itemize}
 
@@ -267,15 +267,15 @@
     F_\beta = (1 + \beta^2)\frac{\text{Precision} \cdot \text{Recall}}{\beta^2 \cdot \text{Precision} + \text{Recall}} = \frac{(1 + \beta^2)\,\text{TP}}{(1 + \beta^2)\,\text{TP} + \beta^2\,\text{FN} + \text{FP}}
     \]
     \begin{itemize}
-        \item \textbf{Task 1 ($F_2$ Score, $\beta=2$):} ให้น้ำหนัก False Negative ($\text{FN}$) มากกว่า False Positive ($\text{FP}$) ถึง \textbf{4 เท่า} (Recall สำคัญเป็น 2 เท่าของ Precision) เนื่องจากผู้เล่นทุจริตที่หลุดรอดสร้างความเสียหายต่อผู้เล่นจำนวนมากในระบบ การคัดกรองเบื้องต้นเพื่อส่งต่อให้เจ้าหน้าที่ตรวจสอบจึงยอมรับผู้ต้องสงสัยเพิ่มได้มากกว่าการปล่อยให้ผู้เล่นทุจริตหลุดรอด
-        \item \textbf{Task 5 ($F_3$ Score, $\beta=3$):} ให้น้ำหนัก $\text{FN}$ มากกว่า $\text{FP}$ ถึง \textbf{9 เท่า} (Recall สำคัญเป็น 3 เท่าของ Precision) เพื่อไม่ให้บัญชีที่ถูกยึดครองหรือขบวนการบอตหลุดรอดจากระบบเฝ้าระวังความปลอดภัย
+        \item \textbf{Task 1 ($F_2$ Score, $\beta=2$):} ให้น้ำหนัก False Negative ($\text{FN}$) มากกว่า False Positive ($\text{FP}$) ถึง \textbf{4 เท่า} (Recall สำคัญเป็น 2 เท่าของ Precision) เนื่องจากผู้เล่นทุจริตที่เล็ดลอดการตรวจจับก่อให้เกิดความเสียหายต่อผู้เล่นจำนวนมากในระบบ การคัดกรองเบื้องต้นเพื่อส่งต่อให้เจ้าหน้าที่ตรวจสอบจึงยอมรับผู้ต้องสงสัยเพิ่มได้มากกว่าการปล่อยให้ผู้เล่นทุจริตหลุดพ้นจากการตรวจสอบ
+        \item \textbf{Task 5 ($F_3$ Score, $\beta=3$):} ให้น้ำหนัก $\text{FN}$ มากกว่า $\text{FP}$ ถึง \textbf{9 เท่า} (Recall สำคัญเป็น 3 เท่าของ Precision) เพื่อไม่ให้บัญชีที่ถูกยึดครองหรือบัญชีอัตโนมัติหลุดพ้นจากการตรวจจับของระบบเฝ้าระวังความปลอดภัย
     \end{itemize}
 
     \item \textbf{Unweighted Macro $F_1$ (Task 2 และ Task 4):}
     \[
     \text{Macro } F_1 = \frac{1}{C}\sum_{c=0}^{C-1} \frac{2 \cdot \text{Precision}_c \cdot \text{Recall}_c}{\text{Precision}_c + \text{Recall}_c}
     \]
-    ให้ความสำคัญทุกคลาสเท่ากันโดยไม่ขึ้นกับสัดส่วนคลาส (Class Proportion) ($C=4$ ใน Task 2 และ $C=5$ ใน Task 4) ดังนั้นคลาสขนาดเล็ก เช่น ผู้เล่นกลุ่ม Whale หรือเกมที่มีภาพตัวอย่างน้อย มีน้ำหนักต่อคะแนนเฉลี่ยเท่ากับคลาสขนาดใหญ่ การทำนายด้วยค่า \code{argmax} ปกติจากความน่าจะเป็นดิบ (Raw Probabilities) จึงไม่เหมาะสมเมื่อคลาสไม่สมดุล
+    ให้ความสำคัญทุกคลาสเท่ากันโดยไม่ขึ้นกับสัดส่วนคลาส (Class Proportion) ($C=4$ ใน Task 2 และ $C=5$ ใน Task 4) ดังนั้นคลาสขนาดเล็ก เช่น ผู้เล่นกลุ่ม Whale หรือเกมที่มีภาพตัวอย่างน้อย มีน้ำหนักต่อคะแนนเฉลี่ยเท่ากับคลาสขนาดใหญ่ การทำนายด้วยค่า \code{argmax} ปกติจากความน่าจะเป็นตั้งต้น (Raw Probabilities) จึงไม่เหมาะสมเมื่อคลาสไม่สมดุล
 
     \item \textbf{Normalized Mean Absolute Error Score (Task 3):}
     \[
@@ -293,30 +293,32 @@
 \subsection{เกณฑ์คะแนนพื้นฐาน โครงสร้างชุดข้อมูล และรูปแบบการส่งคำตอบ}
 
 เอกสารข้อกำหนดโครงงานระบุเกณฑ์อ้างอิงสำหรับประเมินคะแนนรวมไว้ 2 ระดับ ดังนี้
-\begin{itemize}
+\begin{itemize}[itemsep=1pt,topsep=2pt]
     \item \textbf{Ground Baseline ($0.68$):} พัฒนาจากแบบจำลองพื้นฐานในห้องเรียน 4 ชนิด ได้แก่ Logistic Regression (Task 1), Random Forest (Task 2 และ Task 3), Vanilla CNN (Task 4) และ Isolation Forest (Task 5)
     \item \textbf{Challenge Baseline ($0.75$):} พัฒนาด้วยเทคนิคขั้นสูงตามคำแนะนำ ได้แก่ Gradient Boosting Stacking, Two-Stage Hurdle Regression, Pre-trained Transfer Learning และ Voting Ensembles
 \end{itemize}
 
 เกรดในส่วนการแข่งขันคำนวณเทียบเกณฑ์ผ่านการแจกแจง T-Score เมื่อคะแนนถึงเกณฑ์พื้นฐาน ($\text{Score} \ge \text{Baseline}$) ตามสมการ
+\begingroup
+\setlength{\abovedisplayskip}{3pt}\setlength{\belowdisplayskip}{3pt}%
 \[
 \text{Grade\%} = \alpha + (100\% - \alpha)\,\Phi(t), \qquad t = \frac{\text{Your Score} - \mu}{\sigma}
 \]
-
-หากคะแนนต่ำกว่าเกณฑ์จะคิดคะแนนตามสัดส่วน $\alpha \cdot (\text{Your Score} / \text{Baseline})$ สำหรับไฟล์ส่งคำตอบรวม \code{sample\_submission.csv} กำหนดขนาด $25{,}889 \times 6$ คอลัมน์ (รหัส \code{id} ตั้งแต่ \code{ANS00001} ถึง \code{ANS25889} และ \code{task1}--\code{task5}) ดังสรุปภาพรวมทั้ง 5 งานใน \textbf{ตารางที่~\ref{tab:dataset_overview}}
+\endgroup
+\noindent หากคะแนนต่ำกว่าเกณฑ์จะคิดคะแนนตามสัดส่วน $\alpha \cdot (\text{Your Score} / \text{Baseline})$ สำหรับไฟล์ส่งคำตอบรวม \code{sample\_submission.csv} กำหนดขนาด $25{,}889 \times 6$ คอลัมน์ (รหัส \code{id} ตั้งแต่ \code{ANS00001} ถึง \code{ANS25889} และ \code{task1}--\code{task5}) ดังสรุปภาพรวมทั้ง 5 งานใน \textbf{ตารางที่~\ref{tab:dataset_overview}}
 
 \begin{table}[H]\centering
-{\tblfont\renewcommand{\arraystretch}{1.02}\setlength{\tabcolsep}{4pt}
+{\tblfont\renewcommand{\arraystretch}{0.95}\setlength{\tabcolsep}{4pt}
 \caption{สรุปลักษณะงาน ขนาดชุดข้อมูล ตัวแปรเป้าหมาย ตัวชี้วัด และวิธีแบ่ง Validation ทั้ง 5 งาน}
 \label{tab:dataset_overview}
-\begin{tabular}{L{2.00cm}L{4.25cm}L{3.05cm}L{1.85cm}L{3.25cm}}
+\begin{tabular}{L{1.95cm}L{4.55cm}L{3.15cm}L{1.85cm}L{3.40cm}}
 \toprule
 \rowcolor{TableHead} \textbf{Task} & \textbf{ขนาดข้อมูล (Train / Test)} & \textbf{ตัวแปรเป้าหมาย} & \textbf{ตัวชี้วัดหลัก} & \textbf{Validation Split} \\
 \midrule
 Task 1: Binary Cls. & Train $104{,}000 \times 33$ (90,816 มีป้าย) / Test $25{,}889 \times 32$ & \code{is\_cheater} \code{\{0, 1\}} (31 ฟีเจอร์ตัวเลข) & Binary $F_2$ ($\beta=2$) & 5-Fold Stratified K-Fold (แถวมีป้าย) \\
 Task 2: Multi-Class & Train $104{,}000 \times 46$ / Test $25{,}889 \times 45$ (31 ตัวเลข + 3 noise + 10 หมวด) & \code{segment} \code{\{0..3\}} (\code{Casual}, \code{Grinder}, \code{Social}, \code{Whale}) & Unweighted Macro $F_1$ & 5-Fold SKF + Cross-Fit Calibration \\
-Task 3: Zero-Inflated & Train $104{,}000 \times 34$ / Test $25{,}889 \times 33$ (32 ฟีเจอร์รวม \code{segment}) & \code{spending\_30d} $\in [0, 300{,}000]$ THB (48.12\% ศูนย์) & Normalized MAE (NMAE) & Strict Nested 5-Fold Outer (\code{y>0}) \\
-Task 4: Image Cls. & Train $31{,}546$ / Test $25{,}889$ ภาพ (RGB $230 \times 120$ px) & \code{label} \code{\{0..4\}} (5 เกมหลักบนแพลตฟอร์ม) & Unweighted Macro $F_1$ & 5-Fold SGKF (64-bit dHash 28,088 ฉาก) \\
+Task 3: Spending & Train $104{,}000 \times 34$ / Test $25{,}889 \times 33$ (32 ฟีเจอร์รวม \code{segment}) & \code{spending\_30d} $\in [0, 300{,}000]$ THB (48.12\% ศูนย์) & NMAE Score ($L_1$-Median) & Strict Nested 5-Fold Outer (\code{y>0}) \\
+Task 4: Image Cls. & Train $31{,}546$ / Test $25{,}889$ ภาพ (RGB $230 \times 120$ px) & \code{label} \code{\{0..4\}} (5 เกมหลัก) & Unweighted Macro $F_1$ & 5-Fold SGKF (64-bit dHash 28,088 ฉาก) \\
 Task 5: Anomaly & ไม่มี Train / Test $25{,}889 \times 123$ (29 กลุ่ม $\times 4$ คาบ + 4 Flags) & \code{is\_anomaly} \code{\{0, 1\}} (กัน 4 Flags) & $F_3$ Score ($\beta=3$) & Masked Control ($22{,}926$) + Held-Out \\
 \bottomrule
 \end{tabular}}
@@ -324,8 +326,8 @@ Task 5: Anomaly & ไม่มี Train / Test $25{,}889 \times 123$ (29 กล�
 \subsection{มาตรการป้องกัน Data Leakage และประตูตรวจสอบสถิติ}
 
 เพื่อป้องกัน Overfitting และรับประกันว่าผลปรับปรุงจะถ่ายทอดสู่ Test Set คณะผู้จัดทำบังคับใช้หลักปฏิบัติป้องกัน Leakage 2 ข้อในทุกงาน:
-\begin{enumerate}
-    \item \textbf{Pure-Train Invariant:} ขั้นตอนเตรียมข้อมูลทั้งหมด ไม่ว่าจะเป็น Imputation, Standardization/Quantile Transform, การประมาณค่า Density ของกลุ่มไม่มี Label (Task 1), Temperature Scaling, Ensemble Weights ตลอดจน Decision Threshold จะต้อง Fit บน Training Folds เท่านั้น ส่วน \code{test.csv} กันแยกไว้สำหรับ Inference ขั้นสุดท้ายเพียงอย่างเดียว
+\begin{enumerate}[itemsep=1pt,topsep=1pt]
+    \item \textbf{Pure-Train Invariant:} ขั้นตอนเตรียมข้อมูลทั้งหมด (Imputation, Standardization/Quantile Transform, Density Estimation, Calibration, Weights และ Decision Threshold) จะต้อง Fit บน Training Folds เท่านั้น ส่วน \code{test.csv} กันแยกไว้สำหรับ Inference ขั้นสุดท้ายเพียงอย่างเดียว
     \item \textbf{Paired Bootstrap Significance Gate:} ก่อนยอมรับสถาปัตยกรรมใหม่เข้าสู่ชุดคำตอบหลัก โมเดลต้องแสดงผลปรับปรุงที่สม่ำเสมอข้ามทุก Fold และมีขอบล่างของช่วงความเชื่อมั่น 95\% จากการทำ Paired Row Bootstrap (1,000 รอบ) มากกว่าศูนย์เมื่อเทียบกับโมเดลฐานก่อนหน้า
 \end{enumerate}
 
@@ -348,14 +350,14 @@ Task 1 เป็นงาน Binary Classification (\code{is\_cheater = 0} ผ�
 ชุดข้อมูลฝึกสอน \code{train.csv} ประกอบด้วย $104{,}000$ แถว ($33$ คอลัมน์) และ \code{test.csv} ประกอบด้วย $25{,}889$ แถว ($32$ คอลัมน์) ในชุดฝึกสอนมีข้อมูลที่มีป้ายกำกับจำนวน \textbf{90,816 แถว (87.32\%)} แบ่งเป็นผู้เล่นสุจริต $59{,}091$ แถว ($65.07\%$) และผู้เล่นโกง $31{,}725$ แถว ($34.93\%$) ส่วนอีก \textbf{13,184 แถว (12.68\%)} ไม่มีป้ายกำกับ (\code{NaN}) จากการวิเคราะห์การแจกแจงและอัตราข้อมูลขาดหาย (\textbf{รูปที่~\ref{fig:t1_dist}} และ \textbf{รูปที่~\ref{fig:t1_miss}}) สรุปข้อค้นพบ 3 ประการ
 
 \begin{enumerate}
-    \item \textbf{ภาวะถูกตัดขอบขวา (Right-Censoring) และขอบเขตเฉพาะกลุ่มบัญชี (Bounded Cohorts):} ตัวแปร \code{game\_sense\_score}, \code{aiming\_smoothness}, \code{spray\_control\_score} และ \code{win\_rate} มีจุดสะสมหนาแน่นที่ขอบบน (\code{1.0} หรือ \code{100.0}) จากการถูกจำกัดเพดานคะแนน ขณะที่กลุ่มตัวแปรประวัติบัญชี (\code{account\_age\_days}, \code{level}, \code{level\_progression\_speed}, \code{friend\_network\_size}, \code{reports\_received}, \code{crosshair\_placement}) แสดงการแบ่งช่วงขอบเขตชัดเจนที่แยกบัญชีโกงบางกลุ่มออกจากผู้เล่นปกติ
+    \item \textbf{ภาวะถูกตัดขอบขวา (Right-Censoring) และขอบเขตเฉพาะกลุ่มบัญชี (Bounded Cohorts):} ตัวแปร \code{game\_sense\_score}, \code{aiming\_smoothness}, \code{spray\_control\_score} และ \code{win\_rate} มีจุดสะสมหนาแน่นที่ขอบบน (\code{1.0} หรือ \code{100.0}) เนื่องจากภาวะถูกจำกัดขอบบน (Right-Censoring Cap) ขณะที่กลุ่มตัวแปรประวัติบัญชี (\code{account\_age\_days}, \code{level}, \code{level\_progression\_speed}, \code{friend\_network\_size}, \code{reports\_received}, \code{crosshair\_placement}) แสดงการแบ่งช่วงขอบเขตชัดเจนที่แยกบัญชีโกงบางกลุ่มออกจากผู้เล่นปกติ
     \item \textbf{ความต่างของสัดส่วนข้อมูลขาดหายระหว่าง Train และ Test (Missingness Shift):} เช่น \code{account\_age\_days} ขาดหาย $14.44\%$ ใน Train แต่ขาดหายเพียง $0.56\%$ ใน Test, \code{avg\_session\_length\_min} ขาดหาย $22.98\%$ เทียบกับ $1.58\%$, ขณะที่ \code{headshot\_percentage} ขาดหายเพียง $2.70\%$ ใน Train แต่สูงถึง $14.11\%$ ใน Test และ \code{win\_rate} ขาดหาย $4.98\%$ เทียบกับ $13.74\%$ ลักษณะนี้ทำให้โมเดลที่แทนค่าว่างแบบคงที่เสียประสิทธิภาพเมื่อนำไปใช้บน Test Set
     \item \textbf{ความขัดแย้งระหว่างทักษะการยิงกับความเข้าใจเชิงกลยุทธ์:} ผู้เล่นที่ใช้โปรแกรมช่วยเล็งมีค่าความแม่นยำ (\code{kill\_death\_ratio}, \code{headshot\_percentage}) สูงผิดปกติเมื่อเทียบกับระดับความรู้แผนที่และทักษะการตัดสินใจ (\code{game\_sense\_score}, \code{map\_knowledge})
 \end{enumerate}
 
 \begin{figure}[H]\centering
 \makebox[\textwidth][c]{\includegraphics[width=1.04\textwidth,height=0.72\textheight,keepaspectratio]{assets/task1_feature_distributions.png}}
-\caption{การแจกแจงของฟีเจอร์ทั้ง 31 ตัวแปรใน Task 1 แยกตามกลุ่มสุจริตและผู้โกง แสดงการกระจุกตัวที่เพดานสูงสุดและขอบเขตช่วงข้อมูลบัญชี}
+\caption{การแจกแจงของฟีเจอร์ทั้ง 31 ตัวแปรใน Task 1 แยกตามกลุ่มสุจริตและผู้โกง แสดงการกระจุกตัวที่ขอบเขตบนสูงสุดและช่วงขอบเขตข้อมูลบัญชี}
 \label{fig:t1_dist}
 \end{figure}
 
@@ -436,10 +438,10 @@ Task 1 เป็นงาน Binary Classification (\code{is\_cheater = 0} ผ�
 จากการวิเคราะห์ผลลัพธ์ระยะเริ่มต้น พบจุดบกพร่องสำคัญ 2 ประการที่มีผลต่อประสิทธิภาพของแบบจำลอง ดังนี้
 \begin{itemize}
     \item \textbf{ผลกระทบจาก Default Threshold \code{0.50}:} การใช้ Decision Threshold เริ่มต้นให้คะแนน Default $F_2$ เพียง $0.63281$ เทียบกับ $0.84155$ เมื่อจูน Threshold ที่เหมาะสม $\tau^* = 0.1990$ ซึ่งสอดคล้องกับเกณฑ์ $F_2$ ที่ให้น้ำหนัก Recall สูงกว่า Precision
-    \item \textbf{ความคลาดเคลื่อนจากข้อมูลขาดหายและภาวะตัดขอบขวา:} โมเดลที่ใช้เพียง Tree Ensemble 15 ฟีเจอร์พร้อมการแทนค่าว่างแบบคงที่มีประสิทธิภาพลดลงบนแถวที่มีข้อมูลขาดหายและแถวที่กระจุกตัว ณ เพดานคะแนน (\code{game\_sense\_score = 1.0}) การเสริมสมการ Tobit Likelihood และการถ่วงน้ำหนักแยกตามความครบถ้วนของข้อมูลจึงช่วยยกระดับ $F_2$ ของกลุ่มข้อมูลขาดหายจาก $0.82599$ เป็น $0.82776$ ขณะที่กลุ่มข้อมูลครบถ้วนได้ $0.86137$
+    \item \textbf{ความคลาดเคลื่อนจากข้อมูลขาดหายและภาวะตัดขอบขวา:} โมเดลที่ใช้เพียง Tree Ensemble 15 ฟีเจอร์พร้อมการแทนค่าว่างแบบคงที่มีประสิทธิภาพลดลงบนแถวที่มีข้อมูลขาดหายและแถวที่กระจุกตัว ณ ขอบเขตบน (\code{game\_sense\_score = 1.0}) การเสริมสมการ Tobit Likelihood และการถ่วงน้ำหนักแยกตามความครบถ้วนของข้อมูลจึงช่วยยกระดับ $F_2$ ของกลุ่มข้อมูลขาดหายจาก $0.82599$ เป็น $0.82776$ ขณะที่กลุ่มข้อมูลครบถ้วนได้ $0.86137$
 \end{itemize}
 
-ในมิติการปฏิบัติงานจริง (\textbf{รูปที่~\ref{fig:t1_align}}) แม้ตัวแบบจะตั้งธงผู้ต้องสงสัย $15{,}270 / 25{,}889$ บัญชี ($58.98\%$) เพื่อรักษาค่า Recall ตามวัตถุประสงค์ $F_2$ แต่สามารถคัดกรองบัญชีสุจริตบนขอบเขตแน่นอนออกได้ $8{,}266$ บัญชี ($31.93\%$) โดยไม่เกิดการระงับบัญชีผิดพลาด และดึงกลุ่มโกงแน่นอน $3{,}341$ บัญชี ($12.91\%$) เข้าสู่คิวระงับเร่งด่วน ทำให้ทีมผู้ตรวจสอบที่มีขีดจำกัด 500 คดีต่อวันทำงานได้อย่างตรงจุด ลดความสูญเสียรายได้วันละ 15 ล้านบาทและลดปัญหาการระงับบัญชีผู้เล่นสุจริตออกจากระบบ
+ในมิติการปฏิบัติงานจริง (\textbf{รูปที่~\ref{fig:t1_align}}) แม้แบบจำลองจะคัดแยกผู้ต้องสงสัย $15{,}270 / 25{,}889$ บัญชี ($58.98\%$) เพื่อรักษาค่า Recall ตามวัตถุประสงค์ $F_2$ แต่สามารถคัดกรองบัญชีสุจริตบนขอบเขตแน่นอนออกได้ $8{,}266$ บัญชี ($31.93\%$) โดยไม่เกิดการระงับบัญชีผิดพลาด และดึงกลุ่มโกงแน่นอน $3{,}341$ บัญชี ($12.91\%$) เข้าสู่คิวระงับเร่งด่วน ทำให้ทีมผู้ตรวจสอบที่มีขีดจำกัด 500 คดีต่อวันทำงานได้อย่างตรงจุด ลดความสูญเสียรายได้วันละ 15 ล้านบาทและลดปัญหาการระงับบัญชีผู้เล่นสุจริตออกจากระบบ
 
 % ==============================================================================
 \clearpage
@@ -528,7 +530,7 @@ ExactParamEM (Cross-Fitted Affine Macro-$F_1$ Rule) & 0.59563 & 0.75920 & 1.00 \
 
 \subsection{ความผิดพลาดที่ค้นพบและผลกระทบต่อธุรกิจ}
 
-ข้อผิดพลาดสำคัญที่พบระหว่างการพัฒนาเกิดขึ้นเมื่อโค้ดขั้นตอน Export ทำนายตกหล่นพจน์ชดเชย $-\beta_c$ ในสมการ $\arg\max_c(\alpha_c p_c - \beta_c)$ ขณะที่การใช้ SLSQP ลด Global LogLoss ตัดน้ำหนัก CatBoost เหลือศูนย์ใน 3 Folds ส่งผลให้ Macro-$F_1$ ลดลงเหลือ $0.753158$ (ทำนายคลาดเคลื่อน $1{,}622$ แถว) เมื่อปรับแก้ให้ใช้ฟังก์ชัน \code{predict\_segments} ชุดเดียวกันทั้งใน Validation และ Export พร้อมบังคับใช้น้ำหนัก $0.90/0.10$ และ Cross-Fitted Logit-Bias คะแนนเพิ่มขึ้นอย่างมีนัยสำคัญสู่ \textbf{0.759799} (95\% Paired Bootstrap CI เท่ากับ \code{[+0.000159, +0.000805]}) ทั้งนี้ควรระบุเป็นข้อจำกัดทางเทคนิคว่าขั้นตอน Logit Bias Calibration และ Affine Rule ดำเนินการแบบ Cross-Fitted บน OOF Probabilities ของ Frozen Base Models
+ข้อผิดพลาดสำคัญที่พบระหว่างการพัฒนาเกิดขึ้นเมื่อโค้ดขั้นตอน Export ละเว้นพจน์ชดเชย $-\beta_c$ ในสมการ $\arg\max_c(\alpha_c p_c - \beta_c)$ ขณะที่การใช้ SLSQP ลด Global LogLoss ตัดน้ำหนัก CatBoost เหลือศูนย์ใน 3 Folds ส่งผลให้ Macro-$F_1$ ลดลงเหลือ $0.753158$ (ทำนายคลาดเคลื่อน $1{,}622$ แถว) เมื่อปรับแก้ให้ใช้ฟังก์ชัน \code{predict\_segments} ชุดเดียวกันทั้งใน Validation และ Export พร้อมบังคับใช้น้ำหนัก $0.90/0.10$ และ Cross-Fitted Logit-Bias คะแนนเพิ่มขึ้นอย่างมีนัยสำคัญสู่ \textbf{0.759799} (95\% Paired Bootstrap CI เท่ากับ \code{[+0.000159, +0.000805]}) ทั้งนี้ควรระบุเป็นข้อจำกัดทางเทคนิคว่าขั้นตอน Logit Bias Calibration และ Affine Rule ดำเนินการแบบ Cross-Fitted บน OOF Probabilities ของ Frozen Base Models
 
 ในเชิงธุรกิจ (\textbf{รูปที่~\ref{fig:t2_align}}) โมเดลสามารถระบุกลุ่ม Whale ได้ถึง $3{,}708$ บัญชี ($14.32\%$) และกลุ่ม Social/Hardcore $5{,}012$ บัญชี ($19.36\%$) ด้วยสัดส่วนที่สอดคล้องกับประชากรจริง ช่วยให้ฝ่ายการตลาดยุติการส่งโปรโมชันส่วนลดไปยังผู้เล่นที่พร้อมจ่ายอยู่แล้ว และจัดสรรงบประมาณ 60 ล้านบาทต่อเดือนได้ตรงกลุ่มเป้าหมาย
 
@@ -551,7 +553,7 @@ Task 3 มุ่งพยากรณ์ยอดการใช้จ่าย�
 
 \begin{enumerate}
     \item \textbf{ภาวะ Zero-Inflation 48.12\%:} ผู้เล่น $50{,}049$ รายไม่ใช้จ่ายเลย ($0.00$ บาท) การใช้ค่าคาดหมาย $E[Y \mid X] = p \cdot E[Y \mid Y>0, X]$ จะทำนายค่าบวกขนาดเล็กให้คนกลุ่มนี้เกือบทั้งหมด ทำให้ผลรวม $|y_i - \hat{y}_i|$ สูงเกินความจำเป็น
-    \item \textbf{ภาวะ Heavy Right Tail และ Whale Spike:} ในกลุ่มผู้จ่ายเงิน $53{,}951$ ราย ($51.88\%$) ยอดเงินกระจายตัวกว้าง 5 อันดับขนาด ตั้งแต่ $0.09$ บาท, มัธยฐาน $2{,}314.05$ บาท, ค่าเฉลี่ย $20{,}234.88$ บาท, เปอร์เซ็นไทล์ที่ 99 เท่ากับ $184{,}398.64$ บาท จนถึงเพดาน $300{,}000.00$ บาท โดยมีกลุ่มผู้เล่นยอดจ่ายก้อนใหญ่ $\text{Uniform}[50{,}000, 300{,}000]$ กระจายตัวอยู่ใน Segment 3 (Whale)
+    \item \textbf{ภาวะ Heavy Right Tail และ Whale Spike:} ในกลุ่มผู้จ่ายเงิน $53{,}951$ ราย ($51.88\%$) ยอดเงินกระจายตัวกว้าง 5 อันดับขนาด ตั้งแต่ $0.09$ บาท, มัธยฐาน $2{,}314.05$ บาท, ค่าเฉลี่ย $20{,}234.88$ บาท, เปอร์เซ็นไทล์ที่ 99 เท่ากับ $184{,}398.64$ บาท จนถึงระดับสูงสุด (Upper Cap) $300{,}000.00$ บาท โดยมีกลุ่มผู้เล่นที่มียอดใช้จ่ายมูลค่าสูง $\text{Uniform}[50{,}000, 300{,}000]$ กระจายตัวอยู่ใน Segment 3 (Whale)
 \end{enumerate}
 
 ภายใต้การลดผลรวม $|y_i - \hat{y}_i|$ (สมมูลกับการเพิ่ม NMAE Score) คำตอบ Bayes-$L_1$ Optimal Forecast ที่แท้จริงเมื่อทราบ $p_i = P(Y_i > 0 \mid X_i)$ ตามแนวคิด Two-Stage Hurdle (Stage-1: จะใช้จ่ายหรือไม่, Stage-2: จะจ่ายเท่าใด) คือ:
@@ -570,7 +572,7 @@ Task 3 มุ่งพยากรณ์ยอดการใช้จ่าย�
 \begin{enumerate}
     \item \textbf{Deterministic Identity Reconstruction (ความแม่นยำ 99.0\%):} ใช้กฎเอกลักษณ์ทางการเงินที่ค้นพบในข้อมูลเพื่อกู้คืนค่าว่างได้อย่างแม่นยำ ได้แก่ \code{historical\_spending = total\_transactions * avg\_transaction\_value}, \code{purchases\_on\_discount = total\_transactions * discount\_rate\_used} และ \code{is\_premium\_member = (vip\_status >= 3)} ร่วมกับค่ามัธยฐานสัดส่วนราย Fold (\code{prev\_month\_spending / historical\_spending}) ขยายฟีเจอร์สะอาดเป็น $44$ คอลัมน์
     \item \textbf{Fold-Safe Segment Recovery:} กู้คืนค่าว่างของ \code{segment} ($\sim 5.5\%$) ภายในแต่ละ Fold ด้วย Smooth-KDE Naive Bayes ร่วมกับ GBDT (\code{LogLoss = 0.1684}, ความแม่นยำราย Fold $\sim 94.2\%$)
-    \item \textbf{Multiplicative Spending Law \& Huber Anchor:} บนกลุ่มผู้เล่นที่ไม่ติดเพดานสูงสุด (Uncapped Spenders) ยอดใช้จ่ายเป็นไปตามความสัมพันธ์เชิงคูณใน Log Scale ซึ่งประมาณค่า Baseline ด้วย \code{HuberRegressor} (พารามิเตอร์ \code{epsilon=1.35}, \code{alpha=5.0}, MAE บนกลุ่ม uncapped $= 2{,}723.17$ บาท)
+    \item \textbf{Multiplicative Spending Law \& Huber Anchor:} บนกลุ่มผู้เล่นที่ยอดใช้จ่ายไม่ติดขอบเขตจำกัดสูงสุด (Uncapped Spenders) ยอดใช้จ่ายเป็นไปตามความสัมพันธ์เชิงคูณใน Log Scale ซึ่งประมาณค่า Baseline ด้วย \code{HuberRegressor} (พารามิเตอร์ \code{epsilon=1.35}, \code{alpha=5.0}, MAE บนกลุ่ม uncapped $= 2{,}723.17$ บาท)
 \end{enumerate}
 
 \subsection{วิวัฒนาการจาก Quantile Hurdle สู่ ExactBayesL1V2}
@@ -618,7 +620,7 @@ Quantile Hurdle V3 (6-Stage-1 + 5-Family $Q_{\text{FINE}}$) & 2,690.26 & 0.79599
 
 \subsection{การวิเคราะห์ข้อผิดพลาดและผลกระทบต่อธุรกิจ}
 
-ดังที่ปรากฏใน \textbf{รูปที่~\ref{fig:t3_diag}(d)} ค่าความคลาดเคลื่อนที่เหลืออยู่ส่วนมากมาจาก \textbf{Segment 3 (Whale)} เนื่องจากลักษณะการใช้จ่ายก้อนใหญ่ที่กระจายตัวแบบ $\text{Uniform}[50\text{k}, 300\text{k}]$ ไม่สามารถคาดการณ์ตัวเลขแม่นยำล่วงหน้าได้เกินกว่าค่ามัธยฐานเชิงทฤษฎี ส่วนกลุ่ม Casual, Core และ Hardcore มีความแม่นยำสูงมาก การใช้ Two-Stage Bayes-$L_1$ ยังช่วยแก้จุดผิดพลาดของการทำนายด้วย Log-Mean ที่มักให้ค่าสูงเกินจริงและทำให้ผู้เล่นไม่ใช้จ่าย 48.12\% ถูกทำนายเป็นบวก
+ดังที่ปรากฏใน \textbf{รูปที่~\ref{fig:t3_diag}(d)} ค่าความคลาดเคลื่อนที่เหลืออยู่ส่วนมากมาจาก \textbf{Segment 3 (Whale)} เนื่องจากลักษณะยอดใช้จ่ายมูลค่าสูงที่กระจายตัวแบบ $\text{Uniform}[50\text{k}, 300\text{k}]$ ไม่สามารถคาดการณ์ค่าจริงล่วงหน้าได้อย่างแม่นยำเกินกว่าค่ามัธยฐานเชิงทฤษฎี ส่วนกลุ่ม Casual, Core และ Hardcore มีความแม่นยำสูงมาก การใช้ Two-Stage Bayes-$L_1$ ยังช่วยแก้ไขข้อบกพร่องของการทำนายด้วย Log-Mean ที่มักให้ค่าสูงเกินจริงและทำให้ผู้เล่นไม่ใช้จ่าย 48.12\% ถูกทำนายเป็นบวก
 
 ในเชิงธุรกิจ ผลพยากรณ์บน Test Set ($49.60\%$ หรือ $12{,}841$ แถวมีค่าเท่ากับ $0.00$ บาท, ค่าเฉลี่ย $10{,}501.85$ บาท, มัธยฐาน $78.76$ บาท, ยอดรวม $271.88$ ล้านบาท) ช่วยให้ฝ่ายการเงินลดความคลาดเคลื่อนการพยากรณ์รายได้รายไตรมาส 35--40\%, ช่วยให้ทีม VIP Support ทั้ง 20 คนจัดลำดับความสำคัญจากมูลค่าใช้จ่ายที่แท้จริงแทนชั่วโมงการเล่น (ป้องกันการสูญเสียลูกค้าระดับสูงอย่างกรณี Whale 255,000 บาท) และยุติการแจกโค้ดส่วนลด 50\% ผิดกลุ่มซึ่งสร้างความเสียหายกว่า 6 ล้านบาทต่อเดือน พร้อมสนับสนุนการวางกำหนดการ Limited-Time Events ได้ตรงช่วงจับจ่ายจริง
 
@@ -646,7 +648,7 @@ Task 4 จำแนกภาพหน้าจอการเล่นเกม�
 คณะผู้จัดทำพัฒนา Vision Models 2 ตระกูลหลักภายใต้ Strict 5-Fold SGKF ดังนี้:
 \begin{enumerate}[leftmargin=1.8em,itemsep=2pt]
     \item \textbf{Scene-Hardened End-to-End Fine-Tuned Backbones:} Train โมเดลแบบ Full-Resolution ($192 \times 384$ พิกเซล) ประกอบด้วย \code{CNXv3-Base}, \code{DINOv3L-Hard} และ \code{EVA02L-Hard} ประเมินทั้งแบบ 2-view ปกติ (\code{Orig2}) และ 6-view ฟื้นฟูภาพ (\code{Hard6 / ExtHard6}) ร่วมกับโมเดล ViT ขนาด $224$ พิกเซล (\code{EVA02-Large}, \code{EVA02-Base}, \code{DINOv3-ViT-L}, \code{DINOv3-ViT-B}) และ \code{ConvNeXtV2-Tiny} / \code{DINOv2-StageA/C}
-    \item \textbf{6-Backbone Foundation Engine (\code{FoundVLM-v3-Joint12Blk}):} สกัด Feature Embedding 4 มุมมอง (\code{raw}, \code{raw+hflip}, \code{decorrupt\_v4}, \code{decorrupt\_v4+hflip}) จากโมเดลหลัก 6 รุ่น (\code{SigLIP2-SO400M}, \code{DINOv3-ViT-L}, \code{DINOv2-ViT-G/14}, \code{CLIP-ConvNeXt-Large}, \code{CLIP-ViT-H/14}, \code{DINOv3-ConvNeXt-Base}) ต่อรวมเป็นเวกเตอร์ $13{,}568$ มิติ ปรับมาตรฐานด้วย PowerNorm ($p=0.75$) ผ่าน Dual-Condition \code{CosineResMLP} ที่บังคับความคงที่ระหว่างภาพดิบกับภาพฟื้นฟูด้วย Symmetric-KL Consistency Loss
+    \item \textbf{6-Backbone Foundation Engine (\code{FoundVLM-v3-Joint12Blk}):} สกัด Feature Embedding 4 มุมมอง (\code{raw}, \code{raw+hflip}, \code{decorrupt\_v4}, \code{decorrupt\_v4+hflip}) จากโมเดลหลัก 6 รุ่น (\code{SigLIP2-SO400M}, \code{DINOv3-ViT-L}, \code{DINOv2-ViT-G/14}, \code{CLIP-ConvNeXt-Large}, \code{CLIP-ViT-H/14}, \code{DINOv3-ConvNeXt-Base}) ต่อรวมเป็นเวกเตอร์ $13{,}568$ มิติ ปรับมาตรฐานด้วย PowerNorm ($p=0.75$) ผ่าน Dual-Condition \code{CosineResMLP} ที่บังคับความสอดคล้องระหว่างภาพต้นฉบับกับภาพที่ผ่านการฟื้นฟู (Decorrupted) ด้วย Symmetric-KL Consistency Loss
 \end{enumerate}
 
 ขั้นตอนการผสานผลลัพธ์ประยุกต์ใช้ \textbf{Nested Log-Odds Geometric Pooling} แบบ Temperature Calibration สองสภาวะควบคู่กับ Shift Gate และ Prior Debiasing ดังนี้
@@ -745,11 +747,11 @@ Task 5 เป็นงานตรวจจับบัญชีผิดปก�
     \item \textbf{Security Flags สำหรับทวนสอบผล (4 ตัวแปร):} \code{password\_changed}, \code{vpn\_usage}, \code{suspicious\_login\_time} และ \code{mass\_item\_sale} ซึ่งทีมผู้พัฒนากันออกจากการ Train และประเมินโมเดลโดยสิ้นเชิง เพื่อใช้ทวนสอบความน่าเชื่อถือในขั้นตอนสุดท้าย
 \end{itemize}\par}
 
-ข้อค้นพบสำคัญเมื่อทดสอบตามคำแนะนำในโจทย์ (Isolation Forest, One-Class SVM และ Dense Autoencoder) คืออัลกอริทึม Full-Space Detectors เหล่านี้ประสบปัญหา Feature Dilution อย่างรุนแรง เนื่องจากบัญชีที่ผิดปกติจริงมักแสดงความผิดปกติรุนแรงบนฟีเจอร์เฉพาะทางเพียง 1--4 ตัวแปร จากกว่า 75+ มิติ ขณะที่ฟีเจอร์อื่นทั้งหมดยังอยู่ในเกณฑ์ปกติ ส่งผลให้ Anomaly Score รวมถูกกลบโดยมิติปกติจนแยกไม่ออกจากผู้เล่นเดินทางข้ามพื้นที่จริงหรือผู้เล่นที่เว้นช่วงเวลาโจมตีเกิน 24 ชั่วโมง
+ข้อค้นพบสำคัญเมื่อทดสอบตามคำแนะนำในโจทย์ (Isolation Forest, One-Class SVM และ Dense Autoencoder) คืออัลกอริทึม Full-Space Detectors เหล่านี้ประสบปัญหา Feature Dilution อย่างรุนแรง เนื่องจากบัญชีที่ผิดปกติจริงมักแสดงความผิดปกติรุนแรงบนฟีเจอร์เฉพาะทางเพียง 1--4 ตัวแปร จากกว่า 75+ มิติ ขณะที่ฟีเจอร์อื่นทั้งหมดยังอยู่ในเกณฑ์ปกติ ส่งผลให้ Anomaly Score รวมถูกลดทอนสัญญาณโดยมิติปกติจนแยกไม่ออกจากผู้เล่นเดินทางข้ามพื้นที่จริงหรือผู้เล่นที่เว้นช่วงเวลาโจมตีเกิน 24 ชั่วโมง
 
 \subsection{การสร้างฟีเจอร์ Personal Drift และกฎ 8 Archetypes}
 
-คณะผู้จัดทำแปลงอนุกรมเวลา 4 ช่วงเวลาเป็นฟีเจอร์เปรียบเทียบกับพฤติกรรมเดิมของตนเองเพื่อดึงสัญญาณความผิดปกติออกมาให้ชัดเจน ได้แก่ \textbf{Personal Drift (\code{\_\_drift4})} (ช่วงที่ 4 ลบค่ามัธยฐานช่วง 1--3), \textbf{Population Level \& Spread (\code{\_\_level}, \code{\_\_spread})} สำหรับตรวจบอตที่มีพฤติกรรมซ้ำเดิมผิดธรรมชาติ และ \textbf{Geo Displacement (\code{geo\_\_disp4}, \code{geo\_\_disp\_max})} วัดระยะการเปลี่ยนพิกัดล็อกอินโดยรองรับเส้นแบ่งเขตวัน
+คณะผู้จัดทำแปลงอนุกรมเวลา 4 ช่วงเวลาเป็นฟีเจอร์เปรียบเทียบกับพฤติกรรมเดิมของตนเองเพื่อดึงสัญญาณความผิดปกติออกมาให้ชัดเจน ได้แก่ \textbf{Personal Drift (\code{\_\_drift4})} (ช่วงที่ 4 ลบค่ามัธยฐานช่วง 1--3), \textbf{Population Level \& Spread (\code{\_\_level}, \code{\_\_spread})} สำหรับตรวจจับบัญชีอัตโนมัติ (Bot) ที่มีรูปแบบพฤติกรรมคงที่ผิดธรรมชาติ และ \textbf{Geo Displacement (\code{geo\_\_disp4}, \code{geo\_\_disp\_max})} วัดระยะการเปลี่ยนพิกัดล็อกอินโดยรองรับเส้นแบ่งเขตวัน
 
 เมื่อประยุกต์ \textbf{1D Density-Gap CBLOF ($\ge 100\times$ Core Spacing)} และ \textbf{Soft-Max Robust Tail Score} ($\tau > 18.35$ ครอบคลุม 826 บัญชีปลายหาง) ร่วมกับการค้นหาช่องว่างความหนาแน่น พบกลุ่มความผิดปกติที่แยกตัวจากกลุ่มปกติอย่างเด็ดขาด 7 กลุ่มฟีเจอร์เดี่ยว (เช่น \code{behavior\_stability} มี Empty-Gap กว้างกว่ากลุ่มปกติถึง $38{,}792.1\times$) ผสานกับขอบเขต 12 มิติ (12D Hyperrectangle) สำหรับกลุ่มที่ 8 คือ \code{erratic\_combat} (\code{kda\_std} $\in [0.7, 1.0]$, \code{accuracy\_std} $\in [9.0, 12.0]$, \code{performance\_stability} $\in [0.85, 0.95]$ ที่สังเกต $\ge 6$ ช่วงเวลา, \textbf{รูปที่~\ref{fig:t5_box}}) สามารถแยกบัญชีผิดปกติแบบชัดเจนได้ \textbf{2,052 บัญชี (7.93\%)}
 
@@ -761,7 +763,7 @@ Task 5 เป็นงานตรวจจับบัญชีผิดปก�
 
 \begin{table}[H]\centering
 {\tblfont
-\caption{สรุปจำนวนบัญชีแต่ละ Archetype และผลทวนสอบบน Security Flags ที่ซ่อนไว้ของ Task 5}
+\caption{สรุปจำนวนบัญชีแต่ละ Archetype และผลทวนสอบบนชุดตัวแปร Security Flags ที่กันไว้สำหรับการทวนสอบของ Task 5}
 \label{tab:t5_summary}
 \begin{tabular}{L{5.3cm}ccccc}
 \toprule
@@ -817,7 +819,7 @@ Task 5 เป็นงานตรวจจับบัญชีผิดปก�
 
 \subsection{การบูรณาการผลทำนายทั้ง 5 งาน โครงสร้าง LTV และผลตรวจรับไฟล์คำตอบ}
 
-ในภาพรวมเชิงสถาปัตยกรรม ผลทำนายจากทั้ง 5 โมเดลถูกส่งต่อเข้าสู่ Notebook รวมไฟล์คำตอบ (\code{merge\_submission.ipynb}) เพื่อรวมคอลัมน์คำตอบตามลำดับ \code{ANS00001}--\code{ANS25889} และตรวจสอบความถูกต้อง 4 ด้านก่อนใช้งานจริง ได้แก่ ขนาดข้อมูล ($25{,}889 \times 6$ คอลัมน์), ความครบถ้วน (\code{0} ค่าว่าง/ค่าอนันต์), การคงลำดับรหัสตาม \code{sample\_submission.csv} และขอบเขตชนิดข้อมูลของทุกงาน
+ในภาพรวมเชิงสถาปัตยกรรม ผลทำนายจากทั้ง 5 โมเดลถูกส่งต่อเข้าสู่สคริปต์รวมคำตอบกลาง \code{merge.py} ในโฟลเดอร์ \code{submission/} เพื่อรวมคอลัมน์คำตอบตามลำดับ \code{ANS00001}--\code{ANS25889} และตรวจสอบความถูกต้อง 4 ด้านก่อนใช้งานจริง ได้แก่ ขนาดข้อมูล ($25{,}889 \times 6$ คอลัมน์), ความครบถ้วน (\code{0} ค่าว่าง/ค่าอนันต์), การคงลำดับรหัสตาม \code{sample\_submission.csv} และขอบเขตชนิดข้อมูลของทุกงาน
 
 จากนั้นระบบจึงเชื่อมผลลัพธ์เข้าสู่ \textbf{Player Lifetime Value (LTV) Prediction System} ของบริษัท Karena Thailand ดังบทบาทของแต่ละโมเดลต่อไปนี้
 \begin{itemize}
@@ -872,7 +874,7 @@ Task 5: Security & 8 Exact Empty-Gap / 12D Box Archetype Rules + ExactBayesUB An
 
 \subsection{การทำงานร่วมกันในทีม โครงสร้างคลังซอร์สโค้ด และบทเรียนสำคัญ}
 
-กลุ่ม \textbf{ML004} แบ่งโครงสร้างการพัฒนา Source Code ออกเป็นโมดูลอิสระแยกตามโฟลเดอร์งาน (\code{task1}--\code{task5}) ภายใต้ระบบควบคุมเวอร์ชัน GitHub บนคลังหลักของทีม (\url{https://github.com/beambeambeam/ml00x}) ควบคู่กับการรวบรวม Jupyter Notebooks สำหรับส่งงานรายวิชาไว้ในคลัง \url{https://github.com/Palapluem/cpe342-machine-learning-2026/tree/main/project} เพื่อให้แต่ละส่วนสามารถพัฒนา Feature Engineering ทดสอบสมมติฐาน และตรวจสอบคะแนน Validation ผ่าน Pull Request ได้โดยไม่ขัดแย้งกัน พร้อมบังคับใช้มาตรฐาน Pure-Train Invariant, กฎ Test Isolation และการทดสอบ Statistical Significance ร่วมกันทั้งกลุ่ม โดยแบ่งผู้รับผิดชอบหลักรายโมดูลตามสมาชิกทั้ง 5 ท่าน ได้แก่ \textit{\mbox{ศุภวิชญ์ มารยาท}} (\code{67070501045}) รับผิดชอบ \textbf{Task 1 (Anti-Cheat Pre-Filter)}, \textit{\mbox{กันต์ธีร์ ดวงมณี}} (\code{67070501003}) รับผิดชอบ \textbf{Task 2 (Player Segment Classification)}, \textit{\mbox{วิศิษฐ์ สุวรรณเนาว์}} (\code{67070501042}) รับผิดชอบ \textbf{Task 3 (Monthly Spending Prediction)} และประสานงานรวมชุดส่งคำตอบ (\code{merge\_submission.ipynb}), \textit{\mbox{พลวริษฐ์ วัฒนเหมรัตน์}} (\code{67070501067}) รับผิดชอบ \textbf{Task 4 (Game Title Detection)} และ \textit{\mbox{นัธทวัฒน์ ปริมสิริคุณาวุฒิ}} (\code{67070501027}) รับผิดชอบ \textbf{Task 5 (Account Security Monitoring)} พร้อมทั้งร่วมพัฒนาและทวนสอบข้ามโมดูลภายในคลัง Source Code ของกลุ่ม ดังสรุปข้อค้นพบใน \textbf{ตารางที่~\ref{tab:insights_mistakes}} และโครงสร้าง Source Code พร้อมผู้รับผิดชอบหลักใน \textbf{ตารางที่~\ref{tab:repo_structure}}
+กลุ่ม \textbf{ML004} แบ่งโครงสร้างการพัฒนา Source Code ออกเป็นโมดูลอิสระแยกตามโฟลเดอร์งาน (\code{task1}--\code{task5}) ภายใต้ระบบควบคุมเวอร์ชัน GitHub บนคลังจัดเก็บไฟล์กลางของกลุ่ม (\href{https://github.com/beambeambeam/ml00x}{\code{beambeambeam/ml00x}}) ซึ่งรวบรวมซอร์สโค้ด Jupyter Notebooks สคริปต์รวมคำตอบ และเอกสารรายงานฉบับสมบูรณ์ไว้ในคลังเดียวกันที่ \href{https://github.com/beambeambeam/ml00x/tree/main/report}{\code{ml00x/tree/main/report}} เพื่อรองรับการพัฒนา Feature Engineering ทดสอบสมมติฐาน และตรวจสอบคะแนน Validation ผ่าน Pull Request โดยไม่ขัดแย้งกัน พร้อมบังคับใช้มาตรฐาน Pure-Train Invariant, กฎ Test Isolation และการทดสอบ Statistical Significance ร่วมกันทั้งกลุ่ม โดยแบ่งผู้รับผิดชอบหลักรายโมดูลตามสมาชิกทั้ง 5 ท่าน ได้แก่ \textit{\mbox{ศุภวิชญ์ มารยาท}} (\code{67070501045}) รับผิดชอบ \textbf{Task 1 (Anti-Cheat Pre-Filter)}, \textit{\mbox{กันต์ธีร์ ดวงมณี}} (\code{67070501003}) รับผิดชอบ \textbf{Task 2 (Player Segment Classification)}, \textit{\mbox{วิศิษฐ์ สุวรรณเนาว์}} (\code{67070501042}) รับผิดชอบ \textbf{Task 3 (Monthly Spending Prediction)} และประสานงานรวมชุดส่งคำตอบผ่านสคริปต์ \code{merge.py} ในโฟลเดอร์ \code{submission/}, \textit{\mbox{พลวริษฐ์ วัฒนเหมรัตน์}} (\code{67070501067}) รับผิดชอบ \textbf{Task 4 (Game Title Detection)} และ \textit{\mbox{นัธทวัฒน์ ปริมสิริคุณาวุฒิ}} (\code{67070501027}) รับผิดชอบ \textbf{Task 5 (Account Security Monitoring)} พร้อมทั้งร่วมพัฒนาและทวนสอบข้ามโมดูลภายในคลังจัดเก็บไฟล์กลางของกลุ่ม ดังสรุปข้อค้นพบใน \textbf{ตารางที่~\ref{tab:insights_mistakes}} และโครงสร้าง Source Code พร้อมผู้รับผิดชอบหลักใน \textbf{ตารางที่~\ref{tab:repo_structure}}
 
 \begin{table}[H]\centering
 {\tblfont\renewcommand{\arraystretch}{1.04}\setlength{\tabcolsep}{4pt}
@@ -883,8 +885,8 @@ Task 5: Security & 8 Exact Empty-Gap / 12D Box Archetype Rules + ExactBayesUB An
 \rowcolor{TableHead} \textbf{Task} & \textbf{ข้อผิดพลาดที่พบบ่อย (Pitfalls)} & \textbf{แนวทางแก้ไขและข้อค้นพบ (Key Insights)} \\
 \midrule
 Task 1 & ใช้ Threshold 0.50, เติมค่าว่างคงที่โดยไม่สน Shift และใช้ SMOTE จนค่าความน่าจะเป็นคลาดเคลื่อน & จูน Bayes-$F_2$ Threshold ($\tau^* = 0.1990$) ผสาน 1D Tobit EM + Cohort Likelihood บนค่าขอบบน 1.0 \\
-Task 2 & คงตัวแปร Noise \code{random\_metric\_1..3}, ใช้ \code{argmax} ดิบ และตกหล่น $-\beta_c$ ตอน Export & ประเมิน Fixed-Point Affine Bayes Rule ผ่าน \code{predict\_segments} ชุดเดียวทั้ง CV และ Export \\
-Task 3 & คาดหมายค่าเฉลี่ย $E[Y|X]$ หรือแปลง $\exp(\hat{z})$ ตรงๆ จนกลุ่ม 0 บาท 48.12\% คลาดเคลื่อน & แก้ Bayes-$L_1$ Median $Q_{1-1/(2p)}$ ด้วย 28-Step Bisection + กฎเอกลักษณ์การเงิน \\
+Task 2 & คงตัวแปร Noise \code{random\_metric\_1..3}, ใช้ \code{argmax} ตั้งต้น และขาดพจน์ $-\beta_c$ ในขั้นตอน Export & ประเมิน Fixed-Point Affine Bayes Rule ผ่าน \code{predict\_segments} ชุดเดียวทั้ง CV และ Export \\
+Task 3 & คาดหมายค่าเฉลี่ย $E[Y|X]$ หรือแปลงค่า $\exp(\hat{z})$ โดยตรง จนทำให้กลุ่ม 0 บาท 48.12\% คลาดเคลื่อน & แก้ Bayes-$L_1$ Median $Q_{1-1/(2p)}$ ด้วย 28-Step Bisection + กฎเอกลักษณ์การเงิน \\
 Task 4 & แบ่ง Fold สุ่มจนเกิด Frame Leakage ระหว่างฉากต่อเนื่อง และละเลยภาพเสียหาย & จัดกลุ่มฉากด้วย 64-bit dHash SGKF (28,088 ฉาก) และสลับสู่ \code{ExtHard6} ผ่าน JS Shift Gate \\
 Task 5 & ใช้ Isolation Forest/AE บนทุกมิติจนเกิด Feature Dilution และจับหาง Gaussian ผิด & แยกกลุ่มด้วย 1D Empty-Gap ($38{,}792.1\times$) + 12D Box และคำนวณ \code{ExactBayesUB} บนกลุ่ม NaN \\
 \bottomrule
@@ -895,23 +897,23 @@ Task 5 & ใช้ Isolation Forest/AE บนทุกมิติจนเก�
 \begin{enumerate}
     \item \textbf{ความเข้าใจ Data-Generating Process ให้ผลสูงกว่าการจูนพารามิเตอร์แบบสุ่ม:} การจำลอง Tobit (Task 1), สมการคูณและกฎ Bayes-$L_1$ สำหรับยอดใช้จ่าย (Task 3) รวมถึง Empty-Gap บน 4 ช่วงเวลา (Task 5) ยกระดับคะแนนข้ามทุก Fold สูงกว่าการทำ Hyperparameter Tuning ของ Tree-Based Models เพียงอย่างเดียว
     \item \textbf{การออกแบบ Validation Split ต้องเคารพความซ้ำซ้อนของข้อมูล:} การใช้ Perceptual dHash จัดกลุ่มฉากก่อนแบ่ง Fold ใน Task 4 และกฎ Pure-Train Invariant ช่วยป้องกันการประเมินค่าประสิทธิภาพ CV ที่สูงเกินความเป็นจริง
-    \item \textbf{Single Source of Truth ระหว่าง Validation และ Inference:} ข้อผิดพลาดจากพจน์ $-\beta_c$ ที่ตกหล่นใน Task 2 เป็นบทเรียนสำคัญว่าโค้ดคำนวณ Decision Rule ในขั้นตอน Validation และขั้นตอน Export ผลลัพธ์จริงต้องใช้ฟังก์ชันเดียวกันเสมอ
+    \item \textbf{Single Source of Truth ระหว่าง Validation และ Inference:} ข้อผิดพลาดจากพจน์ $-\beta_c$ ที่ขาดหายไปใน Task 2 เป็นบทเรียนสำคัญว่าโค้ดคำนวณ Decision Rule ในขั้นตอน Validation และขั้นตอน Export ผลลัพธ์จริงต้องใช้ฟังก์ชันเดียวกันเสมอ
 \end{enumerate}
 
 \begin{table}[H]\centering
-{\tblfont\renewcommand{\arraystretch}{1.04}\setlength{\tabcolsep}{4pt}
-\caption{โครงสร้างไฟล์ Source Code หลักและผู้รับผิดชอบของกลุ่ม ML004 ในคลัง \code{beambeambeam/ml00x} และ \code{cpe342-machine-learning-2026}}
+{\tblfont\renewcommand{\arraystretch}{1.00}\setlength{\tabcolsep}{4pt}
+\caption{โครงสร้างไฟล์ Source Code รายงาน และผู้รับผิดชอบหลักในคลังกลาง (\code{beambeambeam/ml00x})}
 \label{tab:repo_structure}
-\begin{tabular}{L{1.15cm}L{2.85cm}L{6.10cm}L{4.80cm}}
+\begin{tabular}{L{1.40cm}L{2.55cm}L{5.55cm}L{5.40cm}}
 \toprule
-\rowcolor{TableHead} \textbf{งาน} & \textbf{ผู้รับผิดชอบหลัก} & \textbf{คลังหลักของทีม (\code{beambeambeam/ml00x})} & \textbf{คลังส่งงาน (\code{project/})} \\
+\rowcolor{TableHead} \textbf{งาน} & \textbf{ผู้รับผิดชอบหลัก} & \textbf{โมดูลและสคริปต์หลัก (\code{ml00x})} & \textbf{Notebook / เอกสารประกอบ} \\
 \midrule
-Task 1 & ศุภวิชญ์ (1045) & \code{task1/run\_account\_cohorts.py}, \code{run\_gpu\_task1.py} & \code{task1/task1\_anti\_cheat.ipynb} \\
+Task 1 & ศุภวิชญ์ (1045) & \code{task1/run\_account\_cohorts.py}, \code{run\_gpu\_task1.py} & \code{task1/notebooks/eda.ipynb}, \code{submit/submit.md} \\
 Task 2 & กันต์ธีร์ (1003) & \code{task2/run\_bayes\_export.py}, \code{bayes\_decision.py} & \code{task2/task2\_player\_segment.ipynb} \\
-Task 3 & วิศิษฐ์ (1042) & \code{task3/task3\_monthly\_spending.ipynb}, \code{run\_upgraded\_task3.py} & \code{task3/task3\_monthly\_spending.ipynb} \\
+Task 3 & วิศิษฐ์ (1042) & \code{task3/run\_upgraded\_task3.py} & \code{task3/task3\_monthly\_spending.ipynb} \\
 Task 4 & พลวริษฐ์ (1067) & \code{task4/scripts/fuse\_t4\_sota\_trio.py}, \code{train\_m5\_foundvlm\_v3\_joint12blk.py} & \code{task4/task4\_game\_title\_detection.ipynb} \\
 Task 5 & นัธทวัฒน์ (1027) & \code{task5/archetype\_rules.py}, \code{run\_ensemble\_task5.py} & \code{task5/task5\_account\_security.ipynb} \\
-Merge & วิศิษฐ์ (1042) \& ทีม & \code{submission/merge.py}, \code{submit.md}, \code{report/CPE342\_TermProject\_Report.tex} & \code{merge\_submission.ipynb}, \code{report/CPE342\_TermProject\_Report.tex} \\
+Merge \& Report & วิศิษฐ์ (1042) \& ทีม & \code{submission/merge.py}, \code{submit.md} & \code{report/CPE342\_TermProject\_Report.tex} \\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -919,14 +921,14 @@ Merge & วิศิษฐ์ (1042) \& ทีม & \code{submission/merge.py}, 
 \subsection{ข้อจำกัด บทสรุป และแนวทางการพัฒนาต่อยอด}
 
 จากการพัฒนาระบบต้นแบบ คณะผู้จัดทำสรุปข้อจำกัดทางเทคนิคในเวอร์ชันปัจจุบัน 3 ประการ ดังนี้
-\begin{itemize}
+\begin{itemize}[itemsep=1pt,topsep=2pt]
     \item \textbf{การทำงานแบบ Frozen Base Models ใน Task 2:} ขั้นตอน Calibration ด้วย Zero-Mean Logit Bias และ Affine Bayes Rule ยังคงประมวลผลแบบ Cross-Fitted บน OOF Probabilities ของ Frozen Base Models แทนการ Train โมเดลทั้ง 7 ตระกูลใหม่ทั้งหมดภายใน Nested Loop
     \item \textbf{การประเมินแบบไร้ Label ใน Task 5:} เนื่องจากไม่มี Label ใน Test Set ค่า Expected-$F_3$ จึงประเมินผ่านแบบจำลองเชิงวิเคราะห์และกลุ่มควบคุมที่ทราบ \code{behavior\_stability} ร่วมกับ Security Flags อิสระ
     \item \textbf{ข้อกำหนดทรัพยากรคำนวณใน Task 4:} การ Train Deep Vision Backbones ใหม่จากศูนย์จำเป็นต้องใช้ GPU
 \end{itemize}
 
 \textbf{บทสรุปและแนวทางพัฒนาในอนาคต:} ระบบสำหรับ \textbf{Karena Player Intelligence System} ของกลุ่ม ML004 บรรลุเป้าหมายทั้ง 5 งานตามข้อกำหนด CPE 342 เพื่อต่อยอดสู่การใช้งานจริงในระดับ Production ควรพัฒนาเพิ่มเติม 3 ด้าน ได้แก่
-\begin{itemize}
+\begin{itemize}[itemsep=1pt,topsep=2pt]
     \item \textbf{Nested End-to-End Pipeline (Task 2):} ผสานขั้นตอน Calibration และ Affine Rule เข้าสู่รอบ Training หลักแบบเต็มรูปแบบ
     \item \textbf{Scoring Service แบบ Streaming/API:} รวมผลทำนายทั้ง 5 งานมาคำนวณ \textbf{Risk-Adjusted Player LTV} แบบเรียลไทม์
     \item \textbf{ระบบเฝ้าระวัง Data/Concept Drift:} ติดตามการเปลี่ยนแปลงพฤติกรรมผู้เล่นเมื่ออัปเดตแพตช์เกมและรูปแบบทุจริตใหม่
