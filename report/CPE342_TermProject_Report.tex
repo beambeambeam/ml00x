@@ -199,9 +199,9 @@
 \begin{enumerate}[leftmargin=1.9em,itemsep=2.5pt]
     \item \textbf{ปัญหาภาระงานคัดกรองการโกง (Task 1 — Anti-Cheat Pre-Filter):} แพลตฟอร์มได้รับรายงานการโกงมากกว่า 10,000 กรณีต่อวัน ขณะที่เจ้าหน้าที่ผู้ตรวจสอบสามารถพิจารณาด้วยตนเองได้เพียง 500 กรณีต่อวัน ก่อให้เกิดงานค้างสะสมกว่า 45,000 กรณี ระบบกฎเกณฑ์อัตโนมัติแบบเดิมมีอัตรา False Positive สูงถึง 70\% ทำให้ผู้เล่นสุจริตถูกระบุสถานะผิดพลาดจนนำไปสู่การระงับบัญชีโดยไม่สมควรและสร้างภาระแก่ฝ่ายบริการลูกค้า ขณะเดียวกันผู้เล่นทุจริตที่ใช้โปรแกรม Subtle Aimbot (ช่วยเล็งอัตโนมัติ) และ Wallhack (มองทะลุสิ่งกีดขวาง) ยังคงหลบเลี่ยงการตรวจจับได้ ส่งผลให้อัตราการรักษาผู้เล่นในโหมดแข่งขันลดลง 15\% และกระทบต่อรายได้ราว 15 ล้านบาทต่อวัน
     \item \textbf{ปัญหาการตลาดแบบไม่ตรงกลุ่มเป้าหมาย (Task 2 — Player Segment Classification):} ฝ่ายการตลาดใช้งบประมาณกว่า 60 ล้านบาทต่อเดือนไปกับแคมเปญการตลาดแบบไม่จำแนกกลุ่ม (Mass Campaign) ซึ่งมีอัตราการตอบรับเพียง 2--5\% เช่น การแสดงประกาศแข่งขัน Esports ต่อผู้เล่นสาย Casual บนมือถือ การส่งโฆษณาจำหน่ายไอเทมเครื่องแต่งกาย (Cosmetic) ต่อผู้ที่ไม่เคยเติมเงิน หรือการส่งคำเชิญกิจกรรมสวมบทบาทของเกม \textit{FiveN} ให้กลุ่มผู้เล่นสายแข่งขันของ \textit{PUBE Mobile} ทั้งที่ผู้เล่นกลุ่มใช้จ่ายสูง (Whales) เพียง 5\% แรกสร้างรายได้ถึง 60\% ของแพลตฟอร์ม และตัวชี้วัดอย่างชั่วโมงการเล่นเพียงอย่างเดียวไม่อาจแยกผู้เล่นสายไต่แรงก์ (Grinder), สายสังคม (Social) และสายเติมหนัก (Whale) ออกจากกันได้ การจำแนกกลุ่มอย่างแม่นยำจึงมีศักยภาพเพิ่มประสิทธิผลแคมเปญได้ถึง 3--4 เท่า
-    \item \textbf{ความคลาดเคลื่อนในการพยากรณ์รายได้และดูแลลูกค้า VIP (Task 3 — Monthly Spending Prediction):} ฝ่ายการเงินคาดการณ์รายได้รายไตรมาสคลาดเคลื่อน 35--40\% จนกระทบการวางงบประมาณและการจัดสรรบุคลากร เนื่องจากยอดเติมเงินมีลักษณะ Zero-Inflated และมีหางขวาหนัก (Heavy Right Tail) ขณะเดียวกันทีม VIP Support จำนวน 20 คนขาดข้อมูลคาดการณ์รายบุคคล จึงทุ่มทรัพยากรดูแลผู้เล่นที่เล่นนาน 150 รายซึ่งมียอดใช้จ่ายรวมเพียง 12,000 บาท แต่กลับปล่อยให้ลูกค้า Whale ที่ใช้จ่ายถึง 255,000 บาทต้องรอตอบคำถามนานถึง 3 วันจนย้ายไปแพลตฟอร์มคู่แข่ง นอกจากนี้การแจกโค้ดส่วนลด 50\% แบบสุ่มให้กลุ่มที่พร้อมจ่ายเต็มราคาอยู่แล้วยังสร้างความสูญเสียรายได้กว่า 6 ล้านบาทต่อเดือน และทำให้กำหนดช่วงเวลากิจกรรมจำกัดเวลา (Limited-Time Events) ไม่สอดคล้องกับช่วงเวลาจับจ่ายของผู้เล่นหลัก
+    \item \textbf{ความคลาดเคลื่อนในการพยากรณ์รายได้และดูแลลูกค้า VIP (Task 3 — Monthly Spending Prediction):} ฝ่ายการเงินคาดการณ์รายได้รายไตรมาสคลาดเคลื่อน 35--40\% จนกระทบการวางงบประมาณและการจัดสรรบุคลากร เนื่องจากยอดเติมเงินมีลักษณะ Zero-Inflated และมีหางขวาหนัก (Heavy Right Tail) ขณะเดียวกันทีม VIP Support จำนวน 20 คนขาดข้อมูลคาดการณ์รายบุคคล จึงทุ่มทรัพยากรดูแลผู้เล่นที่เข้าใช้งานต่อเนื่องแต่มียอดใช้จ่ายต่ำ 150 รายซึ่งมียอดใช้จ่ายรวมเพียง 12,000 บาท แต่กลับปล่อยให้ลูกค้า Whale ที่ใช้จ่ายถึง 255,000 บาทต้องรอตอบคำถามนานถึง 3 วันจนย้ายไปแพลตฟอร์มคู่แข่ง นอกจากนี้การแจกโค้ดส่วนลด 50\% แบบสุ่มให้กลุ่มที่พร้อมจ่ายเต็มราคาอยู่แล้วยังสร้างความสูญเสียรายได้กว่า 6 ล้านบาทต่อเดือน และทำให้กำหนดช่วงเวลากิจกรรมจำกัดเวลา (Limited-Time Events) ไม่สอดคล้องกับช่วงเวลาจับจ่ายของผู้เล่นหลัก
     \item \textbf{คอขวดในการคัดแยกภาพหน้าจอแจ้งปัญหา (Task 4 — Game Title Detection):} ฝ่ายบริการลูกค้าได้รับ Ticket แจ้งปัญหาพร้อมภาพหน้าจอที่ไม่มีป้ายกำกับราว 2,000 ใบต่อวัน โดยเจ้าหน้าที่ต้องใช้เวลามากกว่า 10 นาทีต่อใบในการระบุชื่อเกมก่อนส่งต่อผู้เชี่ยวชาญ อีกทั้งกิจกรรมชิงรางวัล ``Play Multiple Games for Rewards'' มีภาพส่งเข้าร่วมกว่า 50,000 ภาพ แต่ตรวจสอบด้วยมือได้เพียง 3\% จึงเกิดช่องโหว่การทุจริตรับรางวัล รวมถึงภาพจากการถ่ายทอดสด ฟอรัม และชุมชนผู้เล่นกว่า 100,000 ภาพต่อสัปดาห์ที่ฝ่ายการตลาดยังไม่สามารถจัดหมวดหมู่เพื่อติดตามความนิยมรายเกมแบบอัตโนมัติได้
-    \item \textbf{การโจรกรรมบัญชีและการเอาเปรียบเศรษฐกิจในเกม (Task 5 — Account Security Monitoring):} แพลตฟอร์มพบเหตุบัญชีที่ถูกโจรกรรมและยืนยันแล้วกว่า 5,000 บัญชีต่อเดือน (ซึ่งคาดว่าปริมาณจริงสูงเป็น 2 เท่า) จนกลายเป็นปัญหาอันดับหนึ่งที่ใช้ทรัพยากรฝ่ายบริการลูกค้าถึง 60\% ควบคู่กับขบวนการรับจ้างปรับเพิ่มระดับแรงก์ (Account Boosting) การเปิดบัญชีอัตโนมัติ (Bot Farming) ตลอด 24 ชั่วโมงที่ก่อให้เกิดภาวะเงินเฟ้อในเกม และการใช้ VPN เพื่อซื้อสินค้าในราคาภูมิภาคอื่น (ส่วนลด 70\%) ระบบกฎเกณฑ์แบบคงที่ (Static Rule-Based System) สร้างสัญญาณเตือนผิดพลาด (False Alarms) สูงถึง 60\% ต่อผู้เล่นที่เดินทางข้ามพื้นที่จริงหรือผู้เล่นที่พัฒนาฝีมือขึ้นตามธรรมชาติ ขณะที่ผู้โจมตีซึ่งเว้นช่วงเวลาทำรายการเกิน 24 ชั่วโมงสามารถหลบเลี่ยงการตรวจจับได้โดยง่าย
+    \item \textbf{การโจรกรรมบัญชีและการเอาเปรียบเศรษฐกิจในเกม (Task 5 — Account Security Monitoring):} แพลตฟอร์มพบเหตุบัญชีที่ถูกโจรกรรมและยืนยันแล้วกว่า 5,000 บัญชีต่อเดือน (ซึ่งคาดว่าปริมาณจริงสูงเป็น 2 เท่า) จนกลายเป็นปัญหาอันดับหนึ่งที่ใช้ทรัพยากรฝ่ายบริการลูกค้าถึง 60\% ควบคู่กับขบวนการรับจ้างปรับเพิ่มระดับแรงก์ (Account Boosting) การใช้งานบัญชีอัตโนมัติ (Bot Farming) ตลอด 24 ชั่วโมงที่ก่อให้เกิดภาวะเงินเฟ้อในเกม และการใช้ VPN เพื่อซื้อสินค้าในราคาภูมิภาคอื่น (ส่วนลด 70\%) ระบบกฎเกณฑ์แบบคงที่ (Static Rule-Based System) สร้างสัญญาณเตือนผิดพลาด (False Alarms) สูงถึง 60\% ต่อผู้เล่นที่เดินทางข้ามพื้นที่จริงหรือผู้เล่นที่พัฒนาฝีมือขึ้นตามธรรมชาติ ขณะที่ผู้โจมตีซึ่งเว้นช่วงเวลาทำรายการเกิน 24 ชั่วโมงสามารถหลบเลี่ยงการตรวจจับได้โดยง่าย
 \end{enumerate}
 
 \subsection{วัตถุประสงค์ของโครงงาน}
@@ -290,20 +290,14 @@
 
 \subsection{เกณฑ์คะแนนพื้นฐาน โครงสร้างชุดข้อมูล และรูปแบบการส่งคำตอบ}
 
-เอกสารข้อกำหนดโครงงานระบุเกณฑ์อ้างอิงสำหรับประเมินคะแนนรวมไว้ 2 ระดับ ดังนี้
-\begin{itemize}[itemsep=1pt,topsep=2pt]
-    \item \textbf{Ground Baseline (0.68):} พัฒนาจากแบบจำลองพื้นฐานในห้องเรียน 4 ชนิด ได้แก่ Logistic Regression (Task 1), Random Forest (Task 2 และ Task 3), Vanilla CNN (Task 4) และ Isolation Forest (Task 5)
-    \item \textbf{Challenge Baseline (0.75):} พัฒนาด้วยเทคนิคขั้นสูงตามคำแนะนำ ได้แก่ Gradient Boosting Stacking, Two-Stage Hurdle Regression, Pre-trained Transfer Learning และ Voting Ensembles
-\end{itemize}
-
-เกรดในส่วนการแข่งขันคำนวณเทียบเกณฑ์ผ่านการแจกแจง T-Score เมื่อคะแนนถึงเกณฑ์พื้นฐาน ($\mathrm{Score} \ge \mathrm{Baseline}$) ตามสมการ
+สำหรับการประเมินผลในส่วนการแข่งขันบน Kaggle (70\%) ระบบกำหนดเกณฑ์อ้างอิงอย่างเป็นทางการเพียงเกณฑ์เดียว คือ \textbf{Kaggle Baseline (0.72601)} ซึ่งเป็นชุดคำตอบมาตรฐานจากผู้จัดรายวิชาบน Leaderboard เพื่อใช้วัดผลการพัฒนาและเป็นจุดแบ่งเกณฑ์คำนวณคะแนนเกรดผ่านการแจกแจง T-Score ของกลุ่มที่ทำคะแนนผ่านเกณฑ์ ($\mathrm{Score} \ge \mathrm{Baseline}$) ตามสมการ
 \begingroup
 \setlength{\abovedisplayskip}{3pt}\setlength{\belowdisplayskip}{3pt}%
 \[
 \mathrm{Grade\%} = \alpha + (100\% - \alpha)\,\Phi(t), \qquad t = \frac{\mathrm{Your\ Score} - \mu}{\sigma}
 \]
 \endgroup
-\noindent หากคะแนนต่ำกว่าเกณฑ์จะคิดคะแนนตามสัดส่วน $\alpha \cdot (\mathrm{Your\ Score} / \mathrm{Baseline})$ สำหรับไฟล์ส่งคำตอบรวม \code{sample\_submission.csv} กำหนดขนาด $25{,}889 \times 6$ คอลัมน์ (รหัส \code{id} ตั้งแต่ \code{ANS00001} ถึง \code{ANS25889} และ \code{task1}--\code{task5}) ดังสรุปภาพรวมทั้ง 5 งานใน \textbf{ตารางที่~\ref{tab:dataset_overview}}
+\noindent โดยที่ $\mu$ และ $\sigma$ คือค่าเฉลี่ยและส่วนเบี่ยงเบนมาตรฐานของคะแนนกลุ่มที่สูงกว่าเกณฑ์ \textbf{Kaggle Baseline (0.72601)} ทั้งหมด ($\Phi(t)$ คือฟังก์ชันการแจกแจงสะสมแบบปกติมาตรฐาน) หากคะแนนต่ำกว่าเกณฑ์จะคิดคะแนนตามสัดส่วน $\alpha \cdot (\mathrm{Your\ Score} / \mathrm{Baseline})$ สำหรับไฟล์ส่งคำตอบรวม \code{sample\_submission.csv} กำหนดขนาด $25{,}889 \times 6$ คอลัมน์ (รหัส \code{id} ตั้งแต่ \code{ANS00001} ถึง \code{ANS25889} และ \code{task1}--\code{task5}) ดังสรุปภาพรวมทั้ง 5 งานใน \textbf{ตารางที่~\ref{tab:dataset_overview}}
 
 \begin{table}[H]\centering
 {\tblfont\renewcommand{\arraystretch}{0.95}\setlength{\tabcolsep}{4pt}
@@ -368,7 +362,7 @@ Task 1 เป็นงาน Binary Classification (\code{is\_cheater = 0} ผ�
 \subsection{การเตรียมข้อมูลและการสร้างคุณลักษณะ}
 ดำเนินการภายใต้ 5-Fold Stratified K-Fold (\code{SEED=42}) บนข้อมูลที่มีป้ายกำกับ 90,816 แถว โดยสร้างคุณลักษณะ 3 ระดับในทุก Training Fold:
 \begin{enumerate}
-    \item \textbf{Physical Account Invariants:} เติมค่าอายุบัญชีด้วยสมการเชิงฟิสิกส์ของความก้าวหน้า (\code{age\_filled = 0.615 * level / level\_progression\_speed}) พร้อมสร้างอัตราส่วนเชิงพฤติกรรม \code{friends\_per\_day}, \code{reports\_per\_day}, \code{kd\_x\_acc} และ \code{aim\_comp} พร้อมชุดคัดกรอง 28 ฟีเจอร์หลัก (\code{COLS\_20\_FE}) ควบคู่กับชุด 31 ฟีเจอร์เดิม
+    \item \textbf{Physical Account Invariants:} เติมค่าอายุบัญชีด้วยสมการเชิงฟิสิกส์ของความก้าวหน้า (\code{age\_filled = 0.615 * level / level\_progression\_speed}) พร้อมสร้างอัตราส่วนเชิงพฤติกรรม \code{friends\_per\_day}, \code{reports\_per\_day}, \code{kd\_x\_acc} และ \code{aim\_comp} พร้อมชุดคัดกรอง 28 ฟีเจอร์หลัก (\code{COLS\_20\_FE}: คัดเลือก 20 ฟีเจอร์ตั้งต้นและ 8 ฟีเจอร์สร้างใหม่) ควบคู่กับชุด 31 ฟีเจอร์เดิม
     \item \textbf{Fold-Safe Aim-vs-Tactics Z-Gaps:} คำนวณค่ามาตรฐาน Z-score ของกลุ่มตัวชี้วัดทักษะการยิงและยุทธวิธีจำนวน 11 ตัวแปรภายในแต่ละ Training Fold (คงค่า \code{NaN} เดิมไว้ให้ Tree-Based Models จัดการโดยตรง) แล้วสร้างส่วนต่างเชิงทักษะ ได้แก่ \code{aim\_minus\_tactics\_z}, \code{hs\_minus\_gs\_z} และ \code{xhair\_minus\_map\_z}
     \item \textbf{Analytical 8-Cohort Support \& 5-Profile Tobit-MVN5:} ถอดแบบ Data-Generating Process เชิงวิเคราะห์ผ่าน 2 กลไก คือ (ก) โมเดลความน่าจะเป็นของ 8 Cohorts (4 Clean Cohorts, 4 Cheater Cohorts) โดยอินทิเกรตตัวแปรที่ขาดหายด้วย 12-Point Gauss-Legendre Quadrature และ (ข) แบบจำลอง \textbf{1D Tobit EM} สำหรับ \code{game\_sense\_score} ที่ถูกตัดขอบขวาที่ 1.0 ร่วมกับ Yeo-Johnson Shrunk-Covariance Multivariate Normal EM ($\mathrm{shrink}=0.3$, 12 รอบ EM) เพื่อจำแนกโปรไฟล์ทักษะ 5 กลุ่ม โดยทำ Semi-Supervised Training เฉพาะในแต่ละ Training Fold ร่วมกับข้อมูลไม่มี Label จำนวน 13,184 แถวในไฟล์ Train Set
 \end{enumerate}
@@ -385,7 +379,7 @@ Task 1 เป็นงาน Binary Classification (\code{is\_cheater = 0} ผ�
 \label{tab:t1_ablation}
 \begin{tabular}{L{6.8cm}ccccc}
 \toprule
-\rowcolor{TableHead} \textbf{สถาปัตยกรรม / ขั้นตอนการทดลอง} & \textbf{ROC-AUC} & \textbf{Def $F_2$} & \textbf{Nested $F_2$} & \textbf{LogLoss} & \textbf{$\tau^*$} \\
+\rowcolor{TableHead} \textbf{สถาปัตยกรรม / ขั้นตอนการทดลอง} & \textbf{ROC-AUC} & \textbf{$F_2$ (@0.50)} & \textbf{Nested $F_2$} & \textbf{LogLoss} & \textbf{$\tau^*$} \\
 \midrule
 1. Logistic Regression Baseline (Fold-Safe) & 0.76782 & 0.48595 & 0.76637 & 0.53577 & 0.1394 \\
 2. Full CleanDGP LGBM + HardSupport Clamp & 0.89448 & 0.63491 & 0.83919 & 0.35504 & 0.1681 \\
@@ -509,7 +503,7 @@ ExactParamEM (Cross-Fitted Affine Macro-$F_1$ Rule) & 0.59563 & 0.75920 & 1.00 \
 1: Core / Grinder & 26,032 & 0.7452 & 0.7540 & 0.7496 & 6,582 (25.42\%) \\
 2: Social / Hardcore & 21,029 & 0.7286 & 0.7087 & 0.7185 & 5,012 (19.36\%) \\
 3: Whale (Big Spender) & 15,982 & 0.7769 & 0.7246 & 0.7498 & 3,708 (14.32\%) \\
-\rowcolor{TableHead} \textbf{Macro Avg / Weighted Avg} & \textbf{104,000} & \textbf{0.7647} & \textbf{0.7555} & \textbf{0.7598} & \textbf{25,889 (100.00\%)} \\
+\rowcolor{TableHead} \textbf{Macro Average (Unweighted)} & \textbf{104,000} & \textbf{0.7647} & \textbf{0.7555} & \textbf{0.7598} & \textbf{25,889 (100.00\%)} \\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -645,15 +639,15 @@ Task 4 จำแนกภาพหน้าจอการเล่นเกม�
 
 คณะผู้จัดทำพัฒนา Vision Models 2 ตระกูลหลักภายใต้ Strict 5-Fold SGKF ดังนี้:
 \begin{enumerate}[leftmargin=1.8em,itemsep=2pt]
-    \item \textbf{Scene-Hardened End-to-End Fine-Tuned Backbones:} Train โมเดลแบบ Full-Resolution ($192 \times 384$ พิกเซล) ประกอบด้วย \code{CNXv3-Base}, \code{DINOv3L-Hard} และ \code{EVA02L-Hard} ประเมินทั้งแบบ 2-view ปกติ (\code{Orig2}) และ 6-view ฟื้นฟูภาพ (\code{Hard6 / ExtHard6}) ร่วมกับโมเดล ViT ขนาด 224 พิกเซล (\code{EVA02-Large}, \code{EVA02-Base}, \code{DINOv3-ViT-L}, \code{DINOv3-ViT-B}) และ \code{ConvNeXtV2-Tiny} / \code{DINOv2-StageA/C}
+    \item \textbf{Scene-Hardened End-to-End Fine-Tuned Backbones:} Train โมเดลแบบ Full-Resolution ($192 \times 384$ พิกเซล) ประกอบด้วย \code{CNXv3-Base}, \code{DINOv3L-Hard} และ \code{EVA02L-Hard} ประเมินทั้งแบบ 2-view ปกติ (\code{Orig2}) และ 6-view ฟื้นฟูภาพ (\code{Hard6 / ExtHard6}) ร่วมกับโมเดล ViT ขนาด 224 พิกเซล (\code{EVA02-Large}, \code{EVA02-Base}, \code{DINOv3-ViT-L}, \code{DINOv3-ViT-B}) และ \code{ConvNeXtV2-StageA/C} / \code{DINOv2-StageA/C}
     \item \textbf{6-Backbone Foundation Engine (\code{FoundVLM-v3-Joint12Blk}):} สกัด Feature Embedding 4 มุมมอง (\code{raw}, \code{raw+hflip}, \code{decorrupt\_v4}, \code{decorrupt\_v4+hflip}) จากโมเดลหลัก 6 รุ่น (\code{SigLIP2-SO400M}, \code{DINOv3-ViT-L}, \code{DINOv2-ViT-G/14}, \code{CLIP-ConvNeXt-Large}, \code{CLIP-ViT-H/14}, \code{DINOv3-ConvNeXt-Base}) ต่อรวมเป็นเวกเตอร์ 13,568 มิติ ปรับมาตรฐานด้วย PowerNorm ($p=0.75$) ผ่าน Dual-Condition \code{CosineResMLP} ที่บังคับความสอดคล้องระหว่างภาพต้นฉบับกับภาพที่ผ่านการฟื้นฟู (Decorrupted) ด้วย Symmetric-KL Consistency Loss
 \end{enumerate}
 
 ขั้นตอนการผสานผลลัพธ์ประยุกต์ใช้ \textbf{Nested Log-Odds Geometric Pooling} แบบ Temperature Calibration สองสภาวะควบคู่กับ Shift Gate และ Prior Debiasing ดังนี้
 \begin{itemize}
     \item \textbf{Clean Pool (11 Active Streams):} ผสานโมเดลบนภาพหน้าจอสภาวะปกติเพื่อคงความคมชัดขององค์ประกอบ HUD และรายละเอียดระดับสูง
-    \item \textbf{Unconstrained \code{ExtHard6} Pool:} กำหนดขอบเขตล่าง \code{min\_bound = 0.00} เพื่อลดน้ำหนัก \code{DINOv2-StageC-6TTA} ที่มี Noise สูงลงเหลือ 0.0000 โดยอัตโนมัติ และเน้นน้ำหนักไปที่ \code{FoundVLM-4Fam-Hard6} (0.2607), \code{CNXv2-StageC-6TTA} (0.2321), \code{EVA02L-Hard-Hard6} (0.2302) และ \code{DINOv3L-Hard-Hard6} (0.2170)
-    \item \textbf{Consensus Restoration Shift Gate \& Prior Debiasing:} ควบคุมการสลับระหว่างสองโหมดด้วยเกณฑ์ Jensen-Shannon Divergence $\mathrm{JS}(\mathrm{Orig2}, \mathrm{Hard6}) > \tau_{98\%} = 0.004910$ ร่วมกับเงื่อนไข Entropy Reduction ที่สัดส่วน $\gamma = 0.04$ (คัดส่ง 795 ภาพบน Test Set) พร้อมทำ Prior Debiasing ($\alpha_{\mathrm{lo}}=0.69 \to \alpha_{\mathrm{hi}}=1.35$)
+    \item \textbf{Unconstrained \code{ExtHard6} Pool:} กำหนดขอบเขตล่าง \code{min\_bound = 0.00} เพื่อลดน้ำหนัก \code{DINOv2-StageC-6TTA} ที่มี Noise สูงลงเหลือ 0.0000 โดยอัตโนมัติ และเน้นน้ำหนักไปที่ \code{FoundVLM-4Fam-Hard6} (สตรีมของ \code{FoundVLM-v3-Joint12Blk}: 0.2607), \code{CNXv2-StageC-6TTA} (0.2321), \code{EVA02L-Hard-Hard6} (0.2302) และ \code{DINOv3L-Hard-Hard6} (0.2170)
+    \item \textbf{Consensus Restoration Shift Gate \& Prior Debiasing:} ควบคุมการสลับระหว่างสองโหมดด้วยเกณฑ์ Jensen-Shannon Divergence $\mathrm{JS}(\mathrm{Orig2}, \mathrm{Hard6}) > \tau_{98\%} = 0.004910$ ร่วมกับเงื่อนไขการลดค่า Predictive Entropy โดยกำหนดน้ำหนักผสานสูงสุด $\gamma = 0.04$ (กระตุ้น Gate บน Test Set จำนวน 795 ภาพ) พร้อมทำ Entropy-Gated Prior Debiasing ($\alpha_{\mathrm{lo}}=0.69 \to \alpha_{\mathrm{hi}}=1.35$)
 \end{itemize}
 
 ผลลัพธ์ขั้นสุดท้ายบรรลุ \textbf{Clean Unif-Prior Macro-$F_1 = 0.994636$}, All OOF $F_1 = 0.994054$, Corrupt $F_1 = 0.989205$, \textbf{ExtHard6 $F_1 = 0.969820$} และ OOF LogLoss $= 0.019164$ (\textbf{ตารางที่~\ref{tab:t4_ablation}}, \textbf{ตารางที่~\ref{tab:t4_perclass}} และ \textbf{รูปที่~\ref{fig:t4_diag}}--\textbf{\ref{fig:t4_test}})
@@ -706,7 +700,7 @@ Stage 4: + Dual-Condition SymKL FoundVLM-v2 & 0.994573 & 0.969549 & 0.019192 \\
 
 \begin{figure}[H]\centering
 \wideimg[1.06\textwidth]{assets/figure3-regime-error-analysis.png}
-\caption{พัฒนาการความแม่นยำ Stage 1--5 ของ Task 4 และการกระจายตัวของ JS Divergence ใน Shift Gate ($\gamma = 0.04$, คัดส่ง 795 ภาพ)}
+\caption{พัฒนาการความแม่นยำ Stage 1--5 ของ Task 4 และการกระจายตัวของ JS Divergence ใน Shift Gate ($\gamma = 0.04$, กระตุ้น Gate 795 ภาพ)}
 \label{fig:t4_regime}
 \end{figure}
 
@@ -720,8 +714,8 @@ Stage 4: + Dual-Condition SymKL FoundVLM-v2 & 0.994573 & 0.969549 & 0.019192 \\
 
 ระหว่างพัฒนาพบกรณีศึกษาที่ส่งผลลบต่อการจำแนก 2 ประการ ดังนี้
 \begin{itemize}
-    \item \textbf{การสูญเสียรายละเอียดจากโมเดลความละเอียดต่ำ:} การพึ่งพา \code{ConvNeXtV2-StageC} เพียงตัวเดียวทำให้สูญเสียรายละเอียดองค์ประกอบ HUD และอินเทอร์เฟซเฉพาะของเกม จึงแก้ปัญหาด้วยการเปิดให้ SLSQP ปรับลดน้ำหนัก \code{DINOv2-StageC} เป็น 0.0000 ในโหมดภาพเสียหาย
-    \item \textbf{เกณฑ์ Shift Gate ที่มีความไวสูงเกินไป (Over-Aggressive Threshold):} การกำหนดสัดส่วน $\gamma = 0.08$ ทำให้ภาพหน้าจอปกติบางส่วนถูกส่งไปประมวลผลแบบภาพเสียหายโดยไม่จำเป็น เมื่อปรับเกณฑ์เป็น $\gamma = 0.04$ จึงช่วยรักษาความแม่นยำทั้งภาพสะอาดและภาพเสียหายได้พร้อมกัน
+    \item \textbf{การสูญเสียรายละเอียดจากโมเดลความละเอียดต่ำ:} โมเดลความละเอียดต่ำ (\code{CNXv2-StageC-2TTA} และ \code{DINOv2-StageC-6TTA}) มักสูญเสียรายละเอียดองค์ประกอบ HUD ที่คมชัด คณะผู้จัดทำจึงนำ \code{CNXv2-StageC-2TTA} ออกจาก Clean Pool เมื่อมีโมเดลความละเอียดเต็ม \code{CNXv3-Base} ($192 \times 384$) และกำหนด \code{min\_bound = 0.00} เพื่อปรับลดน้ำหนัก \code{DINOv2-StageC-6TTA} ลงเป็น 0.0000 ในโหมดภาพเสียหาย
+    \item \textbf{เกณฑ์ Shift Gate ที่มีความไวสูงเกินไป (Over-Aggressive Threshold):} การกำหนดน้ำหนักผสาน $\gamma = 0.08$ ทำให้ภาพหน้าจอปกติบางส่วนถูกเบี่ยงไปยังโหมดภาพเสียหายโดยไม่จำเป็น เมื่อปรับเกณฑ์เป็น $\gamma = 0.04$ จึงช่วยรักษาความแม่นยำทั้งภาพสะอาดและภาพเสียหายได้พร้อมกัน
 \end{itemize}
 
 จากการเปรียบเทียบใน \textbf{รูปที่~\ref{fig:t4_test}} พบว่า Test Set มีการเปลี่ยนแปลงสัดส่วนเกมจาก Train Set อย่างชัดเจน (เช่น \textit{7-11 Knights} ลดจาก 39.4\% เหลือ 13.8\% ขณะที่ \textit{FiveN} และ \textit{Roblock} เพิ่มเป็น 26.2\% และ 20.5\%) โมเดลที่ผ่าน Calibration จึงสามารถคัดแยก Ticket แจ้งปัญหา 2,000 ใบต่อวัน (ลดเวลาคัดกรอง 10+ นาทีต่อใบลงสู่ระบบอัตโนมัติ) ตรวจพิสูจน์ภาพกิจกรรม ``Play Multiple Games for Rewards'' กว่า 50,000 ภาพได้ครบ 100\% แทนการสุ่มตรวจเพียง 3\% และจัดหมวดหมู่ภาพชุมชนกว่า 100,000 ภาพต่อสัปดาห์ด้วยความแม่นยำเกิน 99\% ในเกือบทุกเกม
@@ -844,11 +838,11 @@ Task 5: Security & 8 Exact Empty-Gap / 12D Box Archetype Rules + ExactBayesUB An
 \end{tabular}}
 \end{table}
 
-เมื่อรวมผลทำนายทั้ง 5 งานและปิดการแข่งขันอย่างเป็นทางการ กลุ่ม \textbf{ML004} ได้รับผลคะแนน \textbf{Final Private Leaderboard สูงสุดที่ 0.86680} (Run~27, \code{dc410ae}; โดยผู้จัดแข่งขันประกาศใช้ชุดแถวประเมินเดียวกับ Public Leaderboard จึงยืนยันคะแนนคัดเลือกสุดท้าย ณ 0.86680 ขณะที่ Run~30 PR~\#99, \code{1e248d1} ได้ 0.86678) ครอง\textbf{อันดับที่ 4 จากทั้งหมด 22 กลุ่ม} (\textbf{รูปที่~\ref{fig:final_leaderboard}}) ตามหลังอันดับ 1 (\code{ML003}, 0.87351) เพียง 0.00671 และสูงกว่าเกณฑ์ \code{kaggle-baseline} (0.72601) อยู่ \textbf{+0.14079} รวมถึงเหนือกว่า Ground Baseline (0.68), Challenge Baseline (0.75) และค่าเฉลี่ยสุดท้ายทั้ง 22 กลุ่ม ($0.84321 \pm 0.02744$, $t = +0.8598$) อย่างชัดเจน โดยมีผลตรวจรับไฟล์ส่งคำตอบขั้นสุดท้ายดัง \textbf{ตารางที่~\ref{tab:submission_audit}}
+เมื่อรวมผลทำนายทั้ง 5 งานและปิดการแข่งขันอย่างเป็นทางการ กลุ่ม \textbf{ML004} ได้รับผลคะแนน \textbf{Final Private Leaderboard สูงสุดที่ 0.86680} (Run~27, \code{dc410ae}; โดยผู้จัดแข่งขันประกาศใช้ชุดแถวประเมินเดียวกับ Public Leaderboard จึงยืนยันคะแนนคัดเลือกสุดท้าย ณ 0.86680 ขณะที่ชุดส่งล่าสุด Run~30 PR~\#99, \code{1e248d1} ได้ 0.86678 ซึ่งต่างกันเพียง 10 แถวหรือ 0.04\%) ครอง\textbf{อันดับที่ 4 จากทั้งหมด 22 กลุ่ม} (\textbf{รูปที่~\ref{fig:final_leaderboard}}) ตามหลังอันดับ 1 (\code{ML003}, 0.87351) เพียง 0.00671 และสูงกว่าเกณฑ์มาตรฐานเดียวของการแข่งขัน \textbf{Kaggle Baseline (0.72601)} อยู่ \textbf{+0.14079} รวมถึงเหนือกว่าค่าเฉลี่ยสุดท้ายของทั้ง 22 กลุ่ม ($0.84321 \pm 0.02744$, $t = +0.8598$) อย่างชัดเจน โดยมีผลตรวจรับไฟล์ส่งคำตอบขั้นสุดท้ายดัง \textbf{ตารางที่~\ref{tab:submission_audit}}
 
 \begin{figure}[H]\centering
 \wideimg[1.06\textwidth]{assets/kaggle_final_leaderboard.png}
-\caption{เปรียบเทียบคะแนน Final Private Leaderboard ทั้ง 22 กลุ่ม (ML001--ML022): กลุ่ม ML004 ได้อันดับที่ 4 (0.86680) สูงกว่าค่าเฉลี่ยรุ่น 0.84321 และ \code{kaggle-baseline} 0.72601 อย่างชัดเจน}
+\caption{เปรียบเทียบคะแนน Final Private Leaderboard ทั้ง 22 กลุ่ม (ML001--ML022): กลุ่ม ML004 ได้อันดับที่ 4 (0.86680) สูงกว่าค่าเฉลี่ยรุ่น 0.84321 และ Kaggle Baseline (0.72601) อย่างชัดเจน}
 \label{fig:final_leaderboard}
 \end{figure}
 
