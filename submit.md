@@ -17,6 +17,7 @@ The merged `sha12` equals the `[sha:<hash>]` tag in each Kaggle note.
 
 - **Merged sha12:** `7fceeedc7d15` – Kaggle public: 0.86678
 - **Best Kaggle public so far:** 0.86680 (merged `d5ce58837641`, commit `dc410ae`)
+- **Final Kaggle Private Leaderboard:** `0.86680` (**Rank #4 / 22 teams**, merged `d5ce58837641`, commit `dc410ae`, 63 submissions; cohort mean `0.84321`, competition completed on same evaluation rows as Public)
 
 ## Merged history
 
