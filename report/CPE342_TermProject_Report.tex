@@ -102,10 +102,11 @@
 \titlespacing{\subsection}{0pt}{9pt}{3.5pt}
 \titlespacing{\subsubsection}{0pt}{6pt}{2.5pt}
 
-% สารบัญแบบเป็นทางการ (ไร้จุดไข่ปลา ขนาด 11pt เท่าเนื้อหา)
-\titlecontents{section}[0em]{\raggedright\addvspace{4.5pt}\fontsize{11}{16.2}\selectfont\bfseries}{\mbox{บทที่~\thecontentslabel}\quad}{}{\hfill\contentspage}
-\titlecontents{subsection}[2.2em]{\raggedright\addvspace{1pt}\fontsize{11}{16.2}\selectfont}{\thecontentslabel\quad}{}{\hfill\contentspage}
-\titlecontents{subsubsection}[4.2em]{\raggedright\addvspace{0.5pt}\fontsize{10.5}{15.4}\selectfont}{\thecontentslabel\quad}{}{\hfill\contentspage}
+% สารบัญแบบเป็นทางการ (ไร้จุดไข่ปลา ขนาด 11pt เท่าเนื้อหา และจัดเลขหน้าชิดขอบขวา \textwidth พอดี)
+\contentsmargin{1.4em}
+\titlecontents{section}[0em]{\filright\addvspace{4.5pt}\fontsize{11}{16.2}\selectfont\bfseries}{\mbox{บทที่~\thecontentslabel}\quad}{}{\hfill\contentspage}
+\titlecontents{subsection}[2.2em]{\filright\addvspace{1pt}\fontsize{11}{16.2}\selectfont}{\thecontentslabel\quad}{}{\hfill\contentspage}
+\titlecontents{subsubsection}[4.2em]{\filright\addvspace{0.5pt}\fontsize{10.5}{15.4}\selectfont}{\thecontentslabel\quad}{}{\hfill\contentspage}
 
 % คำบรรยายภาพและตารางขนาด 11pt ตัวเอียงสีฟ้า จัดกึ่งกลางมาตรฐาน
 \DeclareCaptionFont{captext}{\color{CaptionBlue}\itshape\fontsize{11}{16.2}\selectfont}
